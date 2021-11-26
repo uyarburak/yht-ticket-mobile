@@ -1,4 +1,5 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:yht_ticket/models/requests/forgot_password_request.dart';
 import 'package:yht_ticket/models/requests/login_request.dart';
 import 'package:yht_ticket/models/requests/register_request.dart';
 import 'package:yht_ticket/models/responses/login_response.dart';
@@ -21,5 +22,13 @@ class FakeApiRepository implements BaseApiRepository {
     await Future.delayed(const Duration(seconds: 3));
     EasyLoading.dismiss();
     return RegisterResponse(token: "blabla");
+  }
+
+  @override
+  Future<bool?> forgotPassword(ForgotPasswordRequest data) async {
+    EasyLoading.show(status: 'Bekleyiniz...');
+    await Future.delayed(const Duration(seconds: 3));
+    EasyLoading.dismiss();
+    return true;
   }
 }

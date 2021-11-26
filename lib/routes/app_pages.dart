@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:yht_ticket/modules/forgot_password/forgot_password_binding.dart';
+import 'package:yht_ticket/modules/forgot_password/forgot_password_screen.dart';
 import 'package:yht_ticket/modules/login/login_binding.dart';
 import 'package:yht_ticket/modules/login/login_screen.dart';
 import 'package:yht_ticket/modules/register/register_binding.dart';
@@ -26,6 +28,11 @@ class AppPages {
       name: Routes.REGISTER,
       page: () => RegisterScreen(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: Routes.FORGOT_PASSWORD,
+      page: () => ForgotPasswordScreen(),
+      binding: ForgotPasswordBinding(),
     ),
   ];
 }
