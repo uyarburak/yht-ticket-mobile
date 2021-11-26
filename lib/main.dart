@@ -12,30 +12,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DenpendencyInjection.init();
 
-  runApp(App());
+  runApp(GetMaterialApp.router(
+    debugShowCheckedModeBanner: false,
+    enableLog: true,
+    unknownRoute:
+        GetPage(name: '/notfound', page: () => const NotFoundScreen()),
+    defaultTransition: Transition.fade,
+    getPages: AppPages.routes,
+    initialBinding: AppBinding(),
+    smartManagement: SmartManagement.keepFactory,
+    title: 'YHT Bilet Alarm',
+    theme: AppTheme.lightTheme,
+    locale: const Locale('tr', 'TR'),
+    fallbackLocale: const Locale('tr', 'TR'),
+    builder: EasyLoading.init(),
+  ));
   configLoading();
-}
-
-class App extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      enableLog: true,
-      unknownRoute:
-          GetPage(name: '/notfound', page: () => const NotFoundScreen()),
-      initialRoute: Routes.SPLASH,
-      defaultTransition: Transition.fade,
-      getPages: AppPages.routes,
-      initialBinding: AppBinding(),
-      smartManagement: SmartManagement.keepFactory,
-      title: 'YHT Bilet Alarm',
-      theme: AppTheme.lightTheme,
-      locale: const Locale('tr', 'TR'),
-      fallbackLocale: const Locale('tr', 'TR'),
-      builder: EasyLoading.init(),
-    );
-  }
 }
 
 void configLoading() {

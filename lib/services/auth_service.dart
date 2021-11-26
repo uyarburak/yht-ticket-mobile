@@ -23,7 +23,7 @@ class AuthService extends GetxService {
     if (token.isNotEmpty) {
       final prefs = Get.find<SharedPreferences>();
       prefs.setString(StorageConstants.token, token);
-      Get.toNamed(Routes.HOME);
+      Get.rootDelegate.offAndToNamed(Routes.HOME);
     }
   }
 
@@ -31,6 +31,6 @@ class AuthService extends GetxService {
     isLoggedIn.value = false;
     final prefs = Get.find<SharedPreferences>();
     prefs.remove(StorageConstants.token);
-    Get.toNamed(Routes.LOGIN);
+    Get.rootDelegate.offAndToNamed(Routes.LOGIN);
   }
 }

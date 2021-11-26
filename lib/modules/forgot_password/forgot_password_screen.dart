@@ -107,7 +107,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                 margin: EdgeInsets.only(top: MySize.size16!),
                 child: InkWell(
                   onTap: () {
-                    Get.offAndToNamed(Routes.REGISTER);
+                    Get.rootDelegate.offAndToNamed(Routes.REGISTER);
                   },
                   child: Text(
                     "Hesap oluşturmak istiyorum",
