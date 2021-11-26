@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yht_ticket/models/responses/login_response.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/constants/storage.dart';
 
@@ -18,17 +17,20 @@ class AuthService extends GetxService {
     super.onInit();
   }
 
-  void login(LoginResponse loginResponse) {
+  void login(String token) {
     isLoggedIn.value = true;
 
-    if (loginResponse.token.isNotEmpty) {
+    if (token.isNotEmpty) {
       final prefs = Get.find<SharedPreferences>();
-      prefs.setString(StorageConstants.token, loginResponse.token);
+      prefs.setString(StorageConstants.token, token);
       Get.toNamed(Routes.HOME);
     }
   }
 
   void logout() {
     isLoggedIn.value = false;
+    final prefs = Get.find<SharedPreferences>();
+    prefs.remove(StorageConstants.token);
+    Get.toNamed(Routes.LOGIN);
   }
 }

@@ -10,9 +10,9 @@ class SplashController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 2000));
 
     if (AuthService.to.isLoggedInValue) {
-      Get.toNamed(Routes.HOME);
+      Get.offAndToNamed(Routes.HOME);
     } else {
-      Get.toNamed(Routes.LOGIN);
+      Get.offAndToNamed(Routes.LOGIN);
     }
   }
 }

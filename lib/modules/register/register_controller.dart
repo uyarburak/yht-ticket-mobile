@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/requests/login_request.dart';
+import 'package:yht_ticket/models/requests/register_request.dart';
 import 'package:yht_ticket/services/auth_service.dart';
 import 'package:yht_ticket/shared/utils/focus.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class RegisterController extends GetxController {
   final BaseApiRepository apiRepository;
-  LoginController({required this.apiRepository});
+  RegisterController({required this.apiRepository});
 
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -22,11 +23,12 @@ class LoginController extends GetxController {
     super.onReady();
   }
 
-  void login(BuildContext context, GlobalKey<FormState> formKey) async {
+  void register(BuildContext context, GlobalKey<FormState> formKey) async {
     AppFocus.unfocus(context);
     if (formKey.currentState!.validate()) {
-      final res = await apiRepository.login(
-        LoginRequest(
+      final res = await apiRepository.register(
+        RegisterRequest(
+          name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
         ),
@@ -42,6 +44,7 @@ class LoginController extends GetxController {
   void onClose() {
     super.onClose();
 
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
   }

@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:yht_ticket/modules/login/login_binding.dart';
 import 'package:yht_ticket/modules/login/login_screen.dart';
+import 'package:yht_ticket/modules/register/register_binding.dart';
+import 'package:yht_ticket/modules/register/register_screen.dart';
 import 'package:yht_ticket/modules/splash/splash_binding.dart';
 import 'package:yht_ticket/modules/splash/splash_screen.dart';
 
@@ -17,8 +19,13 @@ class AppPages {
     ),
     GetPage(
       name: Routes.LOGIN,
-      page: () => const LoginScreen(),
+      page: () => LoginScreen(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.REGISTER,
+      page: () => RegisterScreen(),
+      binding: RegisterBinding(),
     ),
   ];
 }

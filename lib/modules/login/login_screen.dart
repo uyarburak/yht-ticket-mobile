@@ -10,7 +10,8 @@ import 'package:yht_ticket/theme/theme_data.dart';
 import 'package:yht_ticket/widgets/input_field.dart';
 
 class LoginScreen extends GetView<LoginController> {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class LoginScreen extends GetView<LoginController> {
                 ),
               ),
               Form(
-                key: controller.loginFormKey,
+                key: loginFormKey,
                 child: Container(
                   padding: EdgeInsets.only(
                       left: MySize.size24!,
@@ -49,7 +50,7 @@ class LoginScreen extends GetView<LoginController> {
                   child: Column(
                     children: <Widget>[
                       InputField(
-                        controller: controller.loginEmailController,
+                        controller: controller.emailController,
                         icon: MdiIcons.emailOutline,
                         keyboardType: TextInputType.emailAddress,
                         placeholder: 'E-posta adresi',
@@ -66,7 +67,7 @@ class LoginScreen extends GetView<LoginController> {
                       ),
                       CommonWidget.rowHeight(height: MySize.size16!),
                       InputField(
-                        controller: controller.loginPasswordController,
+                        controller: controller.passwordController,
                         icon: MdiIcons.lockOutline,
                         keyboardType: TextInputType.emailAddress,
                         placeholder: 'Parola',
@@ -123,7 +124,7 @@ class LoginScreen extends GetView<LoginController> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.login(context);
+                    controller.login(context, loginFormKey);
                   },
                   child: Text(
                     "GİRİŞ".toUpperCase(),
@@ -142,7 +143,7 @@ class LoginScreen extends GetView<LoginController> {
                 margin: EdgeInsets.only(top: MySize.size16!),
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.REGISTER);
+                    Get.offAndToNamed(Routes.REGISTER);
                   },
                   child: Text(
                     "Hesap oluşturmak istiyorum",
