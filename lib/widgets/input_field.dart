@@ -46,6 +46,7 @@ class InputField extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(left: MySize.size16!),
               child: TextFormField(
+                controller: controller,
                 style: AppTheme.getTextStyle(
                   AppTheme.theme.textTheme.bodyText1,
                   letterSpacing: 0.1,
