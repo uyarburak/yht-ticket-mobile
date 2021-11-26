@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:yht_ticket/app_binding.dart';
+import 'package:yht_ticket/di.dart';
 import 'package:yht_ticket/modules/not_found/not_found_screen.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/constants/colors.dart';
@@ -9,6 +10,7 @@ import 'package:yht_ticket/theme/theme_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DenpendencyInjection.init();
 
   runApp(App());
   configLoading();

@@ -8,6 +8,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    MySize().init(context);
     return Container(
       color: Colors.white,
       child: Column(
