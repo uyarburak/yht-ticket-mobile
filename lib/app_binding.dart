@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:yht_ticket/api/base_api_repository.dart';
 import 'package:yht_ticket/api/fake_api_repository.dart';
+import 'package:yht_ticket/services/notification_service.dart';
 
 class AppBinding extends Bindings {
   @override
@@ -8,6 +9,10 @@ class AppBinding extends Bindings {
     Get.put<BaseApiRepository>(
       FakeApiRepository(),
       permanent: true,
+    );
+    Get.lazyPut<NotificationService>(
+      () => NotificationService(apiRepository: Get.find()),
+      fenix: true,
     );
   }
 }

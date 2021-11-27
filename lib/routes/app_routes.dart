@@ -13,6 +13,8 @@ abstract class Routes {
   static const DASHBOARD = _Paths.HOME + _Paths.DASHBOARD;
   static const HISTORY = _Paths.HOME + _Paths.HISTORY;
   static const PROFILE = _Paths.HOME + _Paths.PROFILE;
+
+  static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
 }
 
 abstract class _Paths {
@@ -26,4 +28,6 @@ abstract class _Paths {
   static const DASHBOARD = '/dashboard';
   static const HISTORY = '/history';
   static const PROFILE = '/profile';
+
+  static const NOTIFICATIONS = '/notifications';
 }

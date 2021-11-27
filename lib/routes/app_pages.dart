@@ -8,6 +8,7 @@ import 'package:yht_ticket/modules/history/history_screen.dart';
 import 'package:yht_ticket/modules/home/home_view.dart';
 import 'package:yht_ticket/modules/login/login_binding.dart';
 import 'package:yht_ticket/modules/login/login_screen.dart';
+import 'package:yht_ticket/modules/notifications/notifications_screen.dart';
 import 'package:yht_ticket/modules/profile/profile_binding.dart';
 import 'package:yht_ticket/modules/profile/profile_screen.dart';
 import 'package:yht_ticket/modules/register/register_binding.dart';
@@ -70,6 +71,11 @@ class AppPages {
               binding: ProfileBinding(),
             ),
           ],
+        ),
+        GetPage(
+          name: Routes.NOTIFICATIONS,
+          page: () => NotificationsScreen(),
+          //binding: NotificationsBinding(),
         ),
       ],
     ),

@@ -12,14 +12,17 @@ class RootView extends StatelessWidget {
     return GetRouterOutlet.builder(
       builder: (context, delegate, current) {
         final title = current?.location;
-        return Scaffold(
-          // drawer: const DrawerWidget(),
-          // appBar: AppBar(
-          //   title: Text(title ?? ''),
-          //   centerTitle: true,
-          // ),
-          body: GetRouterOutlet(
-            initialRoute: Routes.SPLASH,
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            // drawer: const DrawerWidget(),
+            // appBar: AppBar(
+            //   title: Text(title ?? ''),
+            //   centerTitle: true,
+            // ),
+            body: GetRouterOutlet(
+              initialRoute: Routes.SPLASH,
+            ),
           ),
         );
       },
