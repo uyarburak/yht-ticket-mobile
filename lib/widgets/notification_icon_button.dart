@@ -24,18 +24,18 @@ class NotificationIconButton extends GetView<NotificationService> {
         clipBehavior: Clip.none,
         children: <Widget>[
           Icon(
-            MdiIcons.bellOutline,
+            MdiIcons.bell,
             color: AppTheme.theme.colorScheme.onBackground.withAlpha(200),
           ),
           Obx(
             () => controller.unreadNotificationCount > 0
                 ? Positioned(
-                    right: -2,
-                    top: -2,
+                    right: -4,
+                    top: -4,
                     child: Container(
                       padding: const EdgeInsets.all(0),
-                      height: MySize.size14,
-                      width: MySize.size14,
+                      height: MySize.size18,
+                      width: MySize.size18,
                       decoration: BoxDecoration(
                           color: AppTheme.theme.colorScheme.primary,
                           borderRadius: BorderRadius.all(
@@ -46,7 +46,7 @@ class NotificationIconButton extends GetView<NotificationService> {
                           style: AppTheme.getTextStyle(
                             AppTheme.theme.textTheme.overline,
                             color: AppTheme.theme.colorScheme.onPrimary,
-                            fontSize: 9,
+                            fontSize: 10,
                             fontWeight: 500,
                           ),
                         ),

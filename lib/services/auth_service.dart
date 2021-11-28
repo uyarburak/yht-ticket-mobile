@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
+import 'package:yht_ticket/services/notification_service.dart';
 import 'package:yht_ticket/shared/constants/storage.dart';
 
 class AuthService extends GetxService {
@@ -23,6 +24,8 @@ class AuthService extends GetxService {
     if (token.isNotEmpty) {
       final prefs = Get.find<SharedPreferences>();
       prefs.setString(StorageConstants.token, token);
+
+      Get.delete<NotificationService>(force: true);
       Get.rootDelegate.offAndToNamed(Routes.HOME);
     }
   }
@@ -30,7 +33,7 @@ class AuthService extends GetxService {
   void logout() {
     isLoggedIn.value = false;
     final prefs = Get.find<SharedPreferences>();
-    prefs.remove(StorageConstants.token);
+    prefs.clear();
     Get.rootDelegate.offAndToNamed(Routes.LOGIN);
   }
 }
