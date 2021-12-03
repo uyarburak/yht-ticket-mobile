@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
+import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 
 class DashboardBinding implements Bindings {
   @override
-  void dependencies() {}
+  void dependencies() {
+    Get.lazyPut<DashboardController>(
+        () => DashboardController(apiRepository: Get.find()));
+  }
 }
