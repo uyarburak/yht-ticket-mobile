@@ -136,7 +136,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   margin: EdgeInsets.only(top: MySize.size16!),
                   child: InkWell(
                     onTap: () {
-                      Get.rootDelegate.offAndToNamed(Routes.LOGIN);
+                      Get.offAndToNamed(Routes.LOGIN);
                     },
                     child: Text(
                       "Zaten bir hesabım var",

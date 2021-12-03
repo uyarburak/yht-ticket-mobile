@@ -26,7 +26,7 @@ class AuthService extends GetxService {
       prefs.setString(StorageConstants.token, token);
 
       Get.delete<NotificationService>(force: true);
-      Get.rootDelegate.offAndToNamed(Routes.HOME);
+      Get.offAndToNamed(Routes.DASHBOARD);
     }
   }
 
@@ -34,6 +34,6 @@ class AuthService extends GetxService {
     isLoggedIn.value = false;
     final prefs = Get.find<SharedPreferences>();
     prefs.clear();
-    Get.rootDelegate.offAndToNamed(Routes.LOGIN);
+    Get.offAndToNamed(Routes.LOGIN);
   }
 }

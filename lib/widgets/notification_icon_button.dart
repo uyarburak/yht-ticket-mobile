@@ -13,12 +13,7 @@ class NotificationIconButton extends GetView<NotificationService> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.rootDelegate.toNamed(Routes.NOTIFICATIONS);
-        // Navigator.of(context).push(new MaterialPageRoute<Null>(
-        //     builder: (BuildContext context) {
-        //       return CourseNotificationScreen();
-        //     },
-        //     fullscreenDialog: true));
+        Get.toNamed(Routes.NOTIFICATIONS);
       },
       child: Stack(
         clipBehavior: Clip.none,

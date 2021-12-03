@@ -4,7 +4,6 @@ import 'package:group_list_view/group_list_view.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/models/responses/notification_response.dart';
-import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/services/notification_service.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
@@ -16,20 +15,15 @@ class NotificationsScreen extends GetView<NotificationService> {
     timeago.setLocaleMessages('tr', timeago.TrMessages());
   }
 
-  void goBack() {
-    Get.rootDelegate.backUntil(Routes.HOME);
-  }
-
   @override
   Widget build(BuildContext context) {
-    print("NotificationsScreen is building");
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppTheme.customTheme.bgLayer1,
         centerTitle: true,
         leading: InkWell(
-          onTap: goBack,
+          onTap: Get.back,
           child: Icon(
             MdiIcons.chevronLeft,
             color: AppTheme.theme.colorScheme.onBackground,

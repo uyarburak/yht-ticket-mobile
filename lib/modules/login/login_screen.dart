@@ -86,7 +86,7 @@ class LoginScreen extends GetView<LoginController> {
                           alignment: Alignment.topRight,
                           child: InkWell(
                             onTap: () {
-                              Get.rootDelegate.toNamed(Routes.FORGOT_PASSWORD);
+                              Get.toNamed(Routes.FORGOT_PASSWORD);
                             },
                             child: Text(
                               "Şifremi unuttum",
@@ -143,7 +143,7 @@ class LoginScreen extends GetView<LoginController> {
                 margin: EdgeInsets.only(top: MySize.size16!),
                 child: InkWell(
                   onTap: () {
-                    Get.rootDelegate.offAndToNamed(Routes.REGISTER);
+                    Get.offAndToNamed(Routes.REGISTER);
                   },
                   child: Text(
                     "Hesap oluşturmak istiyorum",

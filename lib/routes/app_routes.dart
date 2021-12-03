@@ -9,12 +9,12 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const REGISTER = _Paths.REGISTER;
 
-  static const HOME = _Paths.HOME;
-  static const DASHBOARD = _Paths.HOME + _Paths.DASHBOARD;
-  static const HISTORY = _Paths.HOME + _Paths.HISTORY;
-  static const PROFILE = _Paths.HOME + _Paths.PROFILE;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const HISTORY = _Paths.HISTORY;
+  static const PROFILE = _Paths.PROFILE;
 
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const SCHEDULES = _Paths.SCHEDULES;
 }
 
 abstract class _Paths {
@@ -24,10 +24,10 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = "/forgot-password";
   static const REGISTER = "/register";
 
-  static const HOME = '/home';
   static const DASHBOARD = '/dashboard';
   static const HISTORY = '/history';
   static const PROFILE = '/profile';
 
   static const NOTIFICATIONS = '/notifications';
+  static const SCHEDULES = '/schedules';
 }
