@@ -7,6 +7,7 @@ import 'package:yht_ticket/models/requests/schedule_request.dart';
 import 'package:yht_ticket/models/responses/alert_response.dart';
 import 'package:yht_ticket/models/responses/login_response.dart';
 import 'package:yht_ticket/models/responses/notification_response.dart';
+import 'package:yht_ticket/models/responses/profile_response.dart';
 import 'package:yht_ticket/models/responses/register_response.dart';
 import 'package:yht_ticket/models/responses/schedule_response.dart';
 
@@ -232,5 +233,13 @@ class FakeApiRepository implements BaseApiRepository {
         wagonCount: e.wagons.length,
         scheduleDate: e.startDate)));
     return data.alerts.map((e) => e.scheduleId.toString()).toList();
+  }
+
+  @override
+  Future<ProfileResponse?> getProfile() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    return ProfileResponse(
+        email: 'john@doe.com', name: 'John Doe', credits: 12);
   }
 }

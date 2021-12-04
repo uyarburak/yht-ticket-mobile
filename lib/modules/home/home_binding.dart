@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 import 'package:yht_ticket/modules/home/home_controller.dart';
+import 'package:yht_ticket/modules/profile/profile_controller.dart';
 
 class HomeBinding extends Bindings {
   @override
@@ -8,5 +9,8 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => HomeController());
     Get.lazyPut<DashboardController>(
         () => DashboardController(apiRepository: Get.find()));
+
+    Get.lazyPut<ProfileController>(
+        () => ProfileController(apiRepository: Get.find()));
   }
 }

@@ -44,6 +44,7 @@ dependencies:
   group_list_view: ^1.1.1
   lottie: ^1.2.1
   intl: ^0.17.0
+  skeleton_loader: ^2.0.0+4
 
 dev_dependencies:
   flutter_test:
