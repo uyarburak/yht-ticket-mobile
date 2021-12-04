@@ -110,11 +110,40 @@ class ActiveAlertsWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.all(Radius.circular(MySize.size8!))),
-              child: CircleAvatar(
-                child: Icon(
-                  MdiIcons.train,
-                  color: AppTheme.theme.colorScheme.onPrimary,
-                ),
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    child: Icon(
+                      MdiIcons.train,
+                      color: AppTheme.theme.colorScheme.onPrimary,
+                    ),
+                  ),
+                  alert.scheduleDate.hour % 2 == 0
+                      ? Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Container(
+                            height: MySize.size20,
+                            width: MySize.size20,
+                            decoration: BoxDecoration(
+                                color: Colors.red.shade600,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(MySize.size40!))),
+                            child: Center(
+                              child: Text(
+                                '${alert.scheduleDate.hour ~/ 2}',
+                                style: AppTheme.getTextStyle(
+                                  AppTheme.theme.textTheme.overline,
+                                  color: AppTheme.theme.colorScheme.onPrimary,
+                                  fontWeight: 600,
+                                  fontSize: 9,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                ],
               ),
             ),
             Expanded(
@@ -151,25 +180,6 @@ class ActiveAlertsWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 8),
-              height: MySize.size28,
-              width: MySize.size28,
-              decoration: BoxDecoration(
-                  color: Colors.red.shade600,
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(MySize.size40!))),
-              child: Center(
-                child: Text(
-                  '2',
-                  style: AppTheme.getTextStyle(
-                    AppTheme.theme.textTheme.overline,
-                    color: AppTheme.theme.colorScheme.onPrimary,
-                    fontWeight: 600,
-                  ),
                 ),
               ),
             ),
