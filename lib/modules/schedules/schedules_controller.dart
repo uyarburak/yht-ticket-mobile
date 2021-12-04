@@ -73,7 +73,7 @@ class SchedulesController extends GetxController {
     final list = await apiRepository.createAlerts(request);
     if (list != null) {
       CommonWidget.toast('${list.length} alarm oluşturuldu');
-      Get.offAllNamed(Routes.DASHBOARD);
+      Get.offAndToNamed(Routes.DASHBOARD);
     }
   }
 
