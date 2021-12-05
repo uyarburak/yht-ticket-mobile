@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 import 'package:yht_ticket/modules/dashboard/widgets/active_alerts_widget.dart';
+import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 import 'package:yht_ticket/widgets/notification_icon_button.dart';
@@ -71,38 +72,43 @@ class DashboardScreen extends GetView<DashboardController> {
                   ],
                 ),
               ),
-              Container(
-                margin: Spacing.fromLTRB(24, 24, 24, 0),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.SEARCH_STATIONS);
+                },
                 child: Container(
-                  padding: Spacing.vertical(4),
-                  decoration: BoxDecoration(
-                      color: AppTheme.customTheme.bgLayer2,
-                      border: Border.all(
-                          color: AppTheme.customTheme.bgLayer3, width: 1),
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(MySize.size8!))),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: Spacing.left(12),
-                        padding: Spacing.vertical(12),
-                        child: Icon(
-                          MdiIcons.magnify,
-                          color: AppTheme.theme.colorScheme.onBackground
-                              .withAlpha(200),
-                          size: MySize.size20,
+                  margin: Spacing.fromLTRB(24, 24, 24, 0),
+                  child: Container(
+                    padding: Spacing.vertical(4),
+                    decoration: BoxDecoration(
+                        color: AppTheme.customTheme.bgLayer2,
+                        border: Border.all(
+                            color: AppTheme.customTheme.bgLayer3, width: 1),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(MySize.size8!))),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: Spacing.left(12),
+                          padding: Spacing.vertical(12),
+                          child: Icon(
+                            MdiIcons.magnify,
+                            color: AppTheme.theme.colorScheme.onBackground
+                                .withAlpha(200),
+                            size: MySize.size20,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        "Tren seferi ara...",
-                        style: AppTheme.getTextStyle(
-                            AppTheme.theme.textTheme.bodyText1,
-                            color: AppTheme.theme.colorScheme.onBackground,
-                            muted: true,
-                            fontWeight: 500),
-                      ),
-                    ],
+                        const SizedBox(width: 12),
+                        Text(
+                          "Tren seferi ara...",
+                          style: AppTheme.getTextStyle(
+                              AppTheme.theme.textTheme.bodyText1,
+                              color: AppTheme.theme.colorScheme.onBackground,
+                              muted: true,
+                              fontWeight: 500),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

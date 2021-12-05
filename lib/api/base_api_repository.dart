@@ -9,6 +9,7 @@ import 'package:yht_ticket/models/responses/notification_response.dart';
 import 'package:yht_ticket/models/responses/profile_response.dart';
 import 'package:yht_ticket/models/responses/register_response.dart';
 import 'package:yht_ticket/models/responses/schedule_response.dart';
+import 'package:yht_ticket/models/responses/station_response.dart';
 
 abstract class BaseApiRepository {
   Future<LoginResponse?> login(LoginRequest data);
@@ -20,6 +21,7 @@ abstract class BaseApiRepository {
   Future<List<AlertResponse>?> getActiveAlerts();
   Future<List<AlertResponse>?> getAlerts();
 
+  Future<List<StationResponse>?> getStations();
   Future<List<ScheduleResponse>?> getSchedules(ScheduleRequest data);
   Future<List<String>?> createAlerts(CreateAlertsRequest data);
 }

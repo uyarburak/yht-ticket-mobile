@@ -10,6 +10,8 @@ import 'package:yht_ticket/modules/register/register_binding.dart';
 import 'package:yht_ticket/modules/register/register_screen.dart';
 import 'package:yht_ticket/modules/schedules/schedules_binding.dart';
 import 'package:yht_ticket/modules/schedules/schedules_screen.dart';
+import 'package:yht_ticket/modules/search_station/search_station_binding.dart';
+import 'package:yht_ticket/modules/search_station/search_station_screen.dart';
 import 'package:yht_ticket/modules/splash/splash_binding.dart';
 import 'package:yht_ticket/modules/splash/splash_screen.dart';
 
@@ -63,6 +65,11 @@ class AppPages {
       name: Routes.SCHEDULES,
       page: () => SchedulesScreen(),
       binding: SchedulesBinding(),
+    ),
+    GetPage(
+      name: Routes.SEARCH_STATIONS,
+      page: () => SearchStationScreen(),
+      binding: SearchStationBinding(),
     ),
   ];
 }

@@ -413,6 +413,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  turkish:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "729ce15840f72b70edafd8cc8854aed89ab62747"
+      url: "git://github.com/uyarburak/turkish.git"
+    source: git
+    version: "0.2.1"
   typed_data:
     dependency: transitive
     description:

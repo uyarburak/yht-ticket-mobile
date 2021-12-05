@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:yht_ticket/models/requests/create_alerts_request.dart';
 import 'package:yht_ticket/models/requests/forgot_password_request.dart';
 import 'package:yht_ticket/models/requests/login_request.dart';
@@ -10,6 +14,7 @@ import 'package:yht_ticket/models/responses/notification_response.dart';
 import 'package:yht_ticket/models/responses/profile_response.dart';
 import 'package:yht_ticket/models/responses/register_response.dart';
 import 'package:yht_ticket/models/responses/schedule_response.dart';
+import 'package:yht_ticket/models/responses/station_response.dart';
 
 import 'base_api_repository.dart';
 
@@ -299,5 +304,15 @@ class FakeApiRepository implements BaseApiRepository {
     ]);
 
     return list;
+  }
+
+  @override
+  Future<List<StationResponse>?> getStations() async {
+    //await Future.delayed(const Duration(seconds: 2));
+    String data = await DefaultAssetBundle.of(Get.context!)
+        .loadString("assets/json/stations.json");
+    List jsonResult = jsonDecode(data);
+
+    return jsonResult.map((e) => StationResponse.fromMap(e)).toList();
   }
 }

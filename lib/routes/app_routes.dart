@@ -15,6 +15,7 @@ abstract class Routes {
 
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const SCHEDULES = _Paths.SCHEDULES;
+  static const SEARCH_STATIONS = _Paths.SEARCH_STATIONS;
 }
 
 abstract class _Paths {
@@ -30,4 +31,5 @@ abstract class _Paths {
 
   static const NOTIFICATIONS = '/notifications';
   static const SCHEDULES = '/schedules';
+  static const SEARCH_STATIONS = '/search-stations';
 }
