@@ -197,10 +197,12 @@ class ProfileScreen extends GetView<ProfileController> {
                                         fontWeight: 600),
                                   )
                                 : Container(
-                                    margin: const EdgeInsets.only(top: 12.0),
-                                    height: 20,
-                                    width: 20,
-                                    child: const CircularProgressIndicator(),
+                                    padding: const EdgeInsets.all(2.0),
+                                    height: 18,
+                                    width: 18,
+                                    child: const CircularProgressIndicator(
+                                      strokeWidth: 1,
+                                    ),
                                   ),
                           ],
                         ),
