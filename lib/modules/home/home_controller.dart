@@ -27,6 +27,17 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
   void onInit() {
     super.onInit();
     tabController = TabController(vsync: this, length: pages.length);
+    tabController.addListener(() {
+      changePage(tabController.index);
+    });
+    tabController.animation!.addListener(() {
+      final aniValue = tabController.animation!.value;
+      if (aniValue - currentIndex.value > 0.5) {
+        changePage(currentIndex.value + 1);
+      } else if (aniValue - currentIndex.value < -0.5) {
+        changePage(currentIndex.value - 1);
+      }
+    });
   }
 
   @override

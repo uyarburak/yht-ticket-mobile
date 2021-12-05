@@ -87,6 +87,8 @@ class FakeApiRepository implements BaseApiRepository {
         destination: "Konya YHT",
         wagonCount: 8,
         scheduleDate: DateTime(now.year, now.month, now.day, 18, 30),
+        status: 0,
+        lastModifiedDate: DateTime.now(),
       ),
       AlertResponse(
         id: "alert:1",
@@ -95,6 +97,8 @@ class FakeApiRepository implements BaseApiRepository {
         wagonCount: 2,
         scheduleDate: DateTime(now.year, now.month, now.day, 15, 30)
             .add(Duration(days: 1)),
+        status: 0,
+        lastModifiedDate: DateTime.now(),
       ),
       AlertResponse(
         id: "alert:1",
@@ -103,6 +107,8 @@ class FakeApiRepository implements BaseApiRepository {
         wagonCount: 5,
         scheduleDate: DateTime(now.year, now.month, now.day, 15, 30)
             .add(Duration(days: 7)),
+        status: 0,
+        lastModifiedDate: DateTime.now(),
       ),
       AlertResponse(
         id: "alert:1",
@@ -111,6 +117,8 @@ class FakeApiRepository implements BaseApiRepository {
         wagonCount: 5,
         scheduleDate: DateTime(now.year, now.month, now.day, 15, 30)
             .add(Duration(days: 8)),
+        status: 0,
+        lastModifiedDate: DateTime.now(),
       ),
       ...additionalAlerts
     ];
@@ -226,12 +234,17 @@ class FakeApiRepository implements BaseApiRepository {
     EasyLoading.show(status: 'Bekleyiniz...');
     await Future.delayed(const Duration(seconds: 2));
     EasyLoading.dismiss();
-    additionalAlerts.addAll(data.alerts.map((e) => AlertResponse(
-        id: e.scheduleId.toString(),
-        departure: e.departureStationName,
-        destination: e.destinationStationName,
-        wagonCount: e.wagons.length,
-        scheduleDate: e.startDate)));
+    additionalAlerts.addAll(
+      data.alerts.map((e) => AlertResponse(
+            id: e.scheduleId.toString(),
+            departure: e.departureStationName,
+            destination: e.destinationStationName,
+            wagonCount: e.wagons.length,
+            scheduleDate: e.startDate,
+            status: 0,
+            lastModifiedDate: DateTime.now(),
+          )),
+    );
     return data.alerts.map((e) => e.scheduleId.toString()).toList();
   }
 
@@ -241,5 +254,50 @@ class FakeApiRepository implements BaseApiRepository {
 
     return ProfileResponse(
         email: 'john@doe.com', name: 'John Doe', credits: 12);
+  }
+
+  @override
+  Future<List<AlertResponse>?> getAlerts() async {
+    var list = await getActiveAlerts();
+    list!.addAll([
+      AlertResponse(
+        id: "alert:111",
+        departure: "Eryaman YHT",
+        destination: "Eskişehir",
+        wagonCount: 1,
+        scheduleDate: DateTime.parse("2021-11-01T18:30:00"),
+        status: 1,
+        lastModifiedDate: DateTime.parse("2021-10-29T18:30:00"),
+      ),
+      AlertResponse(
+        id: "alert:112",
+        departure: "Eskişehir",
+        destination: "Eryaman YHT",
+        wagonCount: 7,
+        scheduleDate: DateTime.parse("2021-10-28T18:30:00"),
+        status: 2,
+        lastModifiedDate: DateTime.parse("2021-10-28T18:30:00"),
+      ),
+      AlertResponse(
+        id: "alert:113",
+        departure: "Eryaman YHT",
+        destination: "Eskişehir",
+        wagonCount: 1,
+        scheduleDate: DateTime.parse("2021-10-14T18:30:00"),
+        status: 2,
+        lastModifiedDate: DateTime.parse("2021-10-14T18:30:00"),
+      ),
+      AlertResponse(
+        id: "alert:114",
+        departure: "İstanbul (Pendik)",
+        destination: "Eskişehir",
+        wagonCount: 8,
+        scheduleDate: DateTime.parse("2021-09-07T12:30:00"),
+        status: 1,
+        lastModifiedDate: DateTime.parse("2021-09-03T12:30:00"),
+      ),
+    ]);
+
+    return list;
   }
 }

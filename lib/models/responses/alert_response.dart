@@ -6,23 +6,17 @@ class AlertResponse {
   final String destination;
   final int wagonCount;
   final DateTime scheduleDate;
+  final int status;
+  final DateTime lastModifiedDate;
   AlertResponse({
     required this.id,
     required this.departure,
     required this.destination,
     required this.wagonCount,
     required this.scheduleDate,
+    required this.status,
+    required this.lastModifiedDate,
   });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'departure': departure,
-      'destination': destination,
-      'wagonCount': wagonCount,
-      'scheduleDate': scheduleDate.millisecondsSinceEpoch,
-    };
-  }
 
   factory AlertResponse.fromJson(Map<String, dynamic> map) {
     return AlertResponse(
@@ -30,11 +24,11 @@ class AlertResponse {
       departure: map['departure'],
       destination: map['destination'],
       wagonCount: map['wagonCount'],
-      scheduleDate: DateTime.fromMillisecondsSinceEpoch(map['scheduleDate']),
+      scheduleDate: DateTime.parse(map['scheduleDate']),
+      status: map['status'],
+      lastModifiedDate: DateTime.parse(map['lastModifiedDate']),
     );
   }
-
-  String toRawJson() => json.encode(toJson());
 
   factory AlertResponse.fromRawJson(String source) =>
       AlertResponse.fromJson(json.decode(source));

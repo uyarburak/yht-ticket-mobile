@@ -18,6 +18,7 @@ abstract class BaseApiRepository {
 
   Future<List<NotificationResponse>?> getNotifications();
   Future<List<AlertResponse>?> getActiveAlerts();
+  Future<List<AlertResponse>?> getAlerts();
 
   Future<List<ScheduleResponse>?> getSchedules(ScheduleRequest data);
   Future<List<String>?> createAlerts(CreateAlertsRequest data);

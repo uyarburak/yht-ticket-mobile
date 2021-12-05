@@ -14,7 +14,8 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        body: controller.currentPage,
+        body: TabBarView(
+            controller: controller.tabController, children: controller.pages),
         bottomNavigationBar: BottomAppBar(
           elevation: 0,
           shape: const CircularNotchedRectangle(),
