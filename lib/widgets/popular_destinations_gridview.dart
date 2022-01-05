@@ -101,9 +101,9 @@ class PopularDestinationsGridview extends StatelessWidget {
               title: 'Ankara-Konya',
               image: 'assets/images/konya-yatay.jpg',
               schedules: [
-                ScheduleInfo(title: 'Ankara Gar - Konya YHT'),
+                ScheduleInfo(title: 'Ankara Gar - Konya'),
                 ScheduleInfo(title: 'Ankara Gar - Selçuklu YHT'),
-                ScheduleInfo(title: 'Eryaman YHT - Konya YHT'),
+                ScheduleInfo(title: 'Eryaman YHT - Konya'),
                 ScheduleInfo(title: 'Eryaman YHT - Selçuklu YHT'),
               ],
             ),
