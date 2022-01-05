@@ -18,6 +18,7 @@ abstract class BaseApiRepository {
   Future<ProfileResponse?> getProfile();
 
   Future<List<NotificationResponse>?> getNotifications();
+  Future<int?> getUnreadNotificationCount();
   Future<List<AlertResponse>?> getActiveAlerts();
   Future<List<AlertResponse>?> getAlerts();
 

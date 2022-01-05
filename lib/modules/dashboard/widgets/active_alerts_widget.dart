@@ -118,7 +118,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                       color: AppTheme.theme.colorScheme.onPrimary,
                     ),
                   ),
-                  alert.scheduleDate.hour % 2 == 0
+                  alert.unreadNotificationCount > 0
                       ? Positioned(
                           top: 0,
                           right: 0,
@@ -131,7 +131,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                                     Radius.circular(MySize.size40!))),
                             child: Center(
                               child: Text(
-                                '${alert.scheduleDate.hour ~/ 2}',
+                                alert.unreadNotificationCount.toString(),
                                 style: AppTheme.getTextStyle(
                                   AppTheme.theme.textTheme.overline,
                                   color: AppTheme.theme.colorScheme.onPrimary,

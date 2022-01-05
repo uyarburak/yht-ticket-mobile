@@ -11,7 +11,6 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class NotificationsScreen extends GetView<NotificationService> {
   NotificationsScreen({Key? key}) : super(key: key) {
-    controller.setLatestReadNotificationDate();
     timeago.setLocaleMessages('tr', timeago.TrMessages());
   }
 
@@ -119,14 +118,16 @@ class NotificationsScreen extends GetView<NotificationService> {
     var month = today.subtract(const Duration(days: 30));
 
     Map<String, List<NotificationResponse>> map = {};
-    var thisDay =
-        notifications.where((element) => element.date.compareTo(today) >= 0);
+    var thisDay = notifications
+        .where((element) => element.createdAt.compareTo(today) >= 0);
     var thisWeek = notifications.where((element) =>
-        element.date.compareTo(week) >= 0 && element.date.compareTo(today) < 0);
+        element.createdAt.compareTo(week) >= 0 &&
+        element.createdAt.compareTo(today) < 0);
     var thisMonth = notifications.where((element) =>
-        element.date.compareTo(month) >= 0 && element.date.compareTo(week) < 0);
-    var older =
-        notifications.where((element) => element.date.compareTo(month) < 0);
+        element.createdAt.compareTo(month) >= 0 &&
+        element.createdAt.compareTo(week) < 0);
+    var older = notifications
+        .where((element) => element.createdAt.compareTo(month) < 0);
 
     if (thisDay.isNotEmpty) {
       map['Bugün'] = thisDay.toList();
@@ -169,9 +170,9 @@ class NotificationsScreen extends GetView<NotificationService> {
                       color: AppTheme.theme.colorScheme.onBackground,
                       fontWeight: 500),
                   children: [
-                    TextSpan(text: item.message),
+                    TextSpan(text: item.payload['alertId'] as String),
                     TextSpan(
-                      text: " ${timeago.format(item.date, locale: 'tr')}",
+                      text: " ${timeago.format(item.createdAt, locale: 'tr')}",
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText2,
                           color: AppTheme.theme.colorScheme.onBackground,

@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 import 'package:yht_ticket/modules/dashboard/widgets/active_alerts_widget.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
+import 'package:yht_ticket/services/notification_service.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 import 'package:yht_ticket/widgets/notification_icon_button.dart';
@@ -18,6 +19,7 @@ class DashboardScreen extends GetView<DashboardController> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
+          NotificationService.to.getUnreadNotificationsCount();
           return controller.getActiveAlerts();
         },
         color: AppTheme.theme.primaryColor,

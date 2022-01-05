@@ -1,40 +1,25 @@
 import 'dart:convert';
 
-class NotificationResponse {
-  final String id;
-  final int notificationType;
-  final String message;
-  final DateTime date;
+import 'package:flutter/foundation.dart';
 
+class NotificationResponse {
+  final int notificationType;
+  final Map<String, Object> payload;
+  final DateTime createdAt;
   NotificationResponse({
-    required this.id,
     required this.notificationType,
-    required this.message,
-    required this.date,
+    required this.payload,
+    required this.createdAt,
   });
 
-  factory NotificationResponse.fromRawJson(String str) =>
-      NotificationResponse.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'notificationType': notificationType,
-        'message': message,
-        'date': date,
-      };
-
-  factory NotificationResponse.fromJson(Map<String, dynamic> json) {
+  factory NotificationResponse.fromMap(Map<String, dynamic> map) {
     return NotificationResponse(
-      id: json['id'] as String,
-      notificationType: json['notificationType'] as int,
-      message: json['message'] as String,
-      date: json['date'] as DateTime,
+      notificationType: map['notificationType']?.toInt() ?? 0,
+      payload: Map<String, Object>.from(map['payload']),
+      createdAt: DateTime.parse(map['createdAt']),
     );
   }
 
-  @override
-  String toString() =>
-      'NotificationResponse(id: $id, notificationType: $notificationType, message: $message, date: $date)';
+  factory NotificationResponse.fromJson(String source) =>
+      NotificationResponse.fromMap(json.decode(source));
 }

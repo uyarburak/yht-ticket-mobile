@@ -67,16 +67,6 @@ class App extends StatelessWidget {
 
 void configLoading() {
   EasyLoading.instance
-    ..indicatorType = EasyLoadingIndicatorType.threeBounce
-    ..loadingStyle = EasyLoadingStyle.custom
-    // ..indicatorSize = 45.0
-    ..radius = 10.0
-    // ..progressColor = Colors.yellow
-    ..backgroundColor = ColorConstants.lightGray
-    ..indicatorColor = hexToColor('#64DEE0')
-    ..textColor = hexToColor('#64DEE0')
-    // ..maskColor = Colors.red
     ..userInteractions = false
-    ..dismissOnTap = false
-    ..animationStyle = EasyLoadingAnimationStyle.scale;
+    ..dismissOnTap = false;
 }

@@ -84,8 +84,8 @@ class SchedulesController extends GetxController {
       AppFocus.unfocus(Get.context!);
       final list = await apiRepository.getSchedules(
         ScheduleRequest(
-          departure: Get.parameters['departure']!,
-          destination: Get.parameters['destination']!,
+          departure: departure.value,
+          destination: destination.value,
           departureDate: selectedDate.value,
         ),
       );

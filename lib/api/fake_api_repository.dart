@@ -47,38 +47,13 @@ class FakeApiRepository implements BaseApiRepository {
   @override
   Future<List<NotificationResponse>?> getNotifications() async {
     await Future.delayed(const Duration(seconds: 2));
-    return [
-      NotificationResponse(
-        id: "blabla2",
-        notificationType: 1,
-        message: "Message 1",
-        date: DateTime(2021, 11, 27, 18, 0),
-      ),
-      NotificationResponse(
-        id: "blabla3",
-        notificationType: 2,
-        message: "Message 2",
-        date: DateTime(2021, 11, 27, 17, 50),
-      ),
-      NotificationResponse(
-        id: "blabla4",
-        notificationType: 2,
-        message: "Message 3",
-        date: DateTime.now().subtract(Duration(days: 3)),
-      ),
-      NotificationResponse(
-        id: "blabla5",
-        notificationType: 2,
-        message: "Message 4",
-        date: DateTime.now().subtract(Duration(days: 12)),
-      ),
-      NotificationResponse(
-        id: "blabla6",
-        notificationType: 3,
-        message: "Message 5",
-        date: DateTime.now().subtract(Duration(days: 122)),
-      ),
-    ];
+    return [];
+  }
+
+  @override
+  Future<int?> getUnreadNotificationCount() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return 2;
   }
 
   @override
@@ -94,6 +69,7 @@ class FakeApiRepository implements BaseApiRepository {
         scheduleDate: DateTime(now.year, now.month, now.day, 18, 30),
         status: 0,
         lastModifiedDate: DateTime.now(),
+        unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:1",
@@ -104,6 +80,7 @@ class FakeApiRepository implements BaseApiRepository {
             .add(Duration(days: 1)),
         status: 0,
         lastModifiedDate: DateTime.now(),
+        unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:1",
@@ -114,6 +91,7 @@ class FakeApiRepository implements BaseApiRepository {
             .add(Duration(days: 7)),
         status: 0,
         lastModifiedDate: DateTime.now(),
+        unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:1",
@@ -124,6 +102,7 @@ class FakeApiRepository implements BaseApiRepository {
             .add(Duration(days: 8)),
         status: 0,
         lastModifiedDate: DateTime.now(),
+        unreadNotificationCount: 0,
       ),
       ...additionalAlerts
     ];
@@ -248,6 +227,7 @@ class FakeApiRepository implements BaseApiRepository {
             scheduleDate: e.startDate,
             status: 0,
             lastModifiedDate: DateTime.now(),
+            unreadNotificationCount: 0,
           )),
     );
     return data.alerts.map((e) => e.scheduleId.toString()).toList();
@@ -273,6 +253,7 @@ class FakeApiRepository implements BaseApiRepository {
         scheduleDate: DateTime.parse("2021-11-01T18:30:00"),
         status: 1,
         lastModifiedDate: DateTime.parse("2021-10-29T18:30:00"),
+        unreadNotificationCount: 1,
       ),
       AlertResponse(
         id: "alert:112",
@@ -282,6 +263,7 @@ class FakeApiRepository implements BaseApiRepository {
         scheduleDate: DateTime.parse("2021-10-28T18:30:00"),
         status: 2,
         lastModifiedDate: DateTime.parse("2021-10-28T18:30:00"),
+        unreadNotificationCount: 11,
       ),
       AlertResponse(
         id: "alert:113",
@@ -291,6 +273,7 @@ class FakeApiRepository implements BaseApiRepository {
         scheduleDate: DateTime.parse("2021-10-14T18:30:00"),
         status: 2,
         lastModifiedDate: DateTime.parse("2021-10-14T18:30:00"),
+        unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:114",
@@ -300,6 +283,7 @@ class FakeApiRepository implements BaseApiRepository {
         scheduleDate: DateTime.parse("2021-09-07T12:30:00"),
         status: 1,
         lastModifiedDate: DateTime.parse("2021-09-03T12:30:00"),
+        unreadNotificationCount: 0,
       ),
     ]);
 

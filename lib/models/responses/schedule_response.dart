@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ScheduleResponse {
   final int id;
   final String name;
@@ -14,6 +16,21 @@ class ScheduleResponse {
     required this.endDate,
     required this.wagonTypes,
   });
+
+  factory ScheduleResponse.fromMap(Map<String, dynamic> map) {
+    return ScheduleResponse(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      type: map['type'] ?? '',
+      startDate: DateTime.parse(map['startDate']),
+      endDate: DateTime.parse(map['endDate']),
+      wagonTypes: List<WagonType>.from(
+          map['wagonTypes']?.map((x) => WagonType.fromMap(x))),
+    );
+  }
+
+  factory ScheduleResponse.fromJson(String source) =>
+      ScheduleResponse.fromMap(json.decode(source));
 }
 
 class WagonType {
@@ -26,4 +43,15 @@ class WagonType {
     required this.price,
     required this.wagons,
   });
+
+  factory WagonType.fromMap(Map<String, dynamic> map) {
+    return WagonType(
+      name: map['name'] ?? '',
+      price: map['price']?.toDouble() ?? 0.0,
+      wagons: List<int>.from(map['wagons']),
+    );
+  }
+
+  factory WagonType.fromJson(String source) =>
+      WagonType.fromMap(json.decode(source));
 }
