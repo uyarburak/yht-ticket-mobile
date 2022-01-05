@@ -48,6 +48,7 @@ dependencies:
   turkish:
     git:
       url: git://github.com/uyarburak/turkish.git
+  onesignal_flutter: ^3.2.7
 
 dev_dependencies:
   flutter_test:
