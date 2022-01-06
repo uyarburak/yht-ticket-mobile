@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
+import 'package:yht_ticket/models/enums/alert_status.dart';
 import 'package:yht_ticket/modules/history/history_controller.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
@@ -18,7 +19,7 @@ class HistoryScreen extends GetView<HistoryController> {
         child: Scaffold(
           body: RefreshIndicator(
             onRefresh: () async {
-              return controller.getAlerts();
+              return controller.refreshAlerts();
             },
             color: AppTheme.theme.primaryColor,
             backgroundColor: Colors.white,
@@ -48,7 +49,8 @@ class HistoryScreen extends GetView<HistoryController> {
                   ),
                   controller.loading.isTrue
                       ? _buildSkeletonLoader()
-                      : controller.alertList.isEmpty
+                      : controller.completedAlerts.isEmpty &&
+                              controller.activeAlerts.isEmpty
                           ? _buildAlertsNotFound()
                           : _buildList()
                 ],
@@ -83,7 +85,7 @@ class HistoryScreen extends GetView<HistoryController> {
               task: '${e.departure} - ${e.destination}',
               subject:
                   DateFormat("d MMMM HH:mm", 'tr_TR').format(e.scheduleDate),
-              status: 0)),
+              status: e.status)),
           controller.completedAlerts.isNotEmpty
               ? Container(
                   margin: Spacing.fromLTRB(24, 24, 0, 8),
@@ -117,34 +119,36 @@ class HistoryScreen extends GetView<HistoryController> {
     IconData iconData;
     Color iconBG, iconColor, statusColor;
     String statusText = '';
-    switch (status) {
-      case 0:
-        iconBG = AppTheme.theme.colorScheme.primary;
-        iconColor = AppTheme.theme.colorScheme.onPrimary;
-        iconData = MdiIcons.alarm;
-        statusColor = AppTheme.theme.colorScheme.primary;
-        statusText = "Devam ediyor";
-        break;
-      case 1:
-        iconBG = AppTheme.customTheme.colorInfo;
-        iconColor = AppTheme.customTheme.onInfo;
-        iconData = MdiIcons.stop;
-        statusColor = AppTheme.customTheme.colorInfo;
-        statusText = "Durduruldu";
-        break;
-      case 2:
-        iconBG = AppTheme.customTheme.disabledColor;
-        iconColor = AppTheme.customTheme.onDisabled;
-        iconData = MdiIcons.checkAll;
-        statusColor = AppTheme.customTheme.disabledColor;
-        statusText = "Tamamlandı";
-        break;
-      default:
-        iconBG = AppTheme.customTheme.colorError;
-        iconColor = AppTheme.customTheme.onError;
-        iconData = MdiIcons.plus;
-        statusColor = AppTheme.customTheme.colorError;
-        break;
+    if (status == AlertStatus.Active || status == AlertStatus.Created) {
+      iconBG = AppTheme.theme.colorScheme.primary;
+      iconColor = AppTheme.theme.colorScheme.onPrimary;
+      iconData = MdiIcons.alarm;
+      statusColor = AppTheme.theme.colorScheme.primary;
+      statusText = "Devam ediyor";
+    } else if (status == AlertStatus.PaymentRequired) {
+      iconBG = AppTheme.customTheme.colorInfo;
+      iconColor = AppTheme.customTheme.onInfo;
+      iconData = MdiIcons.cashMultiple;
+      statusColor = AppTheme.customTheme.colorInfo;
+      statusText = "Ödeme bekliyor";
+    } else if (status == AlertStatus.CancelledByUser) {
+      iconBG = AppTheme.customTheme.colorInfo;
+      iconColor = AppTheme.customTheme.onInfo;
+      iconData = MdiIcons.stop;
+      statusColor = AppTheme.customTheme.colorInfo;
+      statusText = "Durduruldu";
+    } else if (status == AlertStatus.Completed) {
+      iconBG = AppTheme.customTheme.disabledColor;
+      iconColor = AppTheme.customTheme.onDisabled;
+      iconData = MdiIcons.checkAll;
+      statusColor = AppTheme.customTheme.disabledColor;
+      statusText = "Tamamlandı";
+    } else {
+      iconBG = AppTheme.customTheme.disabledColor;
+      iconColor = AppTheme.customTheme.onDisabled;
+      iconData = MdiIcons.help;
+      statusColor = AppTheme.customTheme.disabledColor;
+      statusText = "???";
     }
 
     return Container(

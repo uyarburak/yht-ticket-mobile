@@ -9,21 +9,43 @@ class HistoryController extends GetxController {
 
   var error = false.obs;
   var loading = true.obs;
-  var alertList = RxList<AlertResponse>();
-
-  List<AlertResponse> get activeAlerts =>
-      alertList.where((p0) => p0.status == 0).toList();
-
-  List<AlertResponse> get completedAlerts =>
-      alertList.where((p0) => p0.status != 0).toList();
+  var completedAlerts = RxList<AlertResponse>();
+  var activeAlerts = RxList<AlertResponse>();
 
   @override
   void onInit() {
-    getAlerts();
+    refreshAlerts();
     super.onInit();
   }
 
-  void getAlerts() async {
+  refreshAlerts() {
+    _getAlerts();
+    _getActiveAlerts();
+  }
+
+  void _getActiveAlerts() async {
+    print("getActiveAlerts started");
+    loading.value = true;
+    try {
+      AppFocus.unfocus(Get.context!);
+      final alerts = await apiRepository.getActiveAlerts();
+
+      if (alerts == null) {
+        error.value = true;
+        return;
+      }
+
+      activeAlerts.value = alerts;
+    } on Exception catch (_) {
+      //
+      error.value = true;
+    } finally {
+      loading.value = false;
+    }
+    print("getActiveAlerts finished");
+  }
+
+  void _getAlerts() async {
     print("getAlerts started");
     loading.value = true;
     try {
@@ -35,7 +57,7 @@ class HistoryController extends GetxController {
         return;
       }
 
-      alertList.value = alerts;
+      completedAlerts.value = alerts;
     } on Exception catch (_) {
       //
       error.value = true;
