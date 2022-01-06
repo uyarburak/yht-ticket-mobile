@@ -4,12 +4,12 @@ import 'package:group_list_view/group_list_view.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/models/responses/notification_response.dart';
-import 'package:yht_ticket/services/notification_service.dart';
+import 'package:yht_ticket/modules/notifications/notifications_controller.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class NotificationsScreen extends GetView<NotificationService> {
+class NotificationsScreen extends GetView<NotificationsController> {
   NotificationsScreen({Key? key}) : super(key: key) {
     timeago.setLocaleMessages('tr', timeago.TrMessages());
   }

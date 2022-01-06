@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/services/notification_service.dart';
 import 'package:yht_ticket/shared/constants/storage.dart';
 
 class AuthService extends GetxService {
@@ -25,7 +24,6 @@ class AuthService extends GetxService {
       final prefs = Get.find<SharedPreferences>();
       prefs.setString(StorageConstants.token, token);
 
-      Get.delete<NotificationService>(force: true);
       Get.offAndToNamed(Routes.DASHBOARD);
     }
   }

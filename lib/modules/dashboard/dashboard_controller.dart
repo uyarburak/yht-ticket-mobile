@@ -10,14 +10,25 @@ class DashboardController extends GetxController {
   var error = false.obs;
   var loading = true.obs;
   var alertList = RxList<AlertResponse>();
+  var unreadNotificationCount = 0.obs;
 
   @override
   void onInit() {
-    getActiveAlerts();
+    refreshAlertsAndUnreadNotificationCount();
     super.onInit();
   }
 
-  void getActiveAlerts() async {
+  refreshAlertsAndUnreadNotificationCount() {
+    _getActiveAlerts();
+    _getUnreadNotificationsCount();
+  }
+
+  Future _getUnreadNotificationsCount() async {
+    var count = await apiRepository.getUnreadNotificationCount();
+    unreadNotificationCount.value = count ?? 0;
+  }
+
+  void _getActiveAlerts() async {
     print("getActiveAlerts started");
     loading.value = true;
     try {

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/services/notification_service.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 
-class NotificationIconButton extends GetView<NotificationService> {
-  const NotificationIconButton({Key? key}) : super(key: key);
+import '../dashboard_controller.dart';
+
+class NotificationIconButton extends StatelessWidget {
+  NotificationIconButton({Key? key}) : super(key: key);
+
+  final DashboardController _dashboardController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class NotificationIconButton extends GetView<NotificationService> {
             color: AppTheme.theme.colorScheme.onBackground.withAlpha(200),
           ),
           Obx(
-            () => controller.unreadNotificationCount > 0
+            () => _dashboardController.unreadNotificationCount > 0
                 ? Positioned(
                     right: -4,
                     top: -4,
@@ -37,7 +40,8 @@ class NotificationIconButton extends GetView<NotificationService> {
                               Radius.circular(MySize.size40!))),
                       child: Center(
                         child: Text(
-                          controller.unreadNotificationCount.toString(),
+                          _dashboardController.unreadNotificationCount
+                              .toString(),
                           style: AppTheme.getTextStyle(
                             AppTheme.theme.textTheme.overline,
                             color: AppTheme.theme.colorScheme.onPrimary,

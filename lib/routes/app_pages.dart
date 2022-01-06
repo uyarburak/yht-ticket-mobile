@@ -5,6 +5,7 @@ import 'package:yht_ticket/modules/home/home_binding.dart';
 import 'package:yht_ticket/modules/home/home_view.dart';
 import 'package:yht_ticket/modules/login/login_binding.dart';
 import 'package:yht_ticket/modules/login/login_screen.dart';
+import 'package:yht_ticket/modules/notifications/notifications_binding.dart';
 import 'package:yht_ticket/modules/notifications/notifications_screen.dart';
 import 'package:yht_ticket/modules/register/register_binding.dart';
 import 'package:yht_ticket/modules/register/register_screen.dart';
@@ -59,7 +60,7 @@ class AppPages {
     GetPage(
       name: Routes.NOTIFICATIONS,
       page: () => NotificationsScreen(),
-      //binding: NotificationsBinding(),
+      binding: NotificationsBinding(),
     ),
     GetPage(
       name: Routes.SCHEDULES,
