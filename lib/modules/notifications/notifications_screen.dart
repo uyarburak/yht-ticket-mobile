@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_list_view/group_list_view.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:yht_ticket/models/enums/notification_types.dart';
 import 'package:yht_ticket/models/responses/notification_response.dart';
 import 'package:yht_ticket/modules/notifications/notifications_controller.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
@@ -17,6 +19,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.customTheme.bgLayer1,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppTheme.customTheme.bgLayer1,
@@ -152,13 +155,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(MySize.size24!)),
-            child: Icon(
-              item.notificationType == 1
-                  ? MdiIcons.faceWoman
-                  : MdiIcons.faceMan,
-              size: MySize.size48,
-              color: AppTheme.theme.primaryColor,
-            ),
+            child: _buildNotificationIcon(item),
           ),
           Expanded(
             child: Container(
@@ -170,7 +167,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                       color: AppTheme.theme.colorScheme.onBackground,
                       fontWeight: 500),
                   children: [
-                    TextSpan(text: item.payload['alertId'] as String),
+                    ..._buildNotificationMessage(item),
                     TextSpan(
                       text: " ${timeago.format(item.createdAt, locale: 'tr')}",
                       style: AppTheme.getTextStyle(
@@ -187,5 +184,113 @@ class NotificationsScreen extends GetView<NotificationsController> {
         ],
       ),
     );
+  }
+
+  Icon _buildNotificationIcon(NotificationResponse item) {
+    if (item.notificationType == NotificationTypes.AlertCreated) {
+      return Icon(
+        MdiIcons.bellRing,
+        size: MySize.size48,
+        color: Colors.green,
+      );
+    } else if (item.notificationType == NotificationTypes.AlertCancelled) {
+      return Icon(
+        MdiIcons.bellOffOutline,
+        size: MySize.size48,
+        color: Colors.red,
+      );
+    } else if (item.notificationType == NotificationTypes.AlertCompleted) {
+      return Icon(
+        MdiIcons.train,
+        size: MySize.size48,
+        color: AppTheme.theme.primaryColor,
+      );
+    }
+    return Icon(
+      MdiIcons.faceMan,
+      size: MySize.size48,
+      color: AppTheme.theme.primaryColor,
+    );
+  }
+
+  var dateFormat = DateFormat("d MMMM, EEEE HH:mm", "tr_TR");
+  List<TextSpan> _buildNotificationMessage(NotificationResponse item) {
+    if (item.notificationType == NotificationTypes.AlertCreated) {
+      var startDate = DateTime.parse(item.payload['startDate'] as String);
+      return [
+        TextSpan(
+          text: dateFormat.format(startDate),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' tarihli '),
+        TextSpan(
+          text: item.payload['departureStationName'] as String,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' - '),
+        TextSpan(
+          text: item.payload['destinationStationName'] as String,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' seferi için alarm oluşturuldu.'),
+      ];
+    } else if (item.notificationType == NotificationTypes.AlertCancelled) {
+      var startDate = DateTime.parse(item.payload['startDate'] as String);
+      return [
+        TextSpan(
+          text: dateFormat.format(startDate),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' tarihli '),
+        TextSpan(
+          text: item.payload['departureStationName'] as String,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' - '),
+        TextSpan(
+          text: item.payload['destinationStationName'] as String,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' seferi için alarm kapatıldı.'),
+      ];
+    } else if (item.notificationType == NotificationTypes.AlertCompleted) {
+      var startDate = DateTime.parse(item.payload['startDate'] as String);
+      return [
+        TextSpan(
+          text: dateFormat.format(startDate),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' tarihli '),
+        TextSpan(
+          text: item.payload['departureStationName'] as String,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' - '),
+        TextSpan(
+          text: item.payload['destinationStationName'] as String,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const TextSpan(text: ' treni seferine başladı. İyi yolculuklar!'),
+      ];
+    }
+    return [const TextSpan(text: "???")];
   }
 }
