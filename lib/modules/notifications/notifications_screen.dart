@@ -104,7 +104,6 @@ class NotificationsScreen extends GetView<NotificationsController> {
                     ),
                   );
                 },
-                sectionSeparatorBuilder: (context, section) => const Divider(),
               ),
             ),
           );
@@ -169,7 +168,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                   children: [
                     ..._buildNotificationMessage(item),
                     TextSpan(
-                      text: " ${timeago.format(item.createdAt, locale: 'tr')}",
+                      text: "\n${timeago.format(item.createdAt, locale: 'tr')}",
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText2,
                           color: AppTheme.theme.colorScheme.onBackground,
