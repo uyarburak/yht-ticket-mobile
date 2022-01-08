@@ -4,6 +4,7 @@ import 'package:yht_ticket/models/requests/login_request.dart';
 import 'package:yht_ticket/models/requests/register_request.dart';
 import 'package:yht_ticket/models/requests/schedule_request.dart';
 import 'package:yht_ticket/models/responses/alert_response.dart';
+import 'package:yht_ticket/models/responses/full_alert_response.dart';
 import 'package:yht_ticket/models/responses/login_response.dart';
 import 'package:yht_ticket/models/responses/notification_response.dart';
 import 'package:yht_ticket/models/responses/profile_response.dart';
@@ -21,6 +22,7 @@ abstract class BaseApiRepository {
   Future<int?> getUnreadNotificationCount();
   Future<List<AlertResponse>?> getActiveAlerts();
   Future<List<AlertResponse>?> getAlerts();
+  Future<FullAlertResponse?> getAlert(String alertId);
 
   Future<List<StationResponse>?> getStations();
   Future<List<ScheduleResponse>?> getSchedules(ScheduleRequest data);

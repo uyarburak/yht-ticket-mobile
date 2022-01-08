@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:yht_ticket/api/fake_api_repository.dart';
+import 'package:yht_ticket/models/responses/full_alert_response.dart';
 import 'package:yht_ticket/models/responses/station_response.dart';
 
 import 'package:yht_ticket/models/responses/schedule_response.dart';
@@ -42,6 +43,14 @@ class ApiRepository extends FakeApiRepository implements BaseApiRepository {
     final res = await apiProvider.getAlerts('/alert/api/v1/alerts');
     if (res.statusCode == 200) {
       return (res.body as List).map((e) => AlertResponse.fromMap(e)).toList();
+    }
+  }
+
+  @override
+  Future<FullAlertResponse?> getAlert(String alertId) async {
+    final res = await apiProvider.getAlert('/alert/api/v1/alerts/$alertId');
+    if (res.statusCode == 200) {
+      return FullAlertResponse.fromMap(res.body);
     }
   }
 

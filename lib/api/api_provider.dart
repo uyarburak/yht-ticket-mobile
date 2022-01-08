@@ -23,6 +23,10 @@ class ApiProvider extends BaseProvider {
     return get(path + "?active=false&page=0");
   }
 
+  Future<Response> getAlert(String path) {
+    return get(path);
+  }
+
   Future<Response> getStations(String path) {
     return get(path);
   }

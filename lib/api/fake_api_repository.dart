@@ -9,6 +9,7 @@ import 'package:yht_ticket/models/requests/login_request.dart';
 import 'package:yht_ticket/models/requests/register_request.dart';
 import 'package:yht_ticket/models/requests/schedule_request.dart';
 import 'package:yht_ticket/models/responses/alert_response.dart';
+import 'package:yht_ticket/models/responses/full_alert_response.dart';
 import 'package:yht_ticket/models/responses/login_response.dart';
 import 'package:yht_ticket/models/responses/notification_response.dart';
 import 'package:yht_ticket/models/responses/profile_response.dart';
@@ -298,5 +299,11 @@ class FakeApiRepository implements BaseApiRepository {
     List jsonResult = jsonDecode(data);
 
     return jsonResult.map((e) => StationResponse.fromMap(e)).toList();
+  }
+
+  @override
+  Future<FullAlertResponse?> getAlert(String alertId) {
+    // TODO: implement getAlert
+    throw UnimplementedError();
   }
 }
