@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:skeleton_loader/skeleton_loader.dart';
 import 'package:yht_ticket/models/enums/alert_status.dart';
 import 'package:yht_ticket/modules/history/history_controller.dart';
+import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 
@@ -81,7 +82,7 @@ class HistoryScreen extends GetView<HistoryController> {
                   ),
                 )
               : const SizedBox(),
-          ...controller.activeAlerts.map((e) => singleTask(
+          ...controller.activeAlerts.map((e) => singleTask(e.id,
               task: '${e.departure} - ${e.destination}',
               subject:
                   DateFormat("d MMMM HH:mm", 'tr_TR').format(e.scheduleDate),
@@ -101,6 +102,7 @@ class HistoryScreen extends GetView<HistoryController> {
               : const SizedBox(),
           ...controller.completedAlerts.map(
             (e) => singleTask(
+              e.id,
               task: '${e.departure} - ${e.destination}',
               subject:
                   DateFormat("d MMMM HH:mm", 'tr_TR').format(e.scheduleDate),
@@ -114,7 +116,7 @@ class HistoryScreen extends GetView<HistoryController> {
     );
   }
 
-  Widget singleTask(
+  Widget singleTask(String alertId,
       {String? subject, String? task, String? submissionDate, int status = 0}) {
     IconData iconData;
     Color iconBG, iconColor, statusColor;
@@ -151,82 +153,87 @@ class HistoryScreen extends GetView<HistoryController> {
       statusText = "???";
     }
 
-    return Container(
-      padding: Spacing.all(16),
-      margin: Spacing.fromLTRB(24, 8, 24, 8),
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-          color: AppTheme.customTheme.bgLayer1,
-          borderRadius: BorderRadius.all(Radius.circular(MySize.size8!)),
-          boxShadow: const [],
-          border: Border.all(color: AppTheme.customTheme.bgLayer3, width: 1)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            padding: Spacing.all(6),
-            decoration: BoxDecoration(color: iconBG, shape: BoxShape.circle),
-            child: Icon(
-              iconData,
-              color: iconColor,
-              size: MySize.size20,
+    return InkWell(
+      onTap: () {
+        Get.toNamed(Routes.ALERT_DETAILS(alertId));
+      },
+      child: Container(
+        padding: Spacing.all(16),
+        margin: Spacing.fromLTRB(24, 8, 24, 8),
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+            color: AppTheme.customTheme.bgLayer1,
+            borderRadius: BorderRadius.all(Radius.circular(MySize.size8!)),
+            boxShadow: const [],
+            border: Border.all(color: AppTheme.customTheme.bgLayer3, width: 1)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              padding: Spacing.all(6),
+              decoration: BoxDecoration(color: iconBG, shape: BoxShape.circle),
+              child: Icon(
+                iconData,
+                color: iconColor,
+                size: MySize.size20,
+              ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              margin: Spacing.left(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    subject!,
-                    style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.bodyText1,
-                        color: AppTheme.theme.colorScheme.onBackground,
-                        fontWeight: 600),
-                  ),
-                  Container(
-                    margin: Spacing.top(2),
-                    child: Text(
-                      task!,
+            Expanded(
+              child: Container(
+                margin: Spacing.left(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      subject!,
                       style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.caption,
-                        color: AppTheme.theme.colorScheme.onBackground
-                            .withAlpha(160),
-                        fontWeight: 600,
+                          AppTheme.theme.textTheme.bodyText1,
+                          color: AppTheme.theme.colorScheme.onBackground,
+                          fontWeight: 600),
+                    ),
+                    Container(
+                      margin: Spacing.top(2),
+                      child: Text(
+                        task!,
+                        style: AppTheme.getTextStyle(
+                          AppTheme.theme.textTheme.caption,
+                          color: AppTheme.theme.colorScheme.onBackground
+                              .withAlpha(160),
+                          fontWeight: 600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                submissionDate ?? '',
-                style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
-                    fontSize: 12,
-                    letterSpacing: 0.2,
-                    color: AppTheme.theme.colorScheme.onBackground,
-                    muted: true,
-                    fontWeight: 600),
-              ),
-              Container(
-                margin: Spacing.top(2),
-                child: Text(
-                  statusText,
-                  style: AppTheme.getTextStyle(
-                      AppTheme.theme.textTheme.bodyText2,
-                      color: statusColor,
-                      letterSpacing: 0,
-                      fontWeight: status == 3 ? 600 : 500),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  submissionDate ?? '',
+                  style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
+                      fontSize: 12,
+                      letterSpacing: 0.2,
+                      color: AppTheme.theme.colorScheme.onBackground,
+                      muted: true,
+                      fontWeight: 600),
+                ),
+                Container(
+                  margin: Spacing.top(2),
+                  child: Text(
+                    statusText,
+                    style: AppTheme.getTextStyle(
+                        AppTheme.theme.textTheme.bodyText2,
+                        color: statusColor,
+                        letterSpacing: 0,
+                        fontWeight: status == 3 ? 600 : 500),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

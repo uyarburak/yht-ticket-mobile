@@ -92,6 +92,14 @@ class AlertNotification {
 
   factory AlertNotification.fromJson(String source) =>
       AlertNotification.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    if (newStatus == 0) {
+      return '$wagon. vagon $seatNo koltuğu artık boş.';
+    }
+    return '$wagon. vagon $seatNo koltuğu doldu.';
+  }
 }
 
 class ScheduleWagon {

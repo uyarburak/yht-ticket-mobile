@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'package:yht_ticket/models/responses/alert_response.dart';
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
+import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 
@@ -100,7 +101,9 @@ class ActiveAlertsWidget extends StatelessWidget {
       date = DateFormat('d MMMM, E HH:mm', 'tr_TR').format(alert.scheduleDate);
     }
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.ALERT_DETAILS(alert.id));
+      },
       child: Container(
         margin: Spacing.top(24),
         child: Row(

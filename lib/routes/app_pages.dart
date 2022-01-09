@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+import 'package:yht_ticket/modules/alert/alert_binding.dart';
+import 'package:yht_ticket/modules/alert/alert_screen.dart';
 import 'package:yht_ticket/modules/forgot_password/forgot_password_binding.dart';
 import 'package:yht_ticket/modules/forgot_password/forgot_password_screen.dart';
+import 'package:yht_ticket/modules/history/history_screen.dart';
 import 'package:yht_ticket/modules/home/home_binding.dart';
 import 'package:yht_ticket/modules/home/home_view.dart';
 import 'package:yht_ticket/modules/login/login_binding.dart';
@@ -71,6 +74,20 @@ class AppPages {
       name: Routes.SEARCH_STATIONS,
       page: () => SearchStationScreen(),
       binding: SearchStationBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALERTS,
+      page: () => const HistoryScreen(),
+      title: 'Products',
+      transition: Transition.zoom,
+      binding: HomeBinding(),
+      children: [
+        GetPage(
+          name: _Paths.ALERT_DETAILS,
+          page: () => const AlertScreen(),
+          binding: AlertBinding(),
+        ),
+      ],
     ),
   ];
 }

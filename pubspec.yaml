@@ -49,6 +49,7 @@ dependencies:
     git:
       url: git://github.com/uyarburak/turkish.git
   onesignal_flutter: ^3.2.7
+  snapping_sheet: ^3.1.0
 
 dev_dependencies:
   flutter_test:
