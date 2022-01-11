@@ -6,9 +6,6 @@ class SplashController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-
-    await Future.delayed(const Duration(milliseconds: 2000));
-
     if (AuthService.to.isLoggedInValue) {
       Get.offAndToNamed(Routes.DASHBOARD);
     } else {

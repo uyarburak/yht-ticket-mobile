@@ -53,13 +53,10 @@ class LoginScreen extends GetView<LoginController> {
                         controller: controller.emailController,
                         icon: MdiIcons.emailOutline,
                         keyboardType: TextInputType.emailAddress,
-                        placeholder: 'E-posta adresi',
+                        placeholder: 'Kullanıcı adı',
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'E-posta adresi gerekli';
-                          }
-                          if (!Regex.isEmail(value)) {
-                            return 'E-posta formatı hatalı.';
+                            return 'Kullanıcı adı adresi gerekli';
                           }
 
                           return null;

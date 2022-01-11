@@ -26,7 +26,15 @@ class FakeApiRepository implements BaseApiRepository {
     EasyLoading.show(status: 'Bekleyiniz...');
     await Future.delayed(const Duration(seconds: 3));
     EasyLoading.dismiss();
-    return LoginResponse(token: "blabla");
+    return null;
+  }
+
+  @override
+  Future<LoginResponse?> loginAsGuest(LoginRequest data) async {
+    EasyLoading.show(status: 'Bekleyiniz...');
+    await Future.delayed(const Duration(seconds: 3));
+    EasyLoading.dismiss();
+    return null;
   }
 
   @override

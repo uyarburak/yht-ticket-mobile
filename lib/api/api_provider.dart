@@ -4,9 +4,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:yht_ticket/api/base_provider.dart';
 import 'package:yht_ticket/models/requests/create_alerts_request.dart';
+import 'package:yht_ticket/models/requests/login_request.dart';
 import 'package:yht_ticket/models/requests/schedule_request.dart';
 
 class ApiProvider extends BaseProvider {
+  Future<Response> login(String path, LoginRequest request) {
+    return post(path, request.toRawJson());
+  }
+
   Future<Response> getNotifications(String path) {
     return get(path);
   }

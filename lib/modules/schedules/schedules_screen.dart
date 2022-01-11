@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/modules/schedules/schedules_controller.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
@@ -91,7 +92,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
                     ],
                   ),
                 ),
-                controller.selectedSchedules.length > 0
+                controller.selectedSchedules.isNotEmpty
                     ? Container(
                         color: AppTheme.customTheme.bgLayer1,
                         padding: Spacing.fromLTRB(24, 16, 24, 16),
@@ -218,7 +219,9 @@ class SchedulesScreen extends GetView<SchedulesController> {
                                     child: Icon(
                                       MdiIcons.chevronRight,
                                       size: MySize.size20,
-                                      color: AppTheme.theme.colorScheme.primary,
+                                      color: AppTheme
+                                          .theme.colorScheme.onBackground
+                                          .withAlpha(160),
                                     ),
                                   )
                                 ],
@@ -303,6 +306,41 @@ class SchedulesScreen extends GetView<SchedulesController> {
   Widget _buildSchedules() {
     if (controller.loading.isTrue) {
       return const Center(child: CircularProgressIndicator());
+    }
+    if (controller.schedules.isEmpty) {
+      return Container(
+        margin: Spacing.top(16),
+        padding: Spacing.vertical(16),
+        decoration: BoxDecoration(
+          color: AppTheme.theme.cardTheme.color,
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size16!)),
+          boxShadow: [
+            BoxShadow(
+              color: AppTheme.theme.cardTheme.shadowColor!.withAlpha(28),
+              blurRadius: 5,
+              spreadRadius: 1,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Lottie.asset("assets/lotties/89719-electric-train-animation.json",
+                width: 200),
+            Container(
+              margin: EdgeInsets.only(top: MySize.size24!),
+              child: Text(
+                "Sefer bulunamadı :(",
+                style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
+                    color: AppTheme.theme.colorScheme.onBackground,
+                    fontWeight: 600,
+                    letterSpacing: 0),
+              ),
+            ),
+          ],
+        ),
+      );
     }
     return Container(
       margin: Spacing.top(16),

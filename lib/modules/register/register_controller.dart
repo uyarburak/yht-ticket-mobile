@@ -36,7 +36,7 @@ class RegisterController extends GetxController {
 
       if (res == null) return;
 
-      AuthService.to.login(res.token);
+      //AuthService.to.login(res);
     }
   }
 

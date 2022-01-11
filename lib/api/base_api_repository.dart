@@ -14,6 +14,7 @@ import 'package:yht_ticket/models/responses/station_response.dart';
 
 abstract class BaseApiRepository {
   Future<LoginResponse?> login(LoginRequest data);
+  Future<LoginResponse?> loginAsGuest(LoginRequest data);
   Future<RegisterResponse?> register(RegisterRequest data);
   Future<bool?> forgotPassword(ForgotPasswordRequest data);
   Future<ProfileResponse?> getProfile();

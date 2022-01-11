@@ -145,7 +145,7 @@ class AlertScreen extends GetView<AlertController> {
             : ListView.builder(
                 itemCount: controller.alert.value?.notifications.length,
                 itemBuilder: (context, index) {
-                  final item = controller.alert.value!.notifications[index]!;
+                  final item = controller.alert.value!.notifications[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Row(
@@ -202,7 +202,7 @@ class AlertScreen extends GetView<AlertController> {
                     crossAxisCount: 3,
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
-                    childAspectRatio: 1.4,
+                    childAspectRatio: 1.2,
                     children: controller.alert.value!.scheduleWagons
                         .map((e) => _buildWagon(e))
                         .toList(),

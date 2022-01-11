@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:yht_ticket/api/fake_api_repository.dart';
+import 'package:yht_ticket/models/requests/login_request.dart';
 import 'package:yht_ticket/models/responses/full_alert_response.dart';
+import 'package:yht_ticket/models/responses/login_response.dart';
 import 'package:yht_ticket/models/responses/station_response.dart';
 
 import 'package:yht_ticket/models/responses/schedule_response.dart';
@@ -23,10 +25,26 @@ class ApiRepository extends FakeApiRepository implements BaseApiRepository {
   final ApiProvider apiProvider;
 
   @override
+  Future<LoginResponse?> login(LoginRequest data) async {
+    final res = await apiProvider.login('/auth/api/v1/auth', data);
+    if (res.statusCode == 200) {
+      return LoginResponse.fromMap(res.body);
+    }
+  }
+
+  @override
+  Future<LoginResponse?> loginAsGuest(LoginRequest data) async {
+    final res = await apiProvider.login('/auth/api/v1/auth/guest', data);
+    if (res.statusCode == 200) {
+      return LoginResponse.fromMap(res.body);
+    }
+  }
+
+  @override
   Future<List<String>?> createAlerts(CreateAlertsRequest data) async {
     final res = await apiProvider.createAlerts('/alert/api/v1/alerts', data);
     if (res.statusCode == 200) {
-      return res.body as List<String>;
+      return (res.body as List).map((e) => e.toString()).toList();
     }
   }
 

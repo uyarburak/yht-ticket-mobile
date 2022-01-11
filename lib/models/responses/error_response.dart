@@ -1,22 +1,29 @@
 import 'dart:convert';
 
 class ErrorResponse {
+  final String code;
+  final String message;
   ErrorResponse({
-    required this.error,
+    required this.code,
+    required this.message,
   });
 
-  String error;
+  Map<String, dynamic> toMap() {
+    return {
+      'code': code,
+      'message': message,
+    };
+  }
 
-  factory ErrorResponse.fromRawJson(String str) =>
-      ErrorResponse.fromJson(json.decode(str));
+  factory ErrorResponse.fromMap(Map<String, dynamic> map) {
+    return ErrorResponse(
+      code: map['code'] ?? '',
+      message: map['message'] ?? '',
+    );
+  }
 
-  String toRawJson() => json.encode(toJson());
+  String toJson() => json.encode(toMap());
 
-  factory ErrorResponse.fromJson(Map<String, dynamic> json) => ErrorResponse(
-        error: json["error"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-      };
+  factory ErrorResponse.fromJson(String source) =>
+      ErrorResponse.fromMap(json.decode(source));
 }

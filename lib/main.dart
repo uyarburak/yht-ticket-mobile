@@ -21,13 +21,6 @@ void main() async {
 
   OneSignal.shared.setAppId("4042c904-a960-4692-b889-511bfcdee887");
 
-  // Setting External User Id with Callback Available in SDK Version 3.9.3+
-  OneSignal.shared.setExternalUserId("burak").then((results) {
-    print(results.toString());
-  }).catchError((error) {
-    print(error.toString());
-  });
-
   // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
     print("Accepted permission: $accepted");
