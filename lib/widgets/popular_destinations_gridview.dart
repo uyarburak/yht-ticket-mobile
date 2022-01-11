@@ -146,14 +146,14 @@ class PopularDestinationsGridview extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 8,
-              left: 8,
+              bottom: 6,
+              left: 6,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Icon(
                         MdiIcons.train,

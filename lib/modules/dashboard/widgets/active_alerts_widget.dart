@@ -106,90 +106,86 @@ class ActiveAlertsWidget extends StatelessWidget {
       },
       child: Container(
         margin: Spacing.top(24),
-        child: Row(
-          children: <Widget>[
-            Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(MySize.size8!))),
-              child: Stack(
-                children: [
-                  CircleAvatar(
+        child: Stack(
+          children: [
+            Row(
+              children: <Widget>[
+                Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(MySize.size8!))),
+                  child: CircleAvatar(
                     child: Icon(
                       MdiIcons.train,
                       color: AppTheme.theme.colorScheme.onPrimary,
                     ),
                   ),
-                  alert.unreadNotificationCount > 0
-                      ? Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Container(
-                            height: MySize.size20,
-                            width: MySize.size20,
-                            decoration: BoxDecoration(
-                                color: Colors.red.shade600,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(MySize.size40!))),
-                            child: Center(
-                              child: Text(
-                                alert.unreadNotificationCount.toString(),
-                                style: AppTheme.getTextStyle(
-                                  AppTheme.theme.textTheme.overline,
-                                  color: AppTheme.theme.colorScheme.onPrimary,
-                                  fontWeight: 600,
-                                  fontSize: 9,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                margin: Spacing.left(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      date,
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText2,
-                          color:
-                              AppTheme.theme.colorScheme.primary.withAlpha(180),
-                          fontWeight: 700),
-                    ),
-                    Text(
-                      "${alert.departure} - ${alert.destination}",
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText1,
-                          color: AppTheme.theme.colorScheme.onBackground,
-                          letterSpacing: 0,
-                          fontWeight: 600),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      "${alert.wagonCount} vagon",
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText2,
-                          color: AppTheme.theme.colorScheme.onBackground,
-                          muted: true),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    margin: Spacing.left(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          date,
+                          style: AppTheme.getTextStyle(
+                              AppTheme.theme.textTheme.bodyText2,
+                              color: AppTheme.theme.colorScheme.primary
+                                  .withAlpha(180),
+                              fontWeight: 700),
+                        ),
+                        Text(
+                          "${alert.departure} - ${alert.destination}",
+                          style: AppTheme.getTextStyle(
+                              AppTheme.theme.textTheme.bodyText1,
+                              color: AppTheme.theme.colorScheme.onBackground,
+                              letterSpacing: 0,
+                              fontWeight: 600),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          "${alert.wagonCount} vagon",
+                          style: AppTheme.getTextStyle(
+                              AppTheme.theme.textTheme.bodyText2,
+                              color: AppTheme.theme.colorScheme.onBackground,
+                              muted: true),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Icon(
+                  MdiIcons.chevronRight,
+                  color: AppTheme.theme.colorScheme.primary,
+                ),
+              ],
             ),
-            Icon(
-              MdiIcons.chevronRight,
-              color: AppTheme.theme.colorScheme.primary,
-            ),
+            alert.unreadNotificationCount > 0
+                ? Positioned(
+                    top: 0,
+                    left: 25,
+                    child: CircleAvatar(
+                      maxRadius: 12,
+                      backgroundColor: Colors.red.shade600,
+                      child: Center(
+                        child: Text(
+                          alert.unreadNotificationCount.toString(),
+                          style: AppTheme.getTextStyle(
+                            AppTheme.theme.textTheme.overline,
+                            color: AppTheme.theme.colorScheme.onPrimary,
+                            fontWeight: 600,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

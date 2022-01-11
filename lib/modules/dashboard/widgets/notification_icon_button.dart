@@ -28,8 +28,8 @@ class NotificationIconButton extends StatelessWidget {
           Obx(
             () => _dashboardController.unreadNotificationCount > 0
                 ? Positioned(
-                    right: -4,
-                    top: -4,
+                    right: -6,
+                    top: -6,
                     child: Container(
                       padding: const EdgeInsets.all(0),
                       height: MySize.size18,

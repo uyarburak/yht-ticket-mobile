@@ -151,9 +151,10 @@ class NotificationsScreen extends GetView<NotificationsController> {
     return Container(
       margin: Spacing.top(16),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(MySize.size24!)),
+          CircleAvatar(
+            backgroundColor: Colors.black.withAlpha(8),
             child: _buildNotificationIcon(item),
           ),
           Expanded(
@@ -187,27 +188,23 @@ class NotificationsScreen extends GetView<NotificationsController> {
 
   Icon _buildNotificationIcon(NotificationResponse item) {
     if (item.notificationType == NotificationTypes.AlertCreated) {
-      return Icon(
+      return const Icon(
         MdiIcons.bellRing,
-        size: MySize.size48,
         color: Colors.green,
       );
     } else if (item.notificationType == NotificationTypes.AlertCancelled) {
-      return Icon(
+      return const Icon(
         MdiIcons.bellOffOutline,
-        size: MySize.size48,
         color: Colors.red,
       );
     } else if (item.notificationType == NotificationTypes.AlertCompleted) {
       return Icon(
         MdiIcons.train,
-        size: MySize.size48,
         color: AppTheme.theme.primaryColor,
       );
     }
     return Icon(
       MdiIcons.faceMan,
-      size: MySize.size48,
       color: AppTheme.theme.primaryColor,
     );
   }

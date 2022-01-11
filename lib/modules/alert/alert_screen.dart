@@ -68,7 +68,7 @@ class AlertScreen extends GetView<AlertController> {
                   snappingDuration: Duration(milliseconds: 600),
                 ),
                 SnappingPosition.pixels(
-                  positionPixels: MediaQuery.of(context).size.height - 90,
+                  positionPixels: MediaQuery.of(context).size.height - 110,
                   snappingCurve: Curves.ease,
                   snappingDuration: const Duration(milliseconds: 500),
                 ),
@@ -198,11 +198,14 @@ class AlertScreen extends GetView<AlertController> {
           const SizedBox(height: 16),
           controller.alert.value != null
               ? Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    childAspectRatio: 1.2,
+                  child: Wrap(
+                    // crossAxisCount: 3,
+                    // mainAxisSpacing: 8,
+                    // crossAxisSpacing: 8,
+                    //childAspectRatio: 1.2,
+                    runSpacing: 8,
+                    spacing: 8,
+
                     children: controller.alert.value!.scheduleWagons
                         .map((e) => _buildWagon(e))
                         .toList(),
@@ -216,7 +219,8 @@ class AlertScreen extends GetView<AlertController> {
 
   Widget _buildWagon(ScheduleWagon wagon) {
     return Container(
-      width: double.infinity,
+      width: ((Get.width - 32 - 16) / 3).floorToDouble(),
+      //height: 30,
       decoration: BoxDecoration(
         color: AppTheme.theme.primaryColorDark,
         borderRadius: BorderRadius.circular(12),
@@ -232,7 +236,7 @@ class AlertScreen extends GetView<AlertController> {
               color: Colors.white,
             ),
           ),
-          const Spacer(),
+          //const Spacer(),
           Text(
             '${wagon.wagon}. Vagon',
             style: const TextStyle(
