@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/responses/alert_response.dart';
+import 'package:yht_ticket/api/api.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/shared/utils/focus.dart';
 
 class DashboardController extends GetxController {
@@ -29,7 +29,6 @@ class DashboardController extends GetxController {
   }
 
   void _getActiveAlerts() async {
-    print("getActiveAlerts started");
     loading.value = true;
     try {
       AppFocus.unfocus(Get.context!);
@@ -47,6 +46,5 @@ class DashboardController extends GetxController {
     } finally {
       loading.value = false;
     }
-    print("getActiveAlerts finished");
   }
 }

@@ -1,5 +1,5 @@
 class NotificationTypes {
-  static const AlertCreated = 1;
-  static const AlertCancelled = 2;
-  static const AlertCompleted = 3;
+  static const alertCreated = 1;
+  static const alertCancelled = 2;
+  static const alertCompleted = 3;
 }

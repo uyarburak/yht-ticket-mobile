@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 import 'package:yht_ticket/modules/history/history_controller.dart';
-import 'package:yht_ticket/modules/home/home_controller.dart';
 import 'package:yht_ticket/modules/profile/profile_controller.dart';
+
+import 'home_controller.dart';
 
 class HomeBinding extends Bindings {
   @override

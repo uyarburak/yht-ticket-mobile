@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class NotificationResponse {
   final int notificationType;
   final Map<String, Object> payload;
   final DateTime createdAt;
+
   NotificationResponse({
     required this.notificationType,
     required this.payload,

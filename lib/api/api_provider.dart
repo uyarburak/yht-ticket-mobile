@@ -1,49 +1,49 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:yht_ticket/api/base_provider.dart';
-import 'package:yht_ticket/models/requests/create_alerts_request.dart';
-import 'package:yht_ticket/models/requests/login_request.dart';
-import 'package:yht_ticket/models/requests/schedule_request.dart';
+import 'package:yht_ticket/models/models.dart';
+
+import 'base_provider.dart';
 
 class ApiProvider extends BaseProvider {
-  Future<Response> login(String path, LoginRequest request) {
-    return post(path, request.toRawJson());
+  Future<Response> login(LoginRequest request) {
+    return post('/auth/api/v1/auth', request.toJson());
   }
 
-  Future<Response> getNotifications(String path) {
-    return get(path);
+  Future<Response> loginAsGuest(LoginAsGuestRequest request) {
+    return post('/auth/api/v1/auth/guest', request.toJson());
   }
 
-  Future<Response> getUnreadNotificationCount(String path) {
-    return get(path);
+  Future<Response> getNotifications() {
+    return get('/notification/api/v1/notifications');
   }
 
-  Future<Response> getActiveAlerts(String path) {
-    return get(path + "?active=true");
+  Future<Response> getUnreadNotificationCount() {
+    return get('/notification/api/v1/notifications/unread-count');
   }
 
-  Future<Response> getAlerts(String path) {
-    return get(path + "?active=false&page=0");
+  Future<Response> getActiveAlerts() {
+    return get('/alert/api/v1/alerts?active=true');
   }
 
-  Future<Response> getAlert(String path) {
-    return get(path);
+  Future<Response> getAlerts() {
+    return get('/alert/api/v1/alerts?active=false&page=0');
   }
 
-  Future<Response> getStations(String path) {
-    return get(path);
+  Future<Response> getAlert(String alertId) {
+    return get('/alert/api/v1/alerts/$alertId');
   }
 
-  Future<Response> getSchedules(String path, ScheduleRequest data) {
+  Future<Response> getStations() {
+    return get('/catalog/api/v1/stations');
+  }
+
+  Future<Response> getSchedules(ScheduleRequest data) {
     var dateFormat = DateFormat("yyyy-MM-dd");
-    return get(path +
-        "?departure=${data.departure}&destination=${data.destination}&day=${dateFormat.format(data.departureDate)}");
+    return get(
+        '/catalog/api/v1/schedules?departure=${data.departure}&destination=${data.destination}&day=${dateFormat.format(data.departureDate)}');
   }
 
-  Future<Response> createAlerts(String path, CreateAlertsRequest data) {
-    final json = jsonEncode(data.alerts.map((e) => e.toMap()).toList());
-    return post(path, json);
+  Future<Response> createAlerts(CreateAlertsRequest data) {
+    return post('/alert/api/v1/alerts', data.toJson());
   }
 }

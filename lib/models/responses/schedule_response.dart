@@ -8,6 +8,7 @@ class ScheduleResponse {
   final DateTime endDate;
   final List<WagonType> wagonTypes;
   bool selected = false;
+
   ScheduleResponse({
     required this.id,
     required this.name,
@@ -38,6 +39,7 @@ class WagonType {
   final double price;
   final List<int> wagons;
   bool selected = false;
+
   WagonType({
     required this.name,
     required this.price,

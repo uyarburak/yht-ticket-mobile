@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/responses/profile_response.dart';
+import 'package:yht_ticket/api/api.dart';
+import 'package:yht_ticket/models/models.dart';
 
 class ProfileController extends GetxController {
   final BaseApiRepository apiRepository;
@@ -17,7 +17,6 @@ class ProfileController extends GetxController {
   }
 
   void getProfile() async {
-    print("getProfile started");
     loading.value = true;
     try {
       final profileResponse = await apiRepository.getProfile();
@@ -34,6 +33,5 @@ class ProfileController extends GetxController {
     } finally {
       loading.value = false;
     }
-    print("getProfile finished");
   }
 }

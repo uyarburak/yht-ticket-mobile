@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/modules/schedules/schedules_controller.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 
+import 'schedules_controller.dart';
+
 class SchedulesScreen extends GetView<SchedulesController> {
+  const SchedulesScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(

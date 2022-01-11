@@ -2,49 +2,34 @@ import 'dart:convert';
 
 class AlertResponse {
   final String id;
-  final String departure;
-  final String destination;
+  final String departureStationName;
+  final String destinationStationName;
   final int wagonCount;
-  final DateTime scheduleDate;
-  final int status;
-  final DateTime lastModifiedDate;
+  final DateTime startDate;
+  final int alertStatusType;
+  final DateTime lastModifiedAt;
   final int unreadNotificationCount;
+
   AlertResponse({
     required this.id,
-    required this.departure,
-    required this.destination,
+    required this.departureStationName,
+    required this.destinationStationName,
     required this.wagonCount,
-    required this.scheduleDate,
-    required this.status,
-    required this.lastModifiedDate,
+    required this.startDate,
+    required this.alertStatusType,
+    required this.lastModifiedAt,
     required this.unreadNotificationCount,
   });
-
-  factory AlertResponse.fromJson2(Map<String, dynamic> map) {
-    return AlertResponse(
-      id: map['id'],
-      departure: map['departure'],
-      destination: map['destination'],
-      wagonCount: map['wagonCount'],
-      scheduleDate: DateTime.parse(map['scheduleDate']),
-      status: map['status'],
-      lastModifiedDate: DateTime.parse(map['lastModifiedDate']),
-      unreadNotificationCount: map['unreadNotificationCount'],
-    );
-  }
-
-  factory AlertResponse.fromRawJson(String source) =>
-      AlertResponse.fromJson2(json.decode(source));
 
   factory AlertResponse.fromMap(Map<String, dynamic> map) {
     return AlertResponse(
       id: map['id'] ?? '',
-      departure: map['departureStationName'] ?? '',
-      destination: map['destinationStationName'] ?? '',
+      departureStationName: map['departureStationName'] ?? '',
+      destinationStationName: map['destinationStationName'] ?? '',
       wagonCount: map['wagonCount']?.toInt() ?? 0,
-      scheduleDate: DateTime.parse(map['startDate']),
-      status: map['alertStatusType']?.toInt() ?? 0,
-      lastModifiedDate: DateTime.parse(map['lastModifiedAt']),
+      startDate: DateTime.parse(map['startDate']),
+      alertStatusType: map['alertStatusType']?.toInt() ?? 0,
+      lastModifiedAt: DateTime.parse(map['lastModifiedAt']),
       unreadNotificationCount: map['unreadNotificationCount']?.toInt() ?? 0,
     );
   }

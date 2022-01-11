@@ -3,19 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:yht_ticket/models/requests/create_alerts_request.dart';
-import 'package:yht_ticket/models/requests/forgot_password_request.dart';
-import 'package:yht_ticket/models/requests/login_request.dart';
-import 'package:yht_ticket/models/requests/register_request.dart';
-import 'package:yht_ticket/models/requests/schedule_request.dart';
-import 'package:yht_ticket/models/responses/alert_response.dart';
-import 'package:yht_ticket/models/responses/full_alert_response.dart';
-import 'package:yht_ticket/models/responses/login_response.dart';
-import 'package:yht_ticket/models/responses/notification_response.dart';
-import 'package:yht_ticket/models/responses/profile_response.dart';
-import 'package:yht_ticket/models/responses/register_response.dart';
-import 'package:yht_ticket/models/responses/schedule_response.dart';
-import 'package:yht_ticket/models/responses/station_response.dart';
+import 'package:yht_ticket/models/models.dart';
 
 import 'base_api_repository.dart';
 
@@ -30,7 +18,7 @@ class FakeApiRepository implements BaseApiRepository {
   }
 
   @override
-  Future<LoginResponse?> loginAsGuest(LoginRequest data) async {
+  Future<LoginResponse?> loginAsGuest(LoginAsGuestRequest data) async {
     EasyLoading.show(status: 'Bekleyiniz...');
     await Future.delayed(const Duration(seconds: 3));
     EasyLoading.dismiss();
@@ -38,11 +26,11 @@ class FakeApiRepository implements BaseApiRepository {
   }
 
   @override
-  Future<RegisterResponse?> register(RegisterRequest data) async {
+  Future<LoginResponse?> register(RegisterRequest data) async {
     EasyLoading.show(status: 'Bekleyiniz...');
     await Future.delayed(const Duration(seconds: 3));
     EasyLoading.dismiss();
-    return RegisterResponse(token: "blabla");
+    return null;
   }
 
   @override
@@ -72,45 +60,45 @@ class FakeApiRepository implements BaseApiRepository {
     return [
       AlertResponse(
         id: "alert:1",
-        departure: "Ankara Gar",
-        destination: "Konya YHT",
+        departureStationName: "Ankara Gar",
+        destinationStationName: "Konya YHT",
         wagonCount: 8,
-        scheduleDate: DateTime(now.year, now.month, now.day, 18, 30),
-        status: 0,
-        lastModifiedDate: DateTime.now(),
+        startDate: DateTime(now.year, now.month, now.day, 18, 30),
+        alertStatusType: 0,
+        lastModifiedAt: DateTime.now(),
         unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:1",
-        departure: "Selçuklu Gar",
-        destination: "Ankara Gar",
+        departureStationName: "Selçuklu Gar",
+        destinationStationName: "Ankara Gar",
         wagonCount: 2,
-        scheduleDate: DateTime(now.year, now.month, now.day, 15, 30)
-            .add(Duration(days: 1)),
-        status: 0,
-        lastModifiedDate: DateTime.now(),
+        startDate: DateTime(now.year, now.month, now.day, 15, 30)
+            .add(const Duration(days: 1)),
+        alertStatusType: 0,
+        lastModifiedAt: DateTime.now(),
         unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:1",
-        departure: "Ankara Gar",
-        destination: "Konya YHT",
+        departureStationName: "Ankara Gar",
+        destinationStationName: "Konya YHT",
         wagonCount: 5,
-        scheduleDate: DateTime(now.year, now.month, now.day, 15, 30)
-            .add(Duration(days: 7)),
-        status: 0,
-        lastModifiedDate: DateTime.now(),
+        startDate: DateTime(now.year, now.month, now.day, 15, 30)
+            .add(const Duration(days: 7)),
+        alertStatusType: 0,
+        lastModifiedAt: DateTime.now(),
         unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:1",
-        departure: "Ankara Gar",
-        destination: "Konya YHT",
+        departureStationName: "Ankara Gar",
+        destinationStationName: "Konya YHT",
         wagonCount: 5,
-        scheduleDate: DateTime(now.year, now.month, now.day, 15, 30)
-            .add(Duration(days: 8)),
-        status: 0,
-        lastModifiedDate: DateTime.now(),
+        startDate: DateTime(now.year, now.month, now.day, 15, 30)
+            .add(const Duration(days: 8)),
+        alertStatusType: 0,
+        lastModifiedAt: DateTime.now(),
         unreadNotificationCount: 0,
       ),
       ...additionalAlerts
@@ -119,7 +107,6 @@ class FakeApiRepository implements BaseApiRepository {
 
   @override
   Future<List<ScheduleResponse>?> getSchedules(ScheduleRequest data) async {
-    print('getSchedules data: ${data.toJson()}');
     await Future.delayed(const Duration(seconds: 2));
 
     return [
@@ -223,19 +210,18 @@ class FakeApiRepository implements BaseApiRepository {
 
   @override
   Future<List<String>?> createAlerts(CreateAlertsRequest data) async {
-    print('createAlerts data: ${data.toJson()}');
     EasyLoading.show(status: 'Bekleyiniz...');
     await Future.delayed(const Duration(seconds: 2));
     EasyLoading.dismiss();
     additionalAlerts.addAll(
       data.alerts.map((e) => AlertResponse(
             id: e.scheduleId.toString(),
-            departure: e.departureStationName,
-            destination: e.destinationStationName,
+            departureStationName: e.departureStationName,
+            destinationStationName: e.destinationStationName,
             wagonCount: e.wagons.length,
-            scheduleDate: e.startDate,
-            status: 0,
-            lastModifiedDate: DateTime.now(),
+            startDate: e.startDate,
+            alertStatusType: 0,
+            lastModifiedAt: DateTime.now(),
             unreadNotificationCount: 0,
           )),
     );
@@ -256,42 +242,42 @@ class FakeApiRepository implements BaseApiRepository {
     list!.addAll([
       AlertResponse(
         id: "alert:111",
-        departure: "Eryaman YHT",
-        destination: "Eskişehir",
+        departureStationName: "Eryaman YHT",
+        destinationStationName: "Eskişehir",
         wagonCount: 1,
-        scheduleDate: DateTime.parse("2021-11-01T18:30:00"),
-        status: 1,
-        lastModifiedDate: DateTime.parse("2021-10-29T18:30:00"),
+        startDate: DateTime.parse("2021-11-01T18:30:00"),
+        alertStatusType: 1,
+        lastModifiedAt: DateTime.parse("2021-10-29T18:30:00"),
         unreadNotificationCount: 1,
       ),
       AlertResponse(
         id: "alert:112",
-        departure: "Eskişehir",
-        destination: "Eryaman YHT",
+        departureStationName: "Eskişehir",
+        destinationStationName: "Eryaman YHT",
         wagonCount: 7,
-        scheduleDate: DateTime.parse("2021-10-28T18:30:00"),
-        status: 2,
-        lastModifiedDate: DateTime.parse("2021-10-28T18:30:00"),
+        startDate: DateTime.parse("2021-10-28T18:30:00"),
+        alertStatusType: 2,
+        lastModifiedAt: DateTime.parse("2021-10-28T18:30:00"),
         unreadNotificationCount: 11,
       ),
       AlertResponse(
         id: "alert:113",
-        departure: "Eryaman YHT",
-        destination: "Eskişehir",
+        departureStationName: "Eryaman YHT",
+        destinationStationName: "Eskişehir",
         wagonCount: 1,
-        scheduleDate: DateTime.parse("2021-10-14T18:30:00"),
-        status: 2,
-        lastModifiedDate: DateTime.parse("2021-10-14T18:30:00"),
+        startDate: DateTime.parse("2021-10-14T18:30:00"),
+        alertStatusType: 2,
+        lastModifiedAt: DateTime.parse("2021-10-14T18:30:00"),
         unreadNotificationCount: 0,
       ),
       AlertResponse(
         id: "alert:114",
-        departure: "İstanbul (Pendik)",
-        destination: "Eskişehir",
+        departureStationName: "İstanbul (Pendik)",
+        destinationStationName: "Eskişehir",
         wagonCount: 8,
-        scheduleDate: DateTime.parse("2021-09-07T12:30:00"),
-        status: 1,
-        lastModifiedDate: DateTime.parse("2021-09-03T12:30:00"),
+        startDate: DateTime.parse("2021-09-07T12:30:00"),
+        alertStatusType: 1,
+        lastModifiedAt: DateTime.parse("2021-09-03T12:30:00"),
         unreadNotificationCount: 0,
       ),
     ]);
@@ -311,7 +297,6 @@ class FakeApiRepository implements BaseApiRepository {
 
   @override
   Future<FullAlertResponse?> getAlert(String alertId) {
-    // TODO: implement getAlert
     throw UnimplementedError();
   }
 }

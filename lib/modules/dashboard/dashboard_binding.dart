@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
+
+import 'dashboard_controller.dart';
 
 class DashboardBinding implements Bindings {
   @override

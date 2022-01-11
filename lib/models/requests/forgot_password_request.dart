@@ -1,23 +1,17 @@
 import 'dart:convert';
 
 class ForgotPasswordRequest {
+  final String email;
+
   ForgotPasswordRequest({
     required this.email,
   });
 
-  String email;
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+    };
+  }
 
-  factory ForgotPasswordRequest.fromRawJson(String str) =>
-      ForgotPasswordRequest.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) =>
-      ForgotPasswordRequest(
-        email: json["email"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "email": email,
-      };
+  String toJson() => json.encode(toMap());
 }

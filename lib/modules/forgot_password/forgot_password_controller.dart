@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/requests/forgot_password_request.dart';
+import 'package:yht_ticket/api/api.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/common_widget.dart';
 import 'package:yht_ticket/shared/utils/focus.dart';
@@ -11,16 +11,6 @@ class ForgotPasswordController extends GetxController {
   ForgotPasswordController({required this.apiRepository});
 
   final emailController = TextEditingController();
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   void forgotPassword(
       BuildContext context, GlobalKey<FormState> formKey) async {
@@ -42,8 +32,8 @@ class ForgotPasswordController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
-
     emailController.dispose();
+
+    super.onClose();
   }
 }

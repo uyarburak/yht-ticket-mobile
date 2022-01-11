@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/common_widget.dart';
-
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 

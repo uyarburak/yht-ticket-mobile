@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/modules/profile/profile_controller.dart';
+
+import 'profile_controller.dart';
 
 class ProfileBinding implements Bindings {
   @override

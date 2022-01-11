@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/responses/full_alert_response.dart';
+import 'package:yht_ticket/api/api.dart';
+import 'package:yht_ticket/models/models.dart';
 
 class AlertController extends GetxController {
   final String alertId;

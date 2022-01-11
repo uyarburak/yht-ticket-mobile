@@ -1,14 +1,15 @@
 import 'package:get/get.dart';
 import 'package:turkish/turkish.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/responses/station_response.dart';
+import 'package:yht_ticket/api/api.dart';
+import 'package:yht_ticket/models/models.dart';
 
 class StationService extends GetxService {
   static StationService get to => Get.find();
   final BaseApiRepository apiRepository;
-  StationService({required this.apiRepository});
 
   var stations = RxList<StationResponse>();
+
+  StationService({required this.apiRepository});
 
   @override
   void onInit() {
@@ -17,7 +18,6 @@ class StationService extends GetxService {
   }
 
   Future getStations() async {
-    print("getStations called");
     var list = await apiRepository.getStations();
 
     if (list == null) return;

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/modules/search_station/search_station_controller.dart';
 import 'package:yht_ticket/services/station_service.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 
+import 'search_station_controller.dart';
+
 class SearchStationScreen extends GetView<SearchStationController> {
+  const SearchStationScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(

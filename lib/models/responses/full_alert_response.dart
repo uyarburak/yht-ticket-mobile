@@ -19,6 +19,7 @@ class FullAlertResponse {
   final String createdBy;
   final DateTime lastModifiedAt;
   final String lastModifiedBy;
+
   FullAlertResponse({
     required this.id,
     required this.scheduleId,
@@ -70,6 +71,7 @@ class AlertNotification {
   final int oldStatus;
   final int newStatus;
   final DateTime createdAt;
+
   AlertNotification({
     required this.wagon,
     required this.wagonEmptySeatsCount,
@@ -106,6 +108,7 @@ class ScheduleWagon {
   final int wagon;
   final int? emptyCount;
   final int? totalCount;
+
   ScheduleWagon({
     required this.wagon,
     this.emptyCount,

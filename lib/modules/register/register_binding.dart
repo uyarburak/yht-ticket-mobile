@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/modules/register/register_controller.dart';
+
+import 'register_controller.dart';
 
 class RegisterBinding implements Bindings {
   @override

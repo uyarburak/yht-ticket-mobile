@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
-import 'package:yht_ticket/models/requests/create_alerts_request.dart';
-import 'package:yht_ticket/models/requests/schedule_request.dart';
-import 'package:yht_ticket/models/responses/schedule_response.dart';
+import 'package:yht_ticket/api/api.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/common_widget.dart';
 import 'package:yht_ticket/shared/utils/focus.dart';
@@ -78,7 +76,6 @@ class SchedulesController extends GetxController {
   }
 
   void getSchedules() async {
-    print("getSchedules started");
     loading.value = true;
     try {
       AppFocus.unfocus(Get.context!);
@@ -102,6 +99,5 @@ class SchedulesController extends GetxController {
     } finally {
       loading.value = false;
     }
-    print("getSchedules finished");
   }
 }

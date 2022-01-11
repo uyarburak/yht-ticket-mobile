@@ -7,6 +7,7 @@ class LoginResponse {
   final String name;
   final String surname;
   final String avatarUrl;
+
   LoginResponse({
     required this.token,
     required this.username,

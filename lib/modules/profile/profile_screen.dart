@@ -102,7 +102,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                             height: 10,
                                             color: Colors.white,
                                           ),
-                                          SizedBox(height: 10),
+                                          const SizedBox(height: 10),
                                           Container(
                                             width: double.infinity,
                                             height: 12,

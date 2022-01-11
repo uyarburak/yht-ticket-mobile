@@ -7,7 +7,6 @@ import 'package:yht_ticket/app_binding.dart';
 import 'package:yht_ticket/di.dart';
 import 'package:yht_ticket/modules/not_found/not_found_screen.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/shared/constants/colors.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 
 void main() async {
@@ -23,20 +22,22 @@ void main() async {
 
   // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-    print("Accepted permission: $accepted");
+    //print("Accepted permission: $accepted");
   });
 
   OneSignal.shared
       .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
     // Will be called whenever a notification is opened/button pressed.
-    print(result.notification.rawPayload);
+    //print(result.notification.rawPayload);
   });
 
-  runApp(App());
+  runApp(const App());
   configLoading();
 }
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

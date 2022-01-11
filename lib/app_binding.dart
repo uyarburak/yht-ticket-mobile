@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/api/api_provider.dart';
-import 'package:yht_ticket/api/base_api_repository.dart';
 import 'package:yht_ticket/services/station_service.dart';
 
-import 'api/api_repository.dart';
+import 'api/api.dart';
 
 class AppBinding extends Bindings {
   @override

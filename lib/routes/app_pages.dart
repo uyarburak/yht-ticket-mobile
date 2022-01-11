@@ -22,8 +22,6 @@ import 'package:yht_ticket/modules/splash/splash_screen.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.SPLASH;
-
   static final routes = [
     GetPage(
       name: Routes.SPLASH,
@@ -67,12 +65,12 @@ class AppPages {
     ),
     GetPage(
       name: Routes.SCHEDULES,
-      page: () => SchedulesScreen(),
+      page: () => const SchedulesScreen(),
       binding: SchedulesBinding(),
     ),
     GetPage(
       name: Routes.SEARCH_STATIONS,
-      page: () => SearchStationScreen(),
+      page: () => const SearchStationScreen(),
       binding: SearchStationBinding(),
     ),
     GetPage(

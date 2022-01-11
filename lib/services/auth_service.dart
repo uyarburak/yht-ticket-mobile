@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yht_ticket/models/responses/login_response.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/constants/storage.dart';
 
@@ -38,9 +38,9 @@ class AuthService extends GetxService {
 
     // Setting External User Id with Callback Available in SDK Version 3.9.3+
     OneSignal.shared.setExternalUserId(loginResponse.username).then((results) {
-      print(results.toString());
+      //print(results.toString());
     }).catchError((error) {
-      print(error.toString());
+      //print(error.toString());
     });
 
     Get.offAndToNamed(Routes.DASHBOARD);
@@ -53,9 +53,9 @@ class AuthService extends GetxService {
       loginResponse = null;
 
       OneSignal.shared.removeExternalUserId().then((results) {
-        print(results.toString());
+        //print(results.toString());
       }).catchError((error) {
-        print(error.toString());
+        //print(error.toString());
       });
 
       final prefs = Get.find<SharedPreferences>();

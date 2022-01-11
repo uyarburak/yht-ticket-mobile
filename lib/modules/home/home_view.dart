@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/modules/home/home_controller.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
+
+import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView(int index, {Key? key}) : super(key: key) {

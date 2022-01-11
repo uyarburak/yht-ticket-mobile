@@ -3,6 +3,7 @@ class ProfileResponse {
   final String name;
   final String? photo;
   final int credits;
+
   ProfileResponse({
     required this.email,
     required this.name,

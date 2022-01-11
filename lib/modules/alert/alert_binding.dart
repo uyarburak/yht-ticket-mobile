@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/modules/alert/alert_controller.dart';
+
+import 'alert_controller.dart';
 
 class AlertBinding implements Bindings {
   @override

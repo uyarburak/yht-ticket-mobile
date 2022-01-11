@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/modules/register/register_controller.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/common_widget.dart';
 import 'package:yht_ticket/shared/utils/regex.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 import 'package:yht_ticket/widgets/input_field.dart';
+
+import 'register_controller.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
   RegisterScreen({Key? key}) : super(key: key);

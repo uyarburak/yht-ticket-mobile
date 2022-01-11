@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
-import 'package:yht_ticket/models/responses/full_alert_response.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 

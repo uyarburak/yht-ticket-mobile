@@ -4,14 +4,16 @@ import 'package:group_list_view/group_list_view.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/models/enums/notification_types.dart';
-import 'package:yht_ticket/models/responses/notification_response.dart';
-import 'package:yht_ticket/modules/notifications/notifications_controller.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'notifications_controller.dart';
+
 class NotificationsScreen extends GetView<NotificationsController> {
+  final dateFormat = DateFormat("d MMMM, EEEE HH:mm", "tr_TR");
+
   NotificationsScreen({Key? key}) : super(key: key) {
     timeago.setLocaleMessages('tr', timeago.TrMessages());
   }
@@ -187,17 +189,17 @@ class NotificationsScreen extends GetView<NotificationsController> {
   }
 
   Icon _buildNotificationIcon(NotificationResponse item) {
-    if (item.notificationType == NotificationTypes.AlertCreated) {
+    if (item.notificationType == NotificationTypes.alertCreated) {
       return const Icon(
         MdiIcons.bellRing,
         color: Colors.green,
       );
-    } else if (item.notificationType == NotificationTypes.AlertCancelled) {
+    } else if (item.notificationType == NotificationTypes.alertCancelled) {
       return const Icon(
         MdiIcons.bellOffOutline,
         color: Colors.red,
       );
-    } else if (item.notificationType == NotificationTypes.AlertCompleted) {
+    } else if (item.notificationType == NotificationTypes.alertCompleted) {
       return Icon(
         MdiIcons.train,
         color: AppTheme.theme.primaryColor,
@@ -209,9 +211,8 @@ class NotificationsScreen extends GetView<NotificationsController> {
     );
   }
 
-  var dateFormat = DateFormat("d MMMM, EEEE HH:mm", "tr_TR");
   List<TextSpan> _buildNotificationMessage(NotificationResponse item) {
-    if (item.notificationType == NotificationTypes.AlertCreated) {
+    if (item.notificationType == NotificationTypes.alertCreated) {
       var startDate = DateTime.parse(item.payload['startDate'] as String);
       return [
         TextSpan(
@@ -236,7 +237,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
         ),
         const TextSpan(text: ' seferi için alarm oluşturuldu.'),
       ];
-    } else if (item.notificationType == NotificationTypes.AlertCancelled) {
+    } else if (item.notificationType == NotificationTypes.alertCancelled) {
       var startDate = DateTime.parse(item.payload['startDate'] as String);
       return [
         TextSpan(
@@ -261,7 +262,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
         ),
         const TextSpan(text: ' seferi için alarm kapatıldı.'),
       ];
-    } else if (item.notificationType == NotificationTypes.AlertCompleted) {
+    } else if (item.notificationType == NotificationTypes.alertCompleted) {
       var startDate = DateTime.parse(item.payload['startDate'] as String);
       return [
         TextSpan(

@@ -6,13 +6,7 @@ class CreateAlertsRequest {
     required this.alerts,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'alerts': alerts.map((x) => x.toMap()).toList(),
-    };
-  }
-
-  String toJson() => json.encode(toMap());
+  String toJson() => json.encode(alerts.map((x) => x.toMap()).toList());
 }
 
 class CreateAlertRequest {
@@ -22,6 +16,7 @@ class CreateAlertRequest {
   final DateTime startDate;
   final DateTime endDate;
   final List<int> wagons;
+
   CreateAlertRequest({
     required this.scheduleId,
     required this.departureStationName,

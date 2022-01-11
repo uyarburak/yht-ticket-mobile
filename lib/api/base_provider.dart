@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/api/api_constants.dart';
 
+import 'api_constants.dart';
 import 'interceptors/auth_interceptor.dart';
 import 'interceptors/request_interceptor.dart';
 import 'interceptors/response_interceptor.dart';

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/modules/schedules/schedules_controller.dart';
+
+import 'schedules_controller.dart';
 
 class SchedulesBinding implements Bindings {
   @override

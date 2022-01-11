@@ -4,11 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
-import 'package:yht_ticket/models/enums/alert_status.dart';
-import 'package:yht_ticket/modules/history/history_controller.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
+
+import 'history_controller.dart';
 
 class HistoryScreen extends GetView<HistoryController> {
   const HistoryScreen({Key? key}) : super(key: key);
@@ -83,10 +84,9 @@ class HistoryScreen extends GetView<HistoryController> {
                 )
               : const SizedBox(),
           ...controller.activeAlerts.map((e) => singleTask(e.id,
-              task: '${e.departure} - ${e.destination}',
-              subject:
-                  DateFormat("d MMMM HH:mm", 'tr_TR').format(e.scheduleDate),
-              status: e.status)),
+              task: '${e.departureStationName} - ${e.destinationStationName}',
+              subject: DateFormat("d MMMM HH:mm", 'tr_TR').format(e.startDate),
+              status: e.alertStatusType)),
           controller.completedAlerts.isNotEmpty
               ? Container(
                   margin: Spacing.fromLTRB(24, 24, 0, 8),
@@ -103,12 +103,11 @@ class HistoryScreen extends GetView<HistoryController> {
           ...controller.completedAlerts.map(
             (e) => singleTask(
               e.id,
-              task: '${e.departure} - ${e.destination}',
-              subject:
-                  DateFormat("d MMMM HH:mm", 'tr_TR').format(e.scheduleDate),
-              status: e.status,
+              task: '${e.departureStationName} - ${e.destinationStationName}',
+              subject: DateFormat("d MMMM HH:mm", 'tr_TR').format(e.startDate),
+              status: e.alertStatusType,
               submissionDate:
-                  DateFormat("dd/MM/yy", 'tr_TR').format(e.lastModifiedDate),
+                  DateFormat("dd/MM/yy", 'tr_TR').format(e.lastModifiedAt),
             ),
           ),
         ],
@@ -121,25 +120,25 @@ class HistoryScreen extends GetView<HistoryController> {
     IconData iconData;
     Color iconBG, iconColor, statusColor;
     String statusText = '';
-    if (status == AlertStatus.Active || status == AlertStatus.Created) {
+    if (status == AlertStatus.active || status == AlertStatus.created) {
       iconBG = AppTheme.theme.colorScheme.primary;
       iconColor = AppTheme.theme.colorScheme.onPrimary;
       iconData = MdiIcons.alarm;
       statusColor = AppTheme.theme.colorScheme.primary;
       statusText = "Devam ediyor";
-    } else if (status == AlertStatus.PaymentRequired) {
+    } else if (status == AlertStatus.paymentRequired) {
       iconBG = AppTheme.customTheme.colorInfo;
       iconColor = AppTheme.customTheme.onInfo;
       iconData = MdiIcons.cashMultiple;
       statusColor = AppTheme.customTheme.colorInfo;
       statusText = "Ödeme bekliyor";
-    } else if (status == AlertStatus.CancelledByUser) {
+    } else if (status == AlertStatus.cancelledByUser) {
       iconBG = AppTheme.customTheme.colorInfo;
       iconColor = AppTheme.customTheme.onInfo;
       iconData = MdiIcons.stop;
       statusColor = AppTheme.customTheme.colorInfo;
       statusText = "Durduruldu";
-    } else if (status == AlertStatus.Completed) {
+    } else if (status == AlertStatus.completed) {
       iconBG = AppTheme.customTheme.disabledColor;
       iconColor = AppTheme.customTheme.onDisabled;
       iconData = MdiIcons.checkAll;
@@ -260,7 +259,7 @@ class HistoryScreen extends GetView<HistoryController> {
                       height: 10,
                       color: Colors.white,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       width: double.infinity,
                       height: 12,

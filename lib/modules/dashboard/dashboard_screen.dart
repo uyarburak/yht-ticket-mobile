@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
-import 'package:yht_ticket/modules/dashboard/widgets/active_alerts_widget.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/theme_data.dart';
-import 'package:yht_ticket/modules/dashboard/widgets/notification_icon_button.dart';
 import 'package:yht_ticket/widgets/popular_destinations_gridview.dart';
+
+import 'dashboard_controller.dart';
+import 'widgets/active_alerts_widget.dart';
+import 'widgets/notification_icon_button.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);

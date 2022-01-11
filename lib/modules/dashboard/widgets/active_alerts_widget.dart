@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-import 'package:yht_ticket/models/responses/alert_response.dart';
+import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
@@ -89,16 +88,16 @@ class ActiveAlertsWidget extends StatelessWidget {
   Widget _buildActiveAlert({required AlertResponse alert}) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final nextWeek = today.add(Duration(days: 7));
-    final scheduleDate = DateTime(alert.scheduleDate.year,
-        alert.scheduleDate.month, alert.scheduleDate.day);
+    final nextWeek = today.add(const Duration(days: 7));
+    final scheduleDate = DateTime(
+        alert.startDate.year, alert.startDate.month, alert.startDate.day);
     String date;
     if (scheduleDate == today) {
-      date = 'Bugün ${DateFormat('HH:mm').format(alert.scheduleDate)}';
+      date = 'Bugün ${DateFormat('HH:mm').format(alert.startDate)}';
     } else if (scheduleDate.compareTo(nextWeek) < 0) {
-      date = DateFormat('EEEE HH:mm', 'tr_TR').format(alert.scheduleDate);
+      date = DateFormat('EEEE HH:mm', 'tr_TR').format(alert.startDate);
     } else {
-      date = DateFormat('d MMMM, E HH:mm', 'tr_TR').format(alert.scheduleDate);
+      date = DateFormat('d MMMM, E HH:mm', 'tr_TR').format(alert.startDate);
     }
     return InkWell(
       onTap: () {
@@ -138,7 +137,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                               fontWeight: 700),
                         ),
                         Text(
-                          "${alert.departure} - ${alert.destination}",
+                          "${alert.departureStationName} - ${alert.destinationStationName}",
                           style: AppTheme.getTextStyle(
                               AppTheme.theme.textTheme.bodyText1,
                               color: AppTheme.theme.colorScheme.onBackground,

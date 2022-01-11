@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yht_ticket/modules/forgot_password/forgot_password_controller.dart';
+
+import 'forgot_password_controller.dart';
 
 class ForgotPasswordBinding implements Bindings {
   @override

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SearchStationController extends GetxController {
@@ -22,13 +22,9 @@ class SearchStationController extends GetxController {
   }
 
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
   void onClose() {
     searchQueryEditingController.dispose();
+
     super.onClose();
   }
 }

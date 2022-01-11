@@ -10,14 +10,15 @@ class InputField extends StatelessWidget {
   final bool password;
   final String? Function(String?)? validator;
 
-  InputField({
+  const InputField({
+    Key? key,
     required this.controller,
     required this.icon,
     this.keyboardType = TextInputType.text,
     this.placeholder = '',
     this.password = false,
     this.validator,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
