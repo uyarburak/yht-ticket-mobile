@@ -88,7 +88,7 @@ class AlertNotification {
       seatNo: map['seatNo'] ?? '',
       oldStatus: map['oldStatus']?.toInt() ?? 0,
       newStatus: map['newStatus']?.toInt() ?? 0,
-      createdAt: DateTime.parse(map['createdAt']),
+      createdAt: DateTime.parse(map['createdAt']).toLocal(),
     );
   }
 
