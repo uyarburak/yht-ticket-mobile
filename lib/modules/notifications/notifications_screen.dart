@@ -21,22 +21,22 @@ class NotificationsScreen extends GetView<NotificationsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.customTheme.bgLayer1,
+      backgroundColor: AppTheme.yhtTheme.bgLayer1,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppTheme.customTheme.bgLayer1,
+        backgroundColor: AppTheme.yhtTheme.bgLayer2,
         centerTitle: true,
         leading: InkWell(
           onTap: Get.back,
           child: Icon(
             MdiIcons.chevronLeft,
-            color: AppTheme.theme.colorScheme.onBackground,
+            color: AppTheme.yhtTheme.onBgLayer2,
           ),
         ),
         title: Text(
           "Bildirimler",
           style: AppTheme.getTextStyle(AppTheme.theme.textTheme.headline6,
-              color: AppTheme.theme.colorScheme.onBackground, fontWeight: 600),
+              color: AppTheme.yhtTheme.onBgLayer2, fontWeight: 600),
         ),
       ),
       body: Obx(
@@ -53,7 +53,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                       "Gösterilecek bildirim bulunamadı!",
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.subtitle1,
-                          color: AppTheme.theme.colorScheme.onBackground,
+                          color: AppTheme.yhtTheme.onBgLayer1,
                           fontWeight: 600,
                           letterSpacing: 0),
                     ),
@@ -62,6 +62,8 @@ class NotificationsScreen extends GetView<NotificationsController> {
                     margin: EdgeInsets.only(top: MySize.size24!),
                     child: ElevatedButton(
                         style: ButtonStyle(
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => AppTheme.yhtTheme.primary),
                             padding:
                                 MaterialStateProperty.all(Spacing.xy(16, 0))),
                         onPressed: () {
@@ -71,7 +73,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                             style: AppTheme.getTextStyle(
                                 AppTheme.theme.textTheme.bodyText2,
                                 fontWeight: 600,
-                                color: AppTheme.theme.colorScheme.onPrimary,
+                                color: AppTheme.yhtTheme.onPrimary,
                                 letterSpacing: 0.5))),
                   )
                 ],
@@ -81,10 +83,10 @@ class NotificationsScreen extends GetView<NotificationsController> {
           var grouped = _toMap(controller.notificationList);
           return RefreshIndicator(
             onRefresh: controller.getNotifications,
-            color: AppTheme.theme.primaryColor,
-            backgroundColor: Colors.white,
+            color: AppTheme.yhtTheme.primary,
+            backgroundColor: AppTheme.yhtTheme.bgLayer2,
             child: Container(
-              margin: Spacing.fromLTRB(24, 0, 24, 0),
+              margin: Spacing.horizontal(MySize.size24!),
               child: GroupListView(
                 sectionsCount: grouped.keys.length,
                 countOfItemInSection: (int section) {
@@ -101,7 +103,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                       grouped.keys.toList()[section],
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText1,
-                          color: AppTheme.theme.colorScheme.onBackground,
+                          color: AppTheme.yhtTheme.onBgLayer1Muted,
                           fontWeight: 600),
                     ),
                   );
@@ -155,10 +157,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.black.withAlpha(8),
-            child: _buildNotificationIcon(item),
-          ),
+          _buildNotificationIcon(item),
           Expanded(
             child: Container(
               margin: Spacing.left(16),
@@ -166,7 +165,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                 text: TextSpan(
                   style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.bodyText2,
-                      color: AppTheme.theme.colorScheme.onBackground,
+                      color: AppTheme.yhtTheme.onBgLayer1,
                       fontWeight: 500),
                   children: [
                     ..._buildNotificationMessage(item),
@@ -174,8 +173,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                       text: "\n${timeago.format(item.createdAt, locale: 'tr')}",
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText2,
-                          color: AppTheme.theme.colorScheme.onBackground,
-                          xMuted: true,
+                          color: AppTheme.yhtTheme.onBgLayer1Muted,
                           fontWeight: 500),
                     ),
                   ],
@@ -188,26 +186,42 @@ class NotificationsScreen extends GetView<NotificationsController> {
     );
   }
 
-  Icon _buildNotificationIcon(NotificationResponse item) {
+  Widget _buildNotificationIcon(NotificationResponse item) {
     if (item.notificationType == NotificationTypes.alertCreated) {
-      return const Icon(
-        MdiIcons.bellRing,
-        color: Colors.green,
+      return CircleAvatar(
+        radius: 25,
+        backgroundColor: Colors.green.withAlpha(80),
+        child: const Icon(
+          MdiIcons.bellRing,
+          color: Colors.green,
+        ),
       );
     } else if (item.notificationType == NotificationTypes.alertCancelled) {
-      return const Icon(
-        MdiIcons.bellOffOutline,
-        color: Colors.red,
+      return CircleAvatar(
+        radius: 25,
+        backgroundColor: Colors.red.withAlpha(80),
+        child: const Icon(
+          MdiIcons.bellOffOutline,
+          color: Colors.red,
+        ),
       );
     } else if (item.notificationType == NotificationTypes.alertCompleted) {
-      return Icon(
-        MdiIcons.train,
-        color: AppTheme.theme.primaryColor,
+      return CircleAvatar(
+        radius: 25,
+        backgroundColor: AppTheme.yhtTheme.primary.withAlpha(100),
+        child: Icon(
+          MdiIcons.train,
+          color: AppTheme.yhtTheme.primary,
+        ),
       );
     }
-    return Icon(
-      MdiIcons.faceMan,
-      color: AppTheme.theme.primaryColor,
+    return CircleAvatar(
+      radius: 25,
+      backgroundColor: AppTheme.theme.primaryColor.withAlpha(80),
+      child: Icon(
+        MdiIcons.faceMan,
+        color: AppTheme.theme.primaryColor,
+      ),
     );
   }
 

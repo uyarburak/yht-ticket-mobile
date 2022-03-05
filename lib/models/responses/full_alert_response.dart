@@ -106,7 +106,7 @@ class AlertNotification {
 
 class ScheduleWagon {
   final int wagon;
-  final int? emptyCount;
+  int? emptyCount;
   final int? totalCount;
 
   ScheduleWagon({

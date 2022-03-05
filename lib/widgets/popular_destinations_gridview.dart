@@ -156,7 +156,7 @@ class PopularDestinationsGridview extends StatelessWidget {
                     children: <Widget>[
                       Icon(
                         MdiIcons.train,
-                        color: AppTheme.theme.colorScheme.background,
+                        color: Colors.white,
                         size: MySize.size22,
                       ),
                       Container(
@@ -186,7 +186,7 @@ class PopularDestinationsGridview extends StatelessWidget {
         color: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-              color: AppTheme.theme.dialogBackgroundColor,
+              color: AppTheme.yhtTheme.bgLayer3,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(MySize.size16!),
                   topRight: Radius.circular(MySize.size16!))),
@@ -211,11 +211,15 @@ class PopularDestinationsGridview extends StatelessWidget {
                         },
                         dense: true,
                         leading: Icon(MdiIcons.train,
-                            color: AppTheme.theme.colorScheme.onBackground),
-                        title: Text(e.title,
-                            style: AppTheme.getTextStyle(
-                                AppTheme.theme.textTheme.bodyText2,
-                                fontWeight: 600)),
+                            color: AppTheme.yhtTheme.onBgLayer3),
+                        title: Text(
+                          e.title,
+                          style: AppTheme.getTextStyle(
+                            AppTheme.theme.textTheme.bodyText2,
+                            color: AppTheme.yhtTheme.onBgLayer3,
+                            fontWeight: 600,
+                          ),
+                        ),
                       ),
                     )
                     .toList(),

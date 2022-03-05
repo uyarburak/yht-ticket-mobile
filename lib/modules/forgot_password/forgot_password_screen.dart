@@ -17,14 +17,14 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: AppTheme.customTheme.bgLayer1,
+        color: AppTheme.yhtTheme.bgLayer1,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Image.asset(
                 './assets/icons/ticket-outline.png',
-                color: AppTheme.theme.colorScheme.primary,
+                color: AppTheme.yhtTheme.primary,
                 width: 36,
                 height: 36,
               ),
@@ -34,7 +34,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                   "PAROLAMI UNUTTUM".toUpperCase(),
                   style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.headline6,
-                      color: AppTheme.theme.colorScheme.onBackground,
+                      color: AppTheme.yhtTheme.onBgLayer1,
                       fontWeight: 700,
                       letterSpacing: 0.5),
                 ),
@@ -42,15 +42,10 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
               Form(
                 key: forgotPasswordFormKey,
                 child: Container(
-                  margin: EdgeInsets.only(
+                  padding: EdgeInsets.only(
                       left: MySize.size24!,
                       right: MySize.size24!,
                       top: MySize.size24!),
-                  decoration: BoxDecoration(
-                      color: AppTheme.theme.colorScheme.background,
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(MySize.size16!))),
-                  padding: EdgeInsets.all(MySize.size12!),
                   child: InputField(
                     controller: controller.emailController,
                     icon: MdiIcons.emailOutline,
@@ -76,7 +71,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                       BorderRadius.all(Radius.circular(MySize.size12!)),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.theme.primaryColor.withAlpha(24),
+                      color: AppTheme.yhtTheme.primary.withAlpha(24),
                       blurRadius: 5,
                       offset: const Offset(0, 2), // changes position of shadow
                     ),
@@ -88,6 +83,8 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                     top: MySize.size24!),
                 child: ElevatedButton(
                   style: ButtonStyle(
+                      backgroundColor: MaterialStateColor.resolveWith(
+                          (states) => AppTheme.yhtTheme.primary),
                       padding: MaterialStateProperty.all(Spacing.xy(16, 0))),
                   onPressed: () {
                     controller.forgotPassword(context, forgotPasswordFormKey);
@@ -97,7 +94,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                     style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.bodyText2,
                       fontWeight: 600,
-                      color: AppTheme.theme.colorScheme.onPrimary,
+                      color: AppTheme.yhtTheme.onPrimary,
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -113,7 +110,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                     "Hesap oluşturmak istiyorum",
                     style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.bodyText2,
-                      color: AppTheme.theme.colorScheme.onBackground,
+                      color: AppTheme.yhtTheme.onBgLayer1,
                       fontWeight: 500,
                       decoration: TextDecoration.underline,
                     ),

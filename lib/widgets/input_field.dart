@@ -24,7 +24,7 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppTheme.theme.colorScheme.background,
+          color: AppTheme.yhtTheme.bgLayer3,
           borderRadius: BorderRadius.all(Radius.circular(MySize.size16!))),
       padding: EdgeInsets.all(MySize.size12!),
       child: Row(
@@ -32,13 +32,13 @@ class InputField extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(MySize.size6!),
             decoration: BoxDecoration(
-                color: AppTheme.theme.colorScheme.primary,
+                color: AppTheme.yhtTheme.primary,
                 borderRadius: BorderRadius.all(Radius.circular(MySize.size8!))),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(MySize.size8!),
               child: Icon(
                 icon,
-                color: AppTheme.theme.colorScheme.onPrimary,
+                color: AppTheme.yhtTheme.onPrimary,
                 size: MySize.size20,
               ),
             ),
@@ -51,7 +51,7 @@ class InputField extends StatelessWidget {
                 style: AppTheme.getTextStyle(
                   AppTheme.theme.textTheme.bodyText1,
                   letterSpacing: 0.1,
-                  color: AppTheme.theme.colorScheme.onBackground,
+                  color: AppTheme.yhtTheme.onBgLayer1,
                   fontWeight: 500,
                 ),
                 decoration: InputDecoration(
@@ -59,8 +59,9 @@ class InputField extends StatelessWidget {
                   hintStyle: AppTheme.getTextStyle(
                     AppTheme.theme.textTheme.subtitle2,
                     letterSpacing: 0.1,
-                    color: AppTheme.theme.colorScheme.onBackground,
+                    color: AppTheme.yhtTheme.onBgLayer1,
                     fontWeight: 500,
+                    muted: true,
                   ),
                   border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(

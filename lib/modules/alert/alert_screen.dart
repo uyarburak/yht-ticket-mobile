@@ -14,92 +14,89 @@ class AlertScreen extends GetView<AlertController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: AppTheme.customTheme.bgLayer1,
-            centerTitle: true,
-            leading: InkWell(
-              onTap: Get.back,
+      () => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: AppTheme.yhtTheme.bgLayer2,
+          centerTitle: true,
+          leading: InkWell(
+            onTap: Get.back,
+            child: Icon(
+              MdiIcons.chevronLeft,
+              color: AppTheme.yhtTheme.onBgLayer1,
+            ),
+          ),
+          title: Text(
+            '${controller.alert.value?.departureStationName} - ${controller.alert.value?.destinationStationName}',
+            style: AppTheme.getTextStyle(
+              AppTheme.theme.textTheme.headline6,
+              color: AppTheme.yhtTheme.onBgLayer1,
+              fontWeight: 600,
+            ),
+          ),
+          actions: [
+            GestureDetector(
+              //onTap: controller.swapStations,
               child: Icon(
-                MdiIcons.chevronLeft,
-                color: AppTheme.theme.colorScheme.onBackground,
+                MdiIcons.information,
+                color: AppTheme.yhtTheme.onBgLayer1Muted,
               ),
             ),
-            title: Text(
-              '${controller.alert.value?.departureStationName} - ${controller.alert.value?.destinationStationName}',
-              style: AppTheme.getTextStyle(AppTheme.theme.textTheme.headline6,
-                  color: AppTheme.theme.colorScheme.onBackground,
-                  fontWeight: 600),
+            SizedBox(
+              width: MySize.size24,
             ),
-            actions: [
-              GestureDetector(
-                  //onTap: controller.swapStations,
-                  child: Icon(MdiIcons.swapHorizontal,
-                      color: AppTheme.theme.primaryColor)),
-              SizedBox(
-                width: MySize.size24,
-              ),
-            ],
+          ],
+        ),
+        body: SnappingSheet(
+          grabbingHeight: 52,
+          snappingPositions: [
+            const SnappingPosition.factor(
+              positionFactor: 0.4,
+              snappingCurve: Curves.elasticOut,
+              snappingDuration: Duration(milliseconds: 500),
+            ),
+            const SnappingPosition.factor(
+              positionFactor: 0.2,
+              snappingCurve: Curves.elasticOut,
+              snappingDuration: Duration(milliseconds: 500),
+            ),
+            const SnappingPosition.pixels(
+              positionPixels: 26,
+              snappingCurve: Curves.ease,
+              snappingDuration: Duration(milliseconds: 600),
+            ),
+            SnappingPosition.pixels(
+              positionPixels: MediaQuery.of(context).size.height - 110,
+              snappingCurve: Curves.ease,
+              snappingDuration: const Duration(milliseconds: 500),
+            ),
+          ],
+          // RefreshIndicator(
+          // onRefresh: () async {
+          //   return controller.refreshAlert();
+          // },
+          // color: AppTheme.theme.primaryColor,
+          // backgroundColor: AppTheme.customTheme.bgLayer1,
+          child: _buildGridView(),
+          sheetBelow: SnappingSheetContent(
+            draggable: true,
+            sizeBehavior: const SheetSizeFill(),
+            child: _buildSheetBelow(),
           ),
-          body: RefreshIndicator(
-            onRefresh: () async {
-              return controller.refreshAlert();
-            },
-            color: AppTheme.theme.primaryColor,
-            backgroundColor: Colors.white,
-            child: SnappingSheet(
-              grabbingHeight: 86,
-              snappingPositions: [
-                const SnappingPosition.factor(
-                  positionFactor: 0.4,
-                  snappingCurve: Curves.elasticOut,
-                  snappingDuration: Duration(milliseconds: 500),
-                ),
-                const SnappingPosition.factor(
-                  positionFactor: 0.2,
-                  snappingCurve: Curves.elasticOut,
-                  snappingDuration: Duration(milliseconds: 500),
-                ),
-                const SnappingPosition.pixels(
-                  positionPixels: 42,
-                  snappingCurve: Curves.ease,
-                  snappingDuration: Duration(milliseconds: 600),
-                ),
-                SnappingPosition.pixels(
-                  positionPixels: MediaQuery.of(context).size.height - 110,
-                  snappingCurve: Curves.ease,
-                  snappingDuration: const Duration(milliseconds: 500),
-                ),
-              ],
-              child: _buildGridView(),
-              sheetBelow: SnappingSheetContent(
-                draggable: true,
-                sizeBehavior: const SheetSizeFill(),
-                child: _buildSheetBelow(),
-              ),
-              grabbing: _buildSheetHeader(),
-            ),
-          ),
+          grabbing: _buildSheetHeader(),
         ),
       ),
     );
   }
 
-  Column _buildSheetHeader() {
-    return Column(
+  Widget _buildSheetHeader() {
+    return Stack(
       children: [
-        const Icon(
-          Icons.horizontal_rule_rounded,
-          color: Colors.black26,
-          size: 30,
-        ),
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: AppTheme.yhtTheme.bgLayer3,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(14),
               topRight: Radius.circular(14),
             ),
@@ -108,15 +105,17 @@ class AlertScreen extends GetView<AlertController> {
             children: [
               Text(
                 'OLAYLAR',
-                style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
-                    color: AppTheme.theme.colorScheme.secondary,
-                    fontWeight: 600),
+                style: AppTheme.getTextStyle(
+                  AppTheme.theme.textTheme.subtitle1,
+                  color: AppTheme.yhtTheme.onBgLayer3Muted,
+                  fontWeight: 600,
+                ),
               ),
               const Spacer(),
               InkWell(
-                child: const Icon(
+                child: Icon(
                   Icons.delete,
-                  color: Colors.black26,
+                  color: AppTheme.yhtTheme.onBgLayer3Muted,
                 ),
                 onTap: () {
                   //_controller.logs.clear();
@@ -125,75 +124,91 @@ class AlertScreen extends GetView<AlertController> {
             ],
           ),
         ),
+        Positioned(
+          top: -2,
+          left: Get.width / 2 - 16,
+          child: Icon(
+            Icons.horizontal_rule_rounded,
+            color: AppTheme.yhtTheme.onBgLayer3Muted,
+            size: 30,
+          ),
+        ),
       ],
     );
   }
 
-  Obx _buildSheetBelow() {
-    return Obx(
-      () => Container(
-        color: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        child: controller.alert.value?.notifications.isEmpty ?? true
-            ? const ListTile(
-                contentPadding: EdgeInsets.zero,
-                horizontalTitleGap: 0,
-                leading: Icon(Icons.info),
-                title: Text(
-                    'Henüz yukarıdaki vagonlarda bir değişim olmadı. Koltuklarda bir değişim olduğunda burada göreceksiniz.'),
-              )
-            : ListView.builder(
-                itemCount: controller.alert.value?.notifications.length,
-                itemBuilder: (context, index) {
-                  final item = controller.alert.value!.notifications[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Row(
-                      children: [
-                        item.newStatus == 0
-                            ? Icon(Icons.event_seat,
-                                color: Colors.green.shade300)
-                            : Icon(Icons.airline_seat_recline_normal,
-                                color: item.newStatus == 1
-                                    ? Colors.blue.shade300
-                                    : Colors.pink.shade300),
-                        const SizedBox(width: 5),
-                        Text(
-                          item.toString(),
-                          style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${item.createdAt.hour.toString().padLeft(2, '0')}:${item.createdAt.minute.toString().padLeft(2, '0')}',
-                          style: const TextStyle(
-                            color: Colors.black38,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+  Widget _buildSheetBelow() {
+    return Container(
+      color: AppTheme.yhtTheme.bgLayer3,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: controller.alert.value?.notifications.isEmpty ?? true
+          ? ListTile(
+              contentPadding: EdgeInsets.zero,
+              horizontalTitleGap: 0,
+              leading: Icon(
+                Icons.info,
+                color: AppTheme.yhtTheme.onBgLayer3Muted,
               ),
-      ),
+              title: Text(
+                'Henüz yukarıdaki vagonlarda bir değişim olmadı. Koltuklarda bir değişim olduğunda burada göreceksiniz.',
+                style: TextStyle(
+                  color: AppTheme.yhtTheme.onBgLayer3Muted,
+                ),
+              ),
+            )
+          : ListView.builder(
+              itemCount: controller.alert.value?.notifications.length,
+              itemBuilder: (context, index) {
+                final item = controller.alert.value!.notifications[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      item.newStatus == 0
+                          ? Icon(Icons.event_seat, color: Colors.green.shade300)
+                          : Icon(Icons.airline_seat_recline_normal,
+                              color: item.newStatus == 1
+                                  ? Colors.blue.shade300
+                                  : Colors.pink.shade300),
+                      const SizedBox(width: 8),
+                      Text(
+                        item.toString(),
+                        style: TextStyle(
+                          color: AppTheme.yhtTheme.onBgLayer3,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '${item.createdAt.hour.toString().padLeft(2, '0')}:${item.createdAt.minute.toString().padLeft(2, '0')}',
+                        style: AppTheme.getTextStyle(
+                          AppTheme.theme.textTheme.overline,
+                          color: AppTheme.yhtTheme.onBgLayer3Muted,
+                          fontWeight: 500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
     );
   }
 
   Container _buildGridView() {
     return Container(
       padding: const EdgeInsets.all(16),
+      color: AppTheme.yhtTheme.bgLayer1,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'BOŞ KOLTUKLAR',
-            style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
-                color: AppTheme.theme.colorScheme.onBackground,
-                fontWeight: 600),
+            style: AppTheme.getTextStyle(
+              AppTheme.theme.textTheme.subtitle1,
+              color: AppTheme.yhtTheme.onBgLayer1,
+              fontWeight: 600,
+            ),
           ),
           const SizedBox(height: 16),
           controller.alert.value != null
@@ -222,7 +237,7 @@ class AlertScreen extends GetView<AlertController> {
       width: ((Get.width - 32 - 16) / 3).floorToDouble(),
       //height: 30,
       decoration: BoxDecoration(
-        color: AppTheme.theme.primaryColorDark,
+        color: AppTheme.yhtTheme.bgLayer2,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -230,17 +245,17 @@ class AlertScreen extends GetView<AlertController> {
           const SizedBox(height: 10),
           Text(
             wagon.emptyCount.toString(),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 36,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppTheme.yhtTheme.onBgLayer2,
             ),
           ),
           //const Spacer(),
           Text(
             '${wagon.wagon}. Vagon',
-            style: const TextStyle(
-              color: Colors.white54,
+            style: TextStyle(
+              color: AppTheme.yhtTheme.onBgLayer2Muted,
             ),
           ),
           const SizedBox(height: 10),

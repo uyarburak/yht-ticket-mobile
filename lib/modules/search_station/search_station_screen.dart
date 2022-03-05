@@ -17,6 +17,7 @@ class SearchStationScreen extends GetView<SearchStationController> {
           body: Column(
             children: [
               Container(
+                color: AppTheme.yhtTheme.bgLayer2,
                 padding: const EdgeInsets.only(
                     left: 12.0, top: 8, right: 12, bottom: 8),
                 child: Row(
@@ -26,8 +27,7 @@ class SearchStationScreen extends GetView<SearchStationController> {
                       child: Icon(
                         MdiIcons.chevronLeft,
                         size: 24,
-                        color: AppTheme.theme.colorScheme.onBackground
-                            .withAlpha(240),
+                        color: AppTheme.yhtTheme.onBgLayer2,
                       ),
                     ),
                     Expanded(
@@ -35,9 +35,18 @@ class SearchStationScreen extends GetView<SearchStationController> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 8),
                         child: TextField(
+                          style: AppTheme.getTextStyle(
+                            AppTheme.theme.textTheme.bodyText1,
+                            color: AppTheme.yhtTheme.onBgLayer2,
+                            decoration: TextDecoration.none,
+                          ),
                           controller: controller.searchQueryEditingController,
                           decoration: InputDecoration(
                             hintText: "Gar ismi ara",
+                            hintStyle: AppTheme.getTextStyle(
+                              AppTheme.theme.textTheme.bodyText1,
+                              color: AppTheme.yhtTheme.onBgLayer2Muted,
+                            ),
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -52,9 +61,8 @@ class SearchStationScreen extends GetView<SearchStationController> {
                                       child: Icon(
                                         MdiIcons.close,
                                         size: 24,
-                                        color: AppTheme
-                                            .theme.colorScheme.onBackground
-                                            .withAlpha(240),
+                                        color:
+                                            AppTheme.yhtTheme.onBgLayer2Muted,
                                       ),
                                     )
                                   : const SizedBox(),
@@ -78,7 +86,7 @@ class SearchStationScreen extends GetView<SearchStationController> {
               ),
               Expanded(
                 child: Container(
-                  color: AppTheme.customTheme.bgLayer1,
+                  color: AppTheme.yhtTheme.bgLayer1,
                   child: _buildStationList(),
                 ),
               ),
@@ -97,7 +105,9 @@ class SearchStationScreen extends GetView<SearchStationController> {
     if (stations.isEmpty) return _noResult();
     return ListView.builder(
       itemBuilder: (context, index) {
-        if (index % 2 == 1) return const Divider(height: 0);
+        if (index % 2 == 1) {
+          return Divider(height: 0, color: AppTheme.yhtTheme.bgLayer3);
+        }
         var item = stations[index ~/ 2];
         return ListTile(
           onTap: () {
@@ -106,14 +116,22 @@ class SearchStationScreen extends GetView<SearchStationController> {
           },
           leading: CircleAvatar(
             radius: 16,
-            backgroundColor: AppTheme.theme.colorScheme.secondary,
+            backgroundColor: AppTheme.yhtTheme.primary,
             child: Text(
               item.name[0],
-              style: AppTheme.theme.textTheme.bodyText1!
-                  .copyWith(color: AppTheme.theme.colorScheme.onSecondary),
+              style: AppTheme.getTextStyle(
+                AppTheme.theme.textTheme.bodyText1,
+                color: AppTheme.yhtTheme.onPrimary,
+              ),
             ),
           ),
-          title: Text(item.name),
+          title: Text(
+            item.name,
+            style: AppTheme.getTextStyle(
+              AppTheme.theme.textTheme.bodyText1,
+              color: AppTheme.yhtTheme.onBgLayer1Muted,
+            ),
+          ),
         );
       },
       itemCount: stations.length * 2 - 1,
@@ -123,7 +141,7 @@ class SearchStationScreen extends GetView<SearchStationController> {
 
 Widget _noResult() {
   return Container(
-    color: AppTheme.theme.backgroundColor,
+    color: AppTheme.yhtTheme.bgLayer1,
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -131,17 +149,17 @@ Widget _noResult() {
           Icon(
             MdiIcons.emoticonSadOutline,
             size: 32,
-            color: AppTheme.theme.colorScheme.onBackground,
+            color: AppTheme.yhtTheme.onBgLayer1,
           ),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text("İstasyon bulunamadı",
                 style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
-                    fontWeight: 700)),
+                    color: AppTheme.yhtTheme.onBgLayer1, fontWeight: 700)),
           ),
           Text("Doğru yazdığından emin misin?",
               style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle2,
-                  fontWeight: 500)),
+                  color: AppTheme.yhtTheme.onBgLayer1Muted, fontWeight: 500)),
         ],
       ),
     ),

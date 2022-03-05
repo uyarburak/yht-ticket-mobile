@@ -17,46 +17,38 @@ class HistoryScreen extends GetView<HistoryController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SafeArea(
-        child: Scaffold(
-          body: RefreshIndicator(
-            onRefresh: () async {
-              return controller.refreshAlerts();
-            },
-            color: AppTheme.theme.primaryColor,
-            backgroundColor: Colors.white,
-            child: Container(
-              color: AppTheme.customTheme.bgLayer1,
-              child: ListView(
-                padding: Spacing.zero,
-                children: <Widget>[
-                  Container(
-                    margin: Spacing.fromLTRB(24, 16, 24, 0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "Alarm Geçmişi",
-                              style: AppTheme.getTextStyle(
-                                  AppTheme.theme.textTheme.bodyText1,
-                                  color:
-                                      AppTheme.theme.colorScheme.onBackground,
-                                  fontWeight: 600),
-                            ),
-                          ),
-                        ),
-                      ],
+      () => Scaffold(
+        body: RefreshIndicator(
+          onRefresh: () async {
+            return controller.refreshAlerts();
+          },
+          color: AppTheme.yhtTheme.primary,
+          backgroundColor: AppTheme.yhtTheme.bgLayer2,
+          child: Container(
+            padding: Spacing.top(24),
+            color: AppTheme.yhtTheme.bgLayer1,
+            child: ListView(
+              padding: Spacing.zero,
+              children: <Widget>[
+                Container(
+                  margin: Spacing.top(16),
+                  child: Center(
+                    child: Text(
+                      "Alarm Geçmişi",
+                      style: AppTheme.getTextStyle(
+                          AppTheme.theme.textTheme.bodyText1,
+                          color: AppTheme.yhtTheme.onBgLayer1,
+                          fontWeight: 600),
                     ),
                   ),
-                  controller.loading.isTrue
-                      ? _buildSkeletonLoader()
-                      : controller.completedAlerts.isEmpty &&
-                              controller.activeAlerts.isEmpty
-                          ? _buildAlertsNotFound()
-                          : _buildList()
-                ],
-              ),
+                ),
+                controller.loading.isTrue
+                    ? _buildSkeletonLoader()
+                    : controller.completedAlerts.isEmpty &&
+                            controller.activeAlerts.isEmpty
+                        ? _buildAlertsNotFound()
+                        : _buildList()
+              ],
             ),
           ),
         ),
@@ -66,7 +58,7 @@ class HistoryScreen extends GetView<HistoryController> {
 
   Widget _buildList() {
     return Container(
-      margin: Spacing.fromLTRB(0, 8, 0, 0),
+      margin: Spacing.top(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -78,8 +70,7 @@ class HistoryScreen extends GetView<HistoryController> {
                     style: AppTheme.getTextStyle(
                         AppTheme.theme.textTheme.caption,
                         fontWeight: 700,
-                        muted: true,
-                        color: AppTheme.theme.colorScheme.onBackground),
+                        color: AppTheme.yhtTheme.onBgLayer1Muted),
                   ),
                 )
               : const SizedBox(),
@@ -93,10 +84,10 @@ class HistoryScreen extends GetView<HistoryController> {
                   child: Text(
                     "GEÇMİŞ ALARMLAR",
                     style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.caption,
-                        fontWeight: 700,
-                        muted: true,
-                        color: AppTheme.theme.colorScheme.onBackground),
+                      AppTheme.theme.textTheme.caption,
+                      fontWeight: 700,
+                      color: AppTheme.yhtTheme.onBgLayer1Muted,
+                    ),
                   ),
                 )
               : const SizedBox(),
@@ -121,10 +112,10 @@ class HistoryScreen extends GetView<HistoryController> {
     Color iconBG, iconColor, statusColor;
     String statusText = '';
     if (status == AlertStatus.active || status == AlertStatus.created) {
-      iconBG = AppTheme.theme.colorScheme.primary;
-      iconColor = AppTheme.theme.colorScheme.onPrimary;
+      iconBG = AppTheme.yhtTheme.primary;
+      iconColor = AppTheme.yhtTheme.onPrimary;
       iconData = MdiIcons.alarm;
-      statusColor = AppTheme.theme.colorScheme.primary;
+      statusColor = AppTheme.yhtTheme.primary;
       statusText = "Devam ediyor";
     } else if (status == AlertStatus.paymentRequired) {
       iconBG = AppTheme.customTheme.colorInfo;
@@ -161,10 +152,11 @@ class HistoryScreen extends GetView<HistoryController> {
         margin: Spacing.fromLTRB(24, 8, 24, 8),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-            color: AppTheme.customTheme.bgLayer1,
-            borderRadius: BorderRadius.all(Radius.circular(MySize.size8!)),
-            boxShadow: const [],
-            border: Border.all(color: AppTheme.customTheme.bgLayer3, width: 1)),
+          color: AppTheme.yhtTheme.bgLayer2,
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size8!)),
+          boxShadow: const [],
+          border: Border.all(color: AppTheme.yhtTheme.bgLayer3, width: 1),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -187,7 +179,7 @@ class HistoryScreen extends GetView<HistoryController> {
                       subject!,
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText1,
-                          color: AppTheme.theme.colorScheme.onBackground,
+                          color: AppTheme.yhtTheme.onBgLayer2,
                           fontWeight: 600),
                     ),
                     Container(
@@ -196,8 +188,7 @@ class HistoryScreen extends GetView<HistoryController> {
                         task!,
                         style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.caption,
-                          color: AppTheme.theme.colorScheme.onBackground
-                              .withAlpha(160),
+                          color: AppTheme.yhtTheme.onBgLayer2Muted,
                           fontWeight: 600,
                         ),
                       ),
@@ -214,8 +205,7 @@ class HistoryScreen extends GetView<HistoryController> {
                   style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
                       fontSize: 12,
                       letterSpacing: 0.2,
-                      color: AppTheme.theme.colorScheme.onBackground,
-                      muted: true,
+                      color: AppTheme.yhtTheme.onBgLayer2Muted,
                       fontWeight: 600),
                 ),
                 Container(
@@ -239,7 +229,7 @@ class HistoryScreen extends GetView<HistoryController> {
 
   Widget _buildSkeletonLoader() {
     return Container(
-      margin: Spacing.fromLTRB(0, 8, 0, 0),
+      margin: Spacing.top(8),
       child: SkeletonLoader(
         builder: Container(
           padding: Spacing.all(16),
@@ -247,7 +237,7 @@ class HistoryScreen extends GetView<HistoryController> {
           child: Row(
             children: <Widget>[
               CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: AppTheme.yhtTheme.bgLayer2,
                 radius: MySize.size16,
               ),
               SizedBox(width: MySize.size16!),
@@ -257,13 +247,13 @@ class HistoryScreen extends GetView<HistoryController> {
                     Container(
                       width: double.infinity,
                       height: 10,
-                      color: Colors.white,
+                      color: AppTheme.yhtTheme.bgLayer2,
                     ),
                     const SizedBox(height: 10),
                     Container(
                       width: double.infinity,
                       height: 12,
-                      color: Colors.white,
+                      color: AppTheme.yhtTheme.bgLayer2,
                     ),
                   ],
                 ),
@@ -273,7 +263,7 @@ class HistoryScreen extends GetView<HistoryController> {
         ),
         items: 20,
         period: const Duration(seconds: 2),
-        highlightColor: AppTheme.theme.colorScheme.primary.withAlpha(28),
+        highlightColor: AppTheme.yhtTheme.primary,
         direction: SkeletonDirection.ltr,
       ),
     );

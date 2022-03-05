@@ -18,183 +18,114 @@ class SchedulesScreen extends GetView<SchedulesController> {
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: AppTheme.customTheme.bgLayer1,
+            backgroundColor: AppTheme.yhtTheme.bgLayer2,
             centerTitle: true,
             leading: InkWell(
               onTap: Get.back,
               child: Icon(
                 MdiIcons.chevronLeft,
-                color: AppTheme.theme.colorScheme.onBackground,
+                color: AppTheme.yhtTheme.onBgLayer2,
               ),
             ),
             title: Text(
               '${controller.departure} - ${controller.destination}',
               style: AppTheme.getTextStyle(AppTheme.theme.textTheme.headline6,
-                  color: AppTheme.theme.colorScheme.onBackground,
-                  fontWeight: 600),
+                  color: AppTheme.yhtTheme.onBgLayer2, fontWeight: 600),
             ),
             actions: [
               GestureDetector(
-                  onTap: controller.swapStations,
-                  child: Icon(MdiIcons.swapHorizontal,
-                      color: AppTheme.theme.primaryColor)),
+                onTap: controller.swapStations,
+                child: Icon(
+                  MdiIcons.swapHorizontal,
+                  color: AppTheme.yhtTheme.onBgLayer2Muted,
+                ),
+              ),
               SizedBox(
                 width: MySize.size24,
               ),
             ],
           ),
-          body: Container(
-            color: AppTheme.customTheme.bgLayer2,
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    padding: Spacing.fromLTRB(24, 8, 24, 0),
-                    children: [
-                      Container(
-                        margin: Spacing.top(12),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: controller.days
-                                .map(
-                                  (date) => singleDateWidget(date),
-                                )
-                                .toList()),
+          backgroundColor: AppTheme.yhtTheme.bgLayer1,
+          body: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  padding: Spacing.fromLTRB(24, 8, 24, 0),
+                  children: [
+                    Container(
+                      margin: Spacing.top(12),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: controller.days
+                              .map(
+                                (date) => singleDateWidget(date),
+                              )
+                              .toList()),
+                    ),
+                    Container(
+                      margin: Spacing.top(24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "SEFERLER",
+                            style: AppTheme.getTextStyle(
+                                AppTheme.theme.textTheme.caption,
+                                color: AppTheme.yhtTheme.onBgLayer1Muted,
+                                fontWeight: 700),
+                          ),
+                          Text(
+                            DateFormat('d MMMM EEEE', 'tr_TR')
+                                .format(controller.selectedDate.value),
+                            style: AppTheme.getTextStyle(
+                                AppTheme.theme.textTheme.caption,
+                                color: AppTheme.yhtTheme.onBgLayer1Muted,
+                                muted: true,
+                                fontWeight: 500),
+                          ),
+                        ],
                       ),
-                      Container(
-                        margin: Spacing.top(24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "SEFERLER",
-                              style: AppTheme.getTextStyle(
-                                  AppTheme.theme.textTheme.caption,
-                                  color:
-                                      AppTheme.theme.colorScheme.onBackground,
-                                  muted: true,
-                                  fontWeight: 700),
-                            ),
-                            Text(
-                              DateFormat('d MMMM EEEE', 'tr_TR')
-                                  .format(controller.selectedDate.value),
-                              style: AppTheme.getTextStyle(
-                                  AppTheme.theme.textTheme.caption,
-                                  color:
-                                      AppTheme.theme.colorScheme.onBackground,
-                                  muted: true,
-                                  fontWeight: 500),
-                            ),
-                          ],
-                        ),
-                      ),
-                      _buildSchedules(),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    _buildSchedules(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
-                controller.selectedSchedules.isNotEmpty
-                    ? Container(
-                        color: AppTheme.customTheme.bgLayer1,
-                        padding: Spacing.fromLTRB(24, 16, 24, 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              text: TextSpan(children: <TextSpan>[
-                                TextSpan(
-                                    text: controller.selectedSchedules.length
-                                        .toString(),
-                                    style: AppTheme.getTextStyle(
-                                        AppTheme.theme.textTheme.bodyText1,
-                                        fontWeight: 700,
-                                        letterSpacing: 0,
-                                        color: AppTheme
-                                            .theme.colorScheme.primary)),
-                                TextSpan(
-                                    text: " sefer seçildi",
-                                    style: AppTheme.getTextStyle(
-                                      AppTheme.theme.textTheme.caption,
-                                      fontWeight: 600,
+              ),
+              controller.selectedSchedules.isNotEmpty
+                  ? Container(
+                      color: AppTheme.yhtTheme.bgLayer2,
+                      padding: Spacing.fromLTRB(24, 16, 24, 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RichText(
+                            text: TextSpan(children: <TextSpan>[
+                              TextSpan(
+                                  text: controller.selectedSchedules.length
+                                      .toString(),
+                                  style: AppTheme.getTextStyle(
+                                      AppTheme.theme.textTheme.bodyText1,
+                                      fontWeight: 700,
                                       letterSpacing: 0,
-                                      color: AppTheme
-                                          .theme.colorScheme.onBackground,
-                                    )),
-                              ]),
-                            ),
-                            InkWell(
-                              onTap: controller.createAlerts,
-                              child: Container(
-                                padding: Spacing.fromLTRB(8, 8, 8, 8),
-                                decoration: BoxDecoration(
-                                    color: AppTheme.theme.colorScheme.primary,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(MySize.size40!))),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      margin: Spacing.left(12),
-                                      child: Text(
-                                        "TAMAM".toUpperCase(),
-                                        style: AppTheme.getTextStyle(
-                                            AppTheme.theme.textTheme.caption,
-                                            fontSize: 12,
-                                            letterSpacing: 0.7,
-                                            color: AppTheme
-                                                .theme.colorScheme.onPrimary,
-                                            fontWeight: 600),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: Spacing.left(16),
-                                      padding: Spacing.all(4),
-                                      decoration: BoxDecoration(
-                                          color: AppTheme
-                                              .theme.colorScheme.onPrimary,
-                                          shape: BoxShape.circle),
-                                      child: Icon(
-                                        MdiIcons.chevronRight,
-                                        size: MySize.size20,
-                                        color:
-                                            AppTheme.theme.colorScheme.primary,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    : Container(
-                        color: AppTheme.customTheme.bgLayer1,
-                        padding: Spacing.fromLTRB(24, 16, 24, 16),
-                        child: Row(
-                          children: [
-                            Icon(
-                              MdiIcons.information,
-                              color: AppTheme.theme.colorScheme.onBackground,
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                "Sefer seçiniz",
-                                style: AppTheme.getTextStyle(
-                                  AppTheme.theme.textTheme.caption,
-                                  fontWeight: 600,
-                                  letterSpacing: 0,
-                                  color:
-                                      AppTheme.theme.colorScheme.onBackground,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: Spacing.fromLTRB(8, 8, 8, 8),
+                                      color: AppTheme.yhtTheme.primary)),
+                              TextSpan(
+                                  text: " sefer seçildi",
+                                  style: AppTheme.getTextStyle(
+                                    AppTheme.theme.textTheme.caption,
+                                    fontWeight: 600,
+                                    letterSpacing: 0,
+                                    color: AppTheme.yhtTheme.onBgLayer2,
+                                  )),
+                            ]),
+                          ),
+                          InkWell(
+                            onTap: controller.createAlerts,
+                            child: Container(
+                              padding: Spacing.all(8),
                               decoration: BoxDecoration(
-                                  color: AppTheme.theme.colorScheme.onBackground
-                                      .withAlpha(160),
+                                  color: AppTheme.yhtTheme.primary,
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(MySize.size40!))),
                               child: Row(
@@ -207,8 +138,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
                                           AppTheme.theme.textTheme.caption,
                                           fontSize: 12,
                                           letterSpacing: 0.7,
-                                          color: AppTheme
-                                              .theme.colorScheme.onPrimary,
+                                          color: AppTheme.yhtTheme.onPrimary,
                                           fontWeight: 600),
                                     ),
                                   ),
@@ -216,25 +146,82 @@ class SchedulesScreen extends GetView<SchedulesController> {
                                     margin: Spacing.left(16),
                                     padding: Spacing.all(4),
                                     decoration: BoxDecoration(
-                                        color: AppTheme
-                                            .theme.colorScheme.onPrimary,
+                                        color: AppTheme.yhtTheme.onPrimary,
                                         shape: BoxShape.circle),
                                     child: Icon(
                                       MdiIcons.chevronRight,
                                       size: MySize.size20,
-                                      color: AppTheme
-                                          .theme.colorScheme.onBackground
-                                          .withAlpha(160),
+                                      color: AppTheme.yhtTheme.primary,
                                     ),
                                   )
                                 ],
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
-              ],
-            ),
+                    )
+                  : Container(
+                      color: AppTheme.yhtTheme.bgLayer2,
+                      padding: Spacing.fromLTRB(24, 16, 24, 16),
+                      child: Row(
+                        children: [
+                          Icon(
+                            MdiIcons.information,
+                            color: AppTheme.yhtTheme.onBgLayer2Muted,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              "Sefer seçiniz",
+                              style: AppTheme.getTextStyle(
+                                AppTheme.theme.textTheme.caption,
+                                fontWeight: 600,
+                                letterSpacing: 0,
+                                color: AppTheme.yhtTheme.onBgLayer2Muted,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: Spacing.all(8),
+                            decoration: BoxDecoration(
+                                color: AppTheme.yhtTheme.bgLayer3,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(MySize.size40!))),
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: Spacing.left(12),
+                                  child: Text(
+                                    "TAMAM".toUpperCase(),
+                                    style: AppTheme.getTextStyle(
+                                        AppTheme.theme.textTheme.caption,
+                                        fontSize: 12,
+                                        letterSpacing: 0.7,
+                                        color:
+                                            AppTheme.yhtTheme.onBgLayer3Muted,
+                                        fontWeight: 600),
+                                  ),
+                                ),
+                                Container(
+                                  margin: Spacing.left(16),
+                                  padding: Spacing.all(4),
+                                  decoration: BoxDecoration(
+                                      color: AppTheme.yhtTheme.bgLayer2,
+                                      shape: BoxShape.circle),
+                                  child: Icon(
+                                    MdiIcons.chevronRight,
+                                    size: MySize.size20,
+                                    color: AppTheme.yhtTheme.onBgLayer2Muted,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+            ],
           ),
         ),
       ),
@@ -247,7 +234,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
         width: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(MySize.size6!)),
-          color: AppTheme.theme.colorScheme.primary,
+          color: AppTheme.yhtTheme.primary,
         ),
         padding: Spacing.fromLTRB(0, 8, 0, 14),
         child: Column(
@@ -256,7 +243,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
               DateFormat('dd\nE', 'tr-TR').format(date),
               style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
                   fontWeight: 600,
-                  color: AppTheme.theme.colorScheme.onPrimary,
+                  color: AppTheme.yhtTheme.onPrimary,
                   height: 1.9),
               textAlign: TextAlign.center,
             ),
@@ -265,8 +252,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
               height: MySize.size8,
               width: MySize.size8,
               decoration: BoxDecoration(
-                  color: AppTheme.theme.colorScheme.onPrimary,
-                  shape: BoxShape.circle),
+                  color: AppTheme.yhtTheme.onPrimary, shape: BoxShape.circle),
             )
           ],
         ),
@@ -279,16 +265,9 @@ class SchedulesScreen extends GetView<SchedulesController> {
       child: Container(
         width: 50,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(MySize.size6!)),
-            color: AppTheme.customTheme.bgLayer1,
-            boxShadow: [
-              BoxShadow(
-                color: AppTheme.customTheme.shadowColor,
-                blurRadius: MySize.size10!,
-                spreadRadius: MySize.size2,
-                offset: Offset(0, MySize.size8!),
-              )
-            ]),
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size6!)),
+          color: AppTheme.yhtTheme.bgLayer2,
+        ),
         padding: Spacing.fromLTRB(0, 8, 0, 14),
         child: Column(
           children: [
@@ -296,7 +275,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
               DateFormat('dd\nE', 'tr-TR').format(date),
               style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
                   fontWeight: 600,
-                  color: AppTheme.theme.colorScheme.onBackground,
+                  color: AppTheme.yhtTheme.onBgLayer2,
                   height: 1.9),
               textAlign: TextAlign.center,
             )
@@ -315,28 +294,22 @@ class SchedulesScreen extends GetView<SchedulesController> {
         margin: Spacing.top(16),
         padding: Spacing.vertical(16),
         decoration: BoxDecoration(
-          color: AppTheme.theme.cardTheme.color,
+          color: AppTheme.yhtTheme.bgLayer3,
           borderRadius: BorderRadius.all(Radius.circular(MySize.size16!)),
-          boxShadow: [
-            BoxShadow(
-              color: AppTheme.theme.cardTheme.shadowColor!.withAlpha(28),
-              blurRadius: 5,
-              spreadRadius: 1,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Lottie.asset("assets/lotties/89719-electric-train-animation.json",
-                width: 200),
+            Lottie.asset(
+              "assets/lotties/89719-electric-train-animation.json",
+              width: 200,
+            ),
             Container(
               margin: EdgeInsets.only(top: MySize.size24!),
               child: Text(
                 "Sefer bulunamadı :(",
                 style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
-                    color: AppTheme.theme.colorScheme.onBackground,
+                    color: AppTheme.yhtTheme.onBgLayer3,
                     fontWeight: 600,
                     letterSpacing: 0),
               ),
@@ -348,16 +321,8 @@ class SchedulesScreen extends GetView<SchedulesController> {
     return Container(
       margin: Spacing.top(16),
       decoration: BoxDecoration(
-        color: AppTheme.theme.cardTheme.color,
+        color: AppTheme.yhtTheme.bgLayer3,
         borderRadius: BorderRadius.all(Radius.circular(MySize.size16!)),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.theme.cardTheme.shadowColor!.withAlpha(28),
-            blurRadius: 5,
-            spreadRadius: 1,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         children: controller.schedules.asMap().keys.map((i) {
@@ -378,6 +343,8 @@ class SchedulesScreen extends GetView<SchedulesController> {
                 .map((e) => ListTile(
                       trailing: Checkbox(
                         value: e.selected,
+                        fillColor: MaterialStateColor.resolveWith(
+                            (states) => AppTheme.yhtTheme.primary),
                         onChanged: (value) {
                           e.selected = value!;
                           if (item.wagonTypes.every(
@@ -391,24 +358,34 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       horizontalTitleGap: 0,
                       contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                       dense: true,
-                      leading: const Icon(MdiIcons.train),
+                      leading: Icon(
+                        MdiIcons.train,
+                        color: AppTheme.yhtTheme.onBgLayer3Muted,
+                      ),
                       title: Text(e.name,
                           style: AppTheme.getTextStyle(
                               AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.theme.colorScheme.onBackground)),
+                              color: AppTheme.yhtTheme.onBgLayer3)),
                       subtitle: Text(
                           '${e.price.toStringAsFixed(2)} TL (${e.wagons.length} vagon)',
                           style: AppTheme.getTextStyle(
                               AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.theme.colorScheme.onBackground)),
+                              color: AppTheme.yhtTheme.onBgLayer3Muted)),
                     ))
                 .toList();
           }
           return Column(
             children: [
-              i > 0 ? const Divider(height: 0.3) : const SizedBox(),
+              i > 0
+                  ? Divider(
+                      height: 0.3,
+                      color: AppTheme.yhtTheme.bgLayer4,
+                    )
+                  : const SizedBox(),
               CheckboxListTile(
                 value: item.selected,
+                activeColor: MaterialStateColor.resolveWith(
+                    (states) => AppTheme.yhtTheme.primary),
                 onChanged: (value) {
                   item.selected = value!;
                   for (var element in item.wagonTypes) {
@@ -420,11 +397,11 @@ class SchedulesScreen extends GetView<SchedulesController> {
                     "${DateFormat.Hm().format(item.startDate)} - ${DateFormat.Hm().format(item.endDate)}",
                     style: AppTheme.getTextStyle(
                         AppTheme.theme.textTheme.bodyText1,
-                        color: AppTheme.theme.colorScheme.onBackground)),
+                        color: AppTheme.yhtTheme.onBgLayer3)),
                 subtitle: Text(sDuration,
                     style: AppTheme.getTextStyle(
                         AppTheme.theme.textTheme.bodyText2,
-                        color: AppTheme.theme.colorScheme.onBackground)),
+                        color: AppTheme.yhtTheme.onBgLayer3)),
               ),
               ...wagons,
             ],

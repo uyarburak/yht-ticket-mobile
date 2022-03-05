@@ -17,14 +17,14 @@ class LoginScreen extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: AppTheme.customTheme.bgLayer1,
+        color: AppTheme.yhtTheme.bgLayer1,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Image.asset(
                 './assets/icons/ticket-outline.png',
-                color: AppTheme.theme.colorScheme.primary,
+                color: AppTheme.yhtTheme.primary,
                 width: 36,
                 height: 36,
               ),
@@ -34,7 +34,7 @@ class LoginScreen extends GetView<LoginController> {
                   "TEKRAR HOŞGELDİN!".toUpperCase(),
                   style: AppTheme.getTextStyle(
                     AppTheme.theme.textTheme.headline6,
-                    color: AppTheme.theme.colorScheme.onBackground,
+                    color: AppTheme.yhtTheme.onBgLayer1,
                     fontWeight: 700,
                     letterSpacing: 0.5,
                   ),
@@ -89,7 +89,7 @@ class LoginScreen extends GetView<LoginController> {
                               "Şifremi unuttum",
                               style: AppTheme.getTextStyle(
                                 AppTheme.theme.textTheme.bodyText2,
-                                color: AppTheme.theme.colorScheme.onBackground,
+                                color: AppTheme.yhtTheme.onBgLayer1,
                                 letterSpacing: 0,
                                 fontWeight: 500,
                               ),
@@ -108,7 +108,7 @@ class LoginScreen extends GetView<LoginController> {
                       BorderRadius.all(Radius.circular(MySize.size12!)),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.theme.primaryColor.withAlpha(24),
+                      color: AppTheme.yhtTheme.primary.withAlpha(24),
                       blurRadius: 5,
                       offset: const Offset(0, 2), // changes position of shadow
                     ),
@@ -128,11 +128,13 @@ class LoginScreen extends GetView<LoginController> {
                     style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.bodyText2,
                       fontWeight: 600,
-                      color: AppTheme.theme.colorScheme.onPrimary,
+                      color: AppTheme.yhtTheme.onPrimary,
                       letterSpacing: 0.5,
                     ),
                   ),
                   style: ButtonStyle(
+                      backgroundColor: MaterialStateColor.resolveWith(
+                          (states) => AppTheme.yhtTheme.primary),
                       padding: MaterialStateProperty.all(Spacing.xy(16, 0))),
                 ),
               ),
@@ -146,7 +148,7 @@ class LoginScreen extends GetView<LoginController> {
                     "Hesap oluşturmak istiyorum",
                     style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.bodyText2,
-                      color: AppTheme.theme.colorScheme.onBackground,
+                      color: AppTheme.yhtTheme.onBgLayer1,
                       fontWeight: 500,
                       decoration: TextDecoration.underline,
                     ),

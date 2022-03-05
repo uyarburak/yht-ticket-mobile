@@ -42,7 +42,7 @@ class ActiveAlertsWidget extends StatelessWidget {
       margin: Spacing.fromLTRB(24, 24, 24, 0),
       padding: Spacing.all(24),
       decoration: BoxDecoration(
-        color: AppTheme.theme.colorScheme.primary,
+        color: AppTheme.yhtTheme.primary,
         borderRadius: BorderRadius.all(Radius.circular(MySize.size12!)),
       ),
       child: Row(
@@ -54,8 +54,7 @@ class ActiveAlertsWidget extends StatelessWidget {
               Text(
                 "Hiç alarmın yok!",
                 style: AppTheme.getTextStyle(AppTheme.theme.textTheme.bodyText1,
-                    color: AppTheme.theme.colorScheme.onPrimary,
-                    fontWeight: 600),
+                    color: AppTheme.yhtTheme.onPrimary, fontWeight: 600),
               ),
               Container(
                 margin: Spacing.top(8),
@@ -64,7 +63,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                   "Hemen bir sefer seçerek, koltuk boşaldığında haberdar olabilirsin!",
                   style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.bodyText2,
-                      color: AppTheme.theme.colorScheme.onPrimary,
+                      color: AppTheme.yhtTheme.onPrimary,
                       fontWeight: 400,
                       muted: true),
                 ),
@@ -117,7 +116,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                   child: CircleAvatar(
                     child: Icon(
                       MdiIcons.train,
-                      color: AppTheme.theme.colorScheme.onPrimary,
+                      color: AppTheme.yhtTheme.onPrimary,
                     ),
                   ),
                 ),
@@ -132,15 +131,14 @@ class ActiveAlertsWidget extends StatelessWidget {
                           date,
                           style: AppTheme.getTextStyle(
                               AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.theme.colorScheme.primary
-                                  .withAlpha(180),
+                              color: AppTheme.yhtTheme.primary,
                               fontWeight: 700),
                         ),
                         Text(
                           "${alert.departureStationName} - ${alert.destinationStationName}",
                           style: AppTheme.getTextStyle(
                               AppTheme.theme.textTheme.bodyText1,
-                              color: AppTheme.theme.colorScheme.onBackground,
+                              color: AppTheme.yhtTheme.onBgLayer1,
                               letterSpacing: 0,
                               fontWeight: 600),
                           maxLines: 1,
@@ -149,9 +147,9 @@ class ActiveAlertsWidget extends StatelessWidget {
                         Text(
                           "${alert.wagonCount} vagon",
                           style: AppTheme.getTextStyle(
-                              AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.theme.colorScheme.onBackground,
-                              muted: true),
+                            AppTheme.theme.textTheme.bodyText2,
+                            color: AppTheme.yhtTheme.onBgLayer1Muted,
+                          ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -160,7 +158,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                 ),
                 Icon(
                   MdiIcons.chevronRight,
-                  color: AppTheme.theme.colorScheme.primary,
+                  color: AppTheme.yhtTheme.primary,
                 ),
               ],
             ),
@@ -176,7 +174,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                           alert.unreadNotificationCount.toString(),
                           style: AppTheme.getTextStyle(
                             AppTheme.theme.textTheme.overline,
-                            color: AppTheme.theme.colorScheme.onPrimary,
+                            color: Colors.white,
                             fontWeight: 600,
                             fontSize: 11,
                           ),

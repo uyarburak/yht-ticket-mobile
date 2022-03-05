@@ -23,7 +23,7 @@ class NotificationIconButton extends StatelessWidget {
         children: <Widget>[
           Icon(
             MdiIcons.bell,
-            color: AppTheme.theme.colorScheme.onBackground.withAlpha(200),
+            color: AppTheme.yhtTheme.onBgLayer2Muted,
           ),
           Obx(
             () => _dashboardController.unreadNotificationCount > 0
@@ -35,7 +35,7 @@ class NotificationIconButton extends StatelessWidget {
                       height: MySize.size18,
                       width: MySize.size18,
                       decoration: BoxDecoration(
-                          color: AppTheme.theme.colorScheme.primary,
+                          color: AppTheme.yhtTheme.primary,
                           borderRadius: BorderRadius.all(
                               Radius.circular(MySize.size40!))),
                       child: Center(
@@ -44,7 +44,7 @@ class NotificationIconButton extends StatelessWidget {
                               .toString(),
                           style: AppTheme.getTextStyle(
                             AppTheme.theme.textTheme.overline,
-                            color: AppTheme.theme.colorScheme.onPrimary,
+                            color: AppTheme.yhtTheme.onPrimary,
                             fontSize: 10,
                             fontWeight: 500,
                           ),

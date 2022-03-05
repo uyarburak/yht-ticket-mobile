@@ -18,7 +18,7 @@ class RegisterScreen extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: AppTheme.customTheme.bgLayer1,
+        color: AppTheme.yhtTheme.bgLayer1,
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -26,7 +26,7 @@ class RegisterScreen extends GetView<RegisterController> {
               children: <Widget>[
                 Image.asset(
                   './assets/icons/ticket-outline.png',
-                  color: AppTheme.theme.colorScheme.primary,
+                  color: AppTheme.yhtTheme.primary,
                   width: 36,
                   height: 36,
                 ),
@@ -36,7 +36,7 @@ class RegisterScreen extends GetView<RegisterController> {
                     "HESAP OLUŞTUR".toUpperCase(),
                     style: AppTheme.getTextStyle(
                         AppTheme.theme.textTheme.headline6,
-                        color: AppTheme.theme.colorScheme.onBackground,
+                        color: AppTheme.yhtTheme.onBgLayer1,
                         fontWeight: 700,
                         letterSpacing: 0.5),
                   ),
@@ -106,7 +106,7 @@ class RegisterScreen extends GetView<RegisterController> {
                         BorderRadius.all(Radius.circular(MySize.size12!)),
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.theme.primaryColor.withAlpha(24),
+                        color: AppTheme.yhtTheme.primary.withAlpha(24),
                         blurRadius: 5,
                         offset:
                             const Offset(0, 2), // changes position of shadow
@@ -119,6 +119,8 @@ class RegisterScreen extends GetView<RegisterController> {
                       top: MySize.size24!),
                   child: ElevatedButton(
                     style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => AppTheme.yhtTheme.primary),
                         padding: MaterialStateProperty.all(Spacing.xy(16, 0))),
                     onPressed: () {
                       controller.register(context, registerFormKey);
@@ -128,7 +130,7 @@ class RegisterScreen extends GetView<RegisterController> {
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText2,
                           fontWeight: 600,
-                          color: AppTheme.theme.colorScheme.onPrimary,
+                          color: AppTheme.yhtTheme.onPrimary,
                           letterSpacing: 0.5),
                     ),
                   ),
@@ -143,7 +145,7 @@ class RegisterScreen extends GetView<RegisterController> {
                       "Zaten bir hesabım var",
                       style: AppTheme.getTextStyle(
                           AppTheme.theme.textTheme.bodyText2,
-                          color: AppTheme.theme.colorScheme.onBackground,
+                          color: AppTheme.yhtTheme.onBgLayer1,
                           fontWeight: 500,
                           decoration: TextDecoration.underline),
                     ),

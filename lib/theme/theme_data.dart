@@ -8,8 +8,41 @@ class AppTheme {
   static const int themeLight = 1;
   static const int themeDark = 2;
 
-  static CustomAppTheme customTheme = getCustomAppTheme(themeLight);
-  static ThemeData theme = getThemeFromThemeMode(themeLight);
+  static CustomAppTheme customTheme = getCustomAppTheme(themeDark);
+  static MyCustomAppTheme get yhtTheme => MyCustomAppTheme(
+        bgLayer1: const Color(0xfffafafa),
+        bgLayer2: const Color(0xfff5f5f5),
+        bgLayer3: const Color(0xffe8e8e8),
+        bgLayer4: const Color(0xffb2b2b2),
+        onBgLayer1: const Color(0xff000000),
+        onBgLayer1Muted: const Color(0xff939393),
+        onBgLayer2: const Color(0xff000000),
+        onBgLayer2Muted: const Color(0xff737373),
+        onBgLayer3: const Color(0xff000000),
+        onBgLayer3Muted: const Color(0xff939393),
+        onBgLayer4: const Color(0xffe1e2e4),
+        primary: const Color(0xff127afc),
+        onPrimary: const Color(0xffffffff),
+        shadowColor: const Color(0xff202020),
+      );
+
+  static MyCustomAppTheme get yhtThemeDark => MyCustomAppTheme(
+        bgLayer1: const Color(0xff070707),
+        bgLayer2: const Color(0xff121212),
+        bgLayer3: const Color(0xff252726),
+        bgLayer4: const Color(0xff333436),
+        onBgLayer1: const Color(0xffffffff),
+        onBgLayer1Muted: const Color(0xff939393),
+        onBgLayer2: const Color(0xffffffff),
+        onBgLayer2Muted: const Color(0xff737373),
+        onBgLayer3: const Color(0xffffffff),
+        onBgLayer3Muted: const Color(0xff939393),
+        onBgLayer4: const Color(0xffe1e2e4),
+        primary: const Color(0xff127afc),
+        onPrimary: const Color(0xffffffff),
+        shadowColor: const Color(0xff202020),
+      );
+  static ThemeData theme = getThemeFromThemeMode(themeDark);
 
   AppTheme._();
 
@@ -420,6 +453,44 @@ class AppTheme {
   }
 }
 
+class MyCustomAppTheme {
+  final Color bgLayer1,
+      bgLayer2,
+      bgLayer3,
+      bgLayer4,
+      onBgLayer1,
+      onBgLayer1Muted,
+      onBgLayer2,
+      onBgLayer2Muted,
+      onBgLayer3,
+      onBgLayer3Muted,
+      onBgLayer4,
+      onBgLayer4Muted,
+      primary,
+      onPrimary,
+      onPrimaryMuted,
+      shadowColor;
+
+  MyCustomAppTheme({
+    this.bgLayer1 = const Color(0xffffffff),
+    this.bgLayer2 = const Color(0xfff8faff),
+    this.bgLayer3 = const Color(0xfff8f8f8),
+    this.bgLayer4 = const Color(0xfff8f8f8),
+    this.onBgLayer1 = const Color(0xffffffff),
+    this.onBgLayer2 = const Color(0xffffffff),
+    this.onBgLayer3 = const Color(0xffffffff),
+    this.onBgLayer4 = const Color(0xffffffff),
+    this.onBgLayer1Muted = const Color(0xffffffff),
+    this.onBgLayer2Muted = const Color(0xffffffff),
+    this.onBgLayer3Muted = const Color(0xffffffff),
+    this.onBgLayer4Muted = const Color(0xffffffff),
+    this.primary = const Color(0xff3d63ff),
+    this.onPrimary = const Color(0xffffffff),
+    this.onPrimaryMuted = const Color(0xffffffff),
+    this.shadowColor = const Color(0xffffffff),
+  });
+}
+
 class CustomAppTheme {
   final Color bgLayer1,
       bgLayer2,
@@ -517,6 +588,20 @@ class CustomAppTheme {
   });
 
   //--------------------------------------  Custom App Theme ----------------------------------------//
+
+  static final MyCustomAppTheme darkGayHasan = MyCustomAppTheme(
+    bgLayer1: const Color(0xff1f1f1f),
+    bgLayer2: const Color(0xff2e2f31),
+    bgLayer3: const Color(0xff292a2c),
+    bgLayer4: const Color(0xff333436),
+    onBgLayer1: const Color(0xffffffff),
+    onBgLayer2: const Color(0xff737373),
+    onBgLayer3: const Color(0xff737373),
+    onBgLayer4: const Color(0xffe1e2e4),
+    primary: const Color(0xff3d63ff),
+    onPrimary: const Color(0xffffffff),
+    shadowColor: const Color(0xff202020),
+  );
 
   static final CustomAppTheme lightCustomAppTheme = CustomAppTheme(
       bgLayer1: const Color(0xffffffff),

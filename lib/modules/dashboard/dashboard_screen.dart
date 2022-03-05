@@ -21,10 +21,10 @@ class DashboardScreen extends GetView<DashboardController> {
         onRefresh: () async {
           return controller.refreshAlertsAndUnreadNotificationCount();
         },
-        color: AppTheme.theme.primaryColor,
-        backgroundColor: Colors.white,
+        color: AppTheme.yhtTheme.primary,
+        backgroundColor: AppTheme.yhtTheme.bgLayer2,
         child: Container(
-          color: AppTheme.customTheme.bgLayer1,
+          color: AppTheme.yhtTheme.bgLayer1,
           child: ListView(
             padding: Spacing.top(48),
             children: <Widget>[
@@ -43,7 +43,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                 AppTheme.theme.textTheme.bodyText2,
                                 fontWeight: 400,
                                 letterSpacing: 0,
-                                color: AppTheme.theme.colorScheme.onBackground),
+                                color: AppTheme.yhtTheme.onBgLayer1),
                           ),
                           Text(
                             "YHT Koltuk Alarmı",
@@ -52,7 +52,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                 fontSize: 24,
                                 fontWeight: 700,
                                 letterSpacing: -0.3,
-                                color: AppTheme.theme.colorScheme.onBackground),
+                                color: AppTheme.yhtTheme.onBgLayer1),
                           ),
                         ],
                       ),
@@ -60,14 +60,10 @@ class DashboardScreen extends GetView<DashboardController> {
                     Container(
                       padding: Spacing.all(10),
                       decoration: BoxDecoration(
-                          color: AppTheme.customTheme.bgLayer2,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(MySize.size8!)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppTheme.customTheme.shadowColor,
-                                blurRadius: MySize.size4!)
-                          ]),
+                        color: AppTheme.yhtTheme.bgLayer2,
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(MySize.size8!)),
+                      ),
                       child: NotificationIconButton(),
                     )
                   ],
@@ -82,9 +78,9 @@ class DashboardScreen extends GetView<DashboardController> {
                   child: Container(
                     padding: Spacing.vertical(4),
                     decoration: BoxDecoration(
-                        color: AppTheme.customTheme.bgLayer2,
+                        color: AppTheme.yhtTheme.bgLayer2,
                         border: Border.all(
-                            color: AppTheme.customTheme.bgLayer3, width: 1),
+                            color: AppTheme.yhtTheme.bgLayer3, width: 1),
                         borderRadius:
                             BorderRadius.all(Radius.circular(MySize.size8!))),
                     child: Row(
@@ -94,8 +90,7 @@ class DashboardScreen extends GetView<DashboardController> {
                           padding: Spacing.vertical(12),
                           child: Icon(
                             MdiIcons.magnify,
-                            color: AppTheme.theme.colorScheme.onBackground
-                                .withAlpha(200),
+                            color: AppTheme.yhtTheme.onBgLayer2Muted,
                             size: MySize.size20,
                           ),
                         ),
@@ -104,7 +99,7 @@ class DashboardScreen extends GetView<DashboardController> {
                           "Tren seferi ara...",
                           style: AppTheme.getTextStyle(
                               AppTheme.theme.textTheme.bodyText1,
-                              color: AppTheme.theme.colorScheme.onBackground,
+                              color: AppTheme.yhtTheme.onBgLayer2Muted,
                               muted: true,
                               fontWeight: 500),
                         ),
@@ -119,7 +114,7 @@ class DashboardScreen extends GetView<DashboardController> {
                   "Alarmlarım",
                   style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.subtitle1,
-                      color: AppTheme.theme.colorScheme.onBackground,
+                      color: AppTheme.yhtTheme.onBgLayer1,
                       fontWeight: 600),
                 ),
               ),
@@ -130,7 +125,7 @@ class DashboardScreen extends GetView<DashboardController> {
                   "Popüler Seferler",
                   style: AppTheme.getTextStyle(
                       AppTheme.theme.textTheme.subtitle1,
-                      color: AppTheme.theme.colorScheme.onBackground,
+                      color: AppTheme.yhtTheme.onBgLayer1,
                       fontWeight: 600),
                 ),
               ),

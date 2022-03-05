@@ -19,17 +19,9 @@ class HomeView extends GetView<HomeController> {
             controller: controller.tabController, children: controller.pages),
         bottomNavigationBar: BottomAppBar(
           elevation: 0,
-          shape: const CircularNotchedRectangle(),
           child: Container(
             decoration: BoxDecoration(
-              color: AppTheme.theme.bottomAppBarTheme.color,
-              boxShadow: [
-                BoxShadow(
-                  color: AppTheme.theme.cardTheme.shadowColor!.withAlpha(40),
-                  blurRadius: 3,
-                  offset: const Offset(0, -3),
-                ),
-              ],
+              color: AppTheme.yhtTheme.bgLayer2,
             ),
             padding:
                 EdgeInsets.only(top: MySize.size12!, bottom: MySize.size12!),
@@ -38,7 +30,7 @@ class HomeView extends GetView<HomeController> {
               onTap: controller.changePage,
               indicator: const BoxDecoration(),
               indicatorSize: TabBarIndicatorSize.tab,
-              indicatorColor: AppTheme.theme.colorScheme.primary,
+              indicatorColor: AppTheme.yhtTheme.primary,
               tabs: <Widget>[
                 _buildTabItem(0, MdiIcons.home, MdiIcons.homeOutline),
                 _buildTabItem(1, MdiIcons.history, MdiIcons.history),
@@ -58,21 +50,24 @@ class HomeView extends GetView<HomeController> {
             children: <Widget>[
               Icon(
                 icon,
-                color: AppTheme.theme.colorScheme.primary,
+                color: AppTheme.yhtTheme.primary,
               ),
               Container(
                 margin: EdgeInsets.only(top: MySize.size4!),
                 decoration: BoxDecoration(
-                    color: AppTheme.theme.primaryColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(2.5))),
+                  color: AppTheme.yhtTheme.primary,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(2.5),
+                  ),
+                ),
                 height: 5,
                 width: 5,
-              )
+              ),
             ],
           )
         : Icon(
             passiveIcon,
-            color: AppTheme.theme.colorScheme.onBackground,
+            color: AppTheme.yhtTheme.onBgLayer2Muted,
           );
   }
 }
