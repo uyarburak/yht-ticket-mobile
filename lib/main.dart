@@ -7,7 +7,7 @@ import 'package:yht_ticket/app_binding.dart';
 import 'package:yht_ticket/di.dart';
 import 'package:yht_ticket/modules/not_found/not_found_screen.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
