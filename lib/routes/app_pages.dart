@@ -70,7 +70,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.SEARCH_STATIONS,
-      page: () => const SearchStationScreen(),
+      page: () => SearchStationScreen(),
       binding: SearchStationBinding(),
     ),
     GetPage(
