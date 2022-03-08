@@ -94,4 +94,12 @@ class ApiRepository extends FakeApiRepository implements BaseApiRepository {
       return (res.body as List).map((e) => StationResponse.fromMap(e)).toList();
     }
   }
+
+  @override
+  Future<bool?> cancelAlert(String alertId) async {
+    final res = await apiProvider.cancelAlert(alertId);
+    if (res.isOk) {
+      return res.body as bool;
+    }
+  }
 }

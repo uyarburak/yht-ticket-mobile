@@ -46,4 +46,8 @@ class ApiProvider extends BaseProvider {
   Future<Response> createAlerts(CreateAlertsRequest data) {
     return post('/alert/api/v1/alerts', data.toJson());
   }
+
+  Future<Response> cancelAlert(String alertId) {
+    return delete('/alert/api/v1/alerts/$alertId');
+  }
 }

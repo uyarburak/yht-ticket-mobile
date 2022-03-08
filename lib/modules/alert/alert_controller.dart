@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'package:yht_ticket/api/api.dart';
 import 'package:yht_ticket/models/models.dart';
+import 'package:yht_ticket/modules/alert/widgets/alert_info_dialog.dart';
+import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/common_widget.dart';
 
 class AlertController extends GetxController {
@@ -89,5 +91,19 @@ class AlertController extends GetxController {
   void onClose() async {
     await hubConnection.stop();
     super.onClose();
+  }
+
+  onInfoButtonClicked() {
+    Get.dialog(AlertInfoDialog(
+      onCancelPressed: onCancelAlertPressed,
+    ));
+  }
+
+  onCancelAlertPressed() async {
+    var response = await apiRepository.cancelAlert(alertId);
+
+    if (response != null && response) {
+      Get.offAndToNamed(Routes.DASHBOARD);
+    }
   }
 }

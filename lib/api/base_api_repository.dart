@@ -16,4 +16,5 @@ abstract class BaseApiRepository {
   Future<List<StationResponse>?> getStations();
   Future<List<ScheduleResponse>?> getSchedules(ScheduleRequest data);
   Future<List<String>?> createAlerts(CreateAlertsRequest data);
+  Future<bool?> cancelAlert(String alertId);
 }

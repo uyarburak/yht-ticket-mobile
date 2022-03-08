@@ -36,7 +36,7 @@ class AlertScreen extends GetView<AlertController> {
           ),
           actions: [
             GestureDetector(
-              //onTap: controller.swapStations,
+              onTap: controller.onInfoButtonClicked,
               child: Icon(
                 MdiIcons.information,
                 color: AppTheme.yhtTheme.onBgLayer1Muted,
