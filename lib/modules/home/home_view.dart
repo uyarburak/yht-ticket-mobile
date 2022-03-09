@@ -1,73 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/widgets/container.dart';
+import 'package:yht_ticket/widgets/spacing.dart';
+import 'package:yht_ticket/widgets/svg.dart';
+import 'package:yht_ticket/widgets/tab_indicator.dart';
 
 import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
+  late ThemeData theme;
+  late CustomTheme customTheme;
   HomeView(int index, {Key? key}) : super(key: key) {
     controller.changePage(index);
+
+    theme = AppTheme.theme;
+    customTheme = AppTheme.customTheme;
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        body: TabBarView(
-            controller: controller.tabController, children: controller.pages),
-        bottomNavigationBar: BottomAppBar(
-          elevation: 0,
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppTheme.yhtTheme.bgLayer2,
+        //key: _drawerKey,
+        body: Column(
+          children: [
+            Expanded(
+              child: TabBarView(
+                  controller: controller.tabController,
+                  children: controller.navItems
+                      .map((navItem) => navItem.screen)
+                      .toList()),
             ),
-            padding:
-                EdgeInsets.only(top: MySize.size12!, bottom: MySize.size12!),
-            child: TabBar(
-              controller: controller.tabController,
-              onTap: controller.changePage,
-              indicator: const BoxDecoration(),
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorColor: AppTheme.yhtTheme.primary,
-              tabs: <Widget>[
-                _buildTabItem(0, MdiIcons.home, MdiIcons.homeOutline),
-                _buildTabItem(1, MdiIcons.history, MdiIcons.history),
-                _buildTabItem(2, MdiIcons.account, MdiIcons.accountOutline),
-              ],
-            ),
-          ),
+            FxContainer.none(
+              padding: FxSpacing.xy(12, 16),
+              color: theme.scaffoldBackgroundColor,
+              bordered: true,
+              enableBorderRadius: false,
+              borderRadiusAll: 0,
+              border: Border(
+                top: BorderSide(width: 2, color: customTheme.border),
+              ),
+              child: TabBar(
+                controller: controller.tabController,
+                indicator: FxTabIndicator(
+                    indicatorColor: theme.colorScheme.primary,
+                    indicatorStyle: FxTabIndicatorStyle.rectangle,
+                    indicatorHeight: 2,
+                    radius: 4,
+                    yOffset: -18,
+                    width: 20),
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorColor: theme.colorScheme.primary,
+                tabs: buildTab(),
+              ),
+            )
+          ],
         ),
+        //drawer: _buildDrawer(),
       ),
     );
   }
 
-  Widget _buildTabItem(int desiredIndex, IconData icon, IconData passiveIcon) {
-    return (controller.currentIndex.value == desiredIndex)
-        ? Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(
-                icon,
-                color: AppTheme.yhtTheme.primary,
-              ),
-              Container(
-                margin: EdgeInsets.only(top: MySize.size4!),
-                decoration: BoxDecoration(
-                  color: AppTheme.yhtTheme.primary,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(2.5),
-                  ),
-                ),
-                height: 5,
-                width: 5,
-              ),
-            ],
-          )
-        : Icon(
-            passiveIcon,
-            color: AppTheme.yhtTheme.onBgLayer2Muted,
-          );
+  List<Widget> buildTab() {
+    List<Widget> tabs = [];
+
+    for (int i = 0; i < controller.navItems.length; i++) {
+      tabs.add(Container(
+          child: SVG(controller.navItems[i].icon,
+              color: (controller.currentIndex.value == i)
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.onBackground.withAlpha(200),
+              size: controller.navItems[i].size)));
+    }
+    return tabs;
   }
 }

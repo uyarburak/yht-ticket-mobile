@@ -116,7 +116,7 @@ class HistoryScreen extends GetView<HistoryController> {
       iconColor = AppTheme.yhtTheme.onPrimary;
       iconData = MdiIcons.alarm;
       statusColor = AppTheme.yhtTheme.primary;
-      statusText = "Devam ediyor";
+      //statusText = "Devam ediyor";
     } else if (status == AlertStatus.paymentRequired) {
       iconBG = AppTheme.customTheme.colorInfo;
       iconColor = AppTheme.customTheme.onInfo;
@@ -191,6 +191,7 @@ class HistoryScreen extends GetView<HistoryController> {
                           color: AppTheme.yhtTheme.onBgLayer2Muted,
                           fontWeight: 600,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],

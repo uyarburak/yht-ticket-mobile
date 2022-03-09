@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/widgets/text.dart';
 
 import '../dashboard_controller.dart';
 
@@ -14,6 +15,9 @@ class NotificationIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = AppTheme.theme;
+    var customTheme = AppTheme.customTheme;
+
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.NOTIFICATIONS);
@@ -23,7 +27,7 @@ class NotificationIconButton extends StatelessWidget {
         children: <Widget>[
           Icon(
             MdiIcons.bell,
-            color: AppTheme.yhtTheme.onBgLayer2Muted,
+            color: theme.colorScheme.onSurface.withAlpha(160),
           ),
           Obx(
             () => _dashboardController.unreadNotificationCount > 0
@@ -35,19 +39,16 @@ class NotificationIconButton extends StatelessWidget {
                       height: MySize.size18,
                       width: MySize.size18,
                       decoration: BoxDecoration(
-                          color: AppTheme.yhtTheme.primary,
+                          color: theme.primaryColor,
                           borderRadius: BorderRadius.all(
                               Radius.circular(MySize.size40!))),
                       child: Center(
-                        child: Text(
+                        child: FxText.overline(
                           _dashboardController.unreadNotificationCount
                               .toString(),
-                          style: AppTheme.getTextStyle(
-                            AppTheme.theme.textTheme.overline,
-                            color: AppTheme.yhtTheme.onPrimary,
-                            fontSize: 10,
-                            fontWeight: 500,
-                          ),
+                          color: theme.colorScheme.onPrimary,
+                          fontSize: 10,
+                          fontWeight: 500,
                         ),
                       ),
                     ),

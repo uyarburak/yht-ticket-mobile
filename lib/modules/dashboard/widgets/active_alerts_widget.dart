@@ -6,7 +6,9 @@ import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/modules/dashboard/dashboard_controller.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/widgets/spacing.dart';
+import 'package:yht_ticket/widgets/text.dart';
 
 class ActiveAlertsWidget extends StatelessWidget {
   ActiveAlertsWidget({
@@ -29,48 +31,62 @@ class ActiveAlertsWidget extends StatelessWidget {
   }
 
   Widget _buildList(RxList<AlertResponse> alerts) {
-    return Container(
-      padding: Spacing.fromLTRB(24, 0, 24, 0),
-      child: Column(
-        children: alerts.map((e) => _buildActiveAlert(alert: e)).toList(),
-      ),
+    return Column(
+      children: [
+        FxSpacing.height(24),
+        ...alerts.map((e) => _buildActiveAlert(alert: e)).toList(),
+      ],
     );
   }
 
   Widget _buildEmptyList() {
+    var theme = AppTheme.theme;
+    var customTheme = AppTheme.customTheme;
     return Container(
-      margin: Spacing.fromLTRB(24, 24, 24, 0),
-      padding: Spacing.all(24),
+      margin: Spacing.y(24),
+      padding: Spacing.xy(16, 24),
       decoration: BoxDecoration(
-        color: AppTheme.yhtTheme.primary,
+        color: theme.primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(MySize.size12!)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Container(
+            padding: FxSpacing.all(8),
+            decoration: const BoxDecoration(
+                color: Colors.white24,
+                borderRadius: BorderRadius.all(Radius.circular(8))),
+            child: const Icon(
+              MdiIcons.alarmPlus,
+              color: Colors.white,
+            ),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Hiç alarmın yok!",
-                style: AppTheme.getTextStyle(AppTheme.theme.textTheme.bodyText1,
-                    color: AppTheme.yhtTheme.onPrimary, fontWeight: 600),
+              FxText.b1(
+                "Yeni alarm oluştur!",
+                color: theme.colorScheme.onPrimary,
+                fontWeight: 600,
               ),
               Container(
-                margin: Spacing.top(8),
+                margin: Spacing.top(6),
                 width: MySize.safeWidth! * 0.6,
-                child: Text(
-                  "Hemen bir sefer seçerek, koltuk boşaldığında haberdar olabilirsin!",
-                  style: AppTheme.getTextStyle(
-                      AppTheme.theme.textTheme.bodyText2,
-                      color: AppTheme.yhtTheme.onPrimary,
-                      fontWeight: 400,
-                      muted: true),
+                child: FxText.b2(
+                  "Koltuk boşaldığında haberin olsun",
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: 500,
+                  muted: true,
                 ),
               ),
             ],
           ),
-          const Icon(MdiIcons.chevronRight),
+          Icon(
+            MdiIcons.chevronRight,
+            color: theme.colorScheme.onPrimary,
+            size: 20,
+          ),
         ],
       ),
     );
@@ -85,6 +101,9 @@ class ActiveAlertsWidget extends StatelessWidget {
   }
 
   Widget _buildActiveAlert({required AlertResponse alert}) {
+    var theme = AppTheme.theme;
+    var customTheme = AppTheme.customTheme;
+
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final nextWeek = today.add(const Duration(days: 7));
@@ -103,7 +122,7 @@ class ActiveAlertsWidget extends StatelessWidget {
         Get.toNamed(Routes.ALERT_DETAILS(alert.id));
       },
       child: Container(
-        margin: Spacing.top(24),
+        margin: Spacing.bottom(24),
         child: Stack(
           children: [
             Row(
@@ -113,10 +132,14 @@ class ActiveAlertsWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.all(Radius.circular(MySize.size8!))),
-                  child: CircleAvatar(
+                  child: Container(
+                    padding: FxSpacing.all(8),
+                    decoration: BoxDecoration(
+                        color: theme.primaryColor.withAlpha(24),
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: Icon(
                       MdiIcons.train,
-                      color: AppTheme.yhtTheme.onPrimary,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ),
@@ -127,29 +150,21 @@ class ActiveAlertsWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
+                        FxText.b2(
                           date,
-                          style: AppTheme.getTextStyle(
-                              AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.yhtTheme.primary,
-                              fontWeight: 700),
+                          color: theme.primaryColor,
+                          fontWeight: 700,
                         ),
-                        Text(
+                        FxText.b1(
                           "${alert.departureStationName} - ${alert.destinationStationName}",
-                          style: AppTheme.getTextStyle(
-                              AppTheme.theme.textTheme.bodyText1,
-                              color: AppTheme.yhtTheme.onBgLayer1,
-                              letterSpacing: 0,
-                              fontWeight: 600),
+                          letterSpacing: 0,
+                          fontWeight: 600,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
+                        FxText.b2(
                           "${alert.wagonCount} vagon",
-                          style: AppTheme.getTextStyle(
-                            AppTheme.theme.textTheme.bodyText2,
-                            color: AppTheme.yhtTheme.onBgLayer1Muted,
-                          ),
+                          muted: true,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -158,7 +173,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                 ),
                 Icon(
                   MdiIcons.chevronRight,
-                  color: AppTheme.yhtTheme.primary,
+                  color: theme.primaryColor,
                 ),
               ],
             ),
@@ -167,17 +182,14 @@ class ActiveAlertsWidget extends StatelessWidget {
                     top: 0,
                     left: 25,
                     child: CircleAvatar(
-                      maxRadius: 12,
-                      backgroundColor: Colors.red.shade600,
+                      maxRadius: 10,
+                      backgroundColor: Colors.red.shade400,
                       child: Center(
-                        child: Text(
+                        child: FxText.overline(
                           alert.unreadNotificationCount.toString(),
-                          style: AppTheme.getTextStyle(
-                            AppTheme.theme.textTheme.overline,
-                            color: Colors.white,
-                            fontWeight: 600,
-                            fontSize: 11,
-                          ),
+                          color: Colors.white,
+                          fontWeight: 600,
+                          fontSize: 11,
                         ),
                       ),
                     ),

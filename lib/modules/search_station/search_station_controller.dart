@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yht_ticket/models/responses/station_response.dart';
+import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/services/station_service.dart';
 
 class SearchStationController extends GetxController {
@@ -28,8 +29,15 @@ class SearchStationController extends GetxController {
   }
 
   onStationPressed(String stationName) {
-    StationService.to.addStationToLastSearchedList(stationName);
-    Get.back(result: stationName);
+    if (Get.parameters.containsKey('destination')) {
+      Get.toNamed(Routes.SCHEDULES, parameters: {
+        'departure': stationName,
+        'destination': Get.parameters['destination'] as String,
+      });
+    } else {
+      StationService.to.addStationToLastSearchedList(stationName);
+      Get.back(result: stationName);
+    }
   }
 
   onStationRemovedFromHistory(String stationName) {
