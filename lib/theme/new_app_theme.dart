@@ -69,7 +69,7 @@ class AppTheme {
     brightness: Brightness.light,
 
     /// Primary Color
-    primaryColor: Color(0xfff27a1a),
+    primaryColor: Color(0xfffe755c),
 
     /// Scaffold and Background color
     backgroundColor: Color(0xffffffff),
@@ -90,10 +90,10 @@ class AppTheme {
 
     /// Colorscheme
     colorScheme: ColorScheme.light(
-        primary: Color(0xfff27a1a),
+        primary: Color(0xfffe755c),
         onPrimary: Color(0xffeeeeee),
-        primaryVariant: Color(0xfff27a1a),
-        secondary: Color(0xfff27a1a),
+        primaryVariant: Color(0xfffe755c),
+        secondary: Color(0xff385b64),
         secondaryVariant: Color(0xffeeeeee),
         onSecondary: Color(0xffeeeeee),
         surface: Color(0xffeeeeee),
@@ -102,12 +102,12 @@ class AppTheme {
 
     /// Floating Action Theme
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Color(0xfff27a1a),
+        backgroundColor: Color(0xfffe755c),
         splashColor: Color(0xffeeeeee).withAlpha(100),
         highlightElevation: 8,
         elevation: 4,
-        focusColor: Color(0xfff27a1a),
-        hoverColor: Color(0xfff27a1a),
+        focusColor: Color(0xfffe755c),
+        hoverColor: Color(0xfffe755c),
         foregroundColor: Color(0xffeeeeee)),
 
     /// Divider Theme
@@ -131,12 +131,12 @@ class AppTheme {
     /// CheckBox theme
     checkboxTheme: CheckboxThemeData(
       checkColor: MaterialStateProperty.all(Color(0xffeeeeee)),
-      fillColor: MaterialStateProperty.all(Color(0xfff27a1a)),
+      fillColor: MaterialStateProperty.all(Color(0xff385b64)),
     ),
 
     /// Radio theme
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(Color(0xfff27a1a)),
+      fillColor: MaterialStateProperty.all(Color(0xfffe755c)),
     ),
 
     ///Switch Theme

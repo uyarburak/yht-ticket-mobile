@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/widgets/container.dart';
 import 'package:yht_ticket/widgets/spacing.dart';
@@ -33,6 +35,7 @@ class HomeView extends GetView<HomeController> {
                       .toList()),
             ),
             FxContainer.none(
+              margin: FxSpacing.top(4),
               padding: FxSpacing.xy(12, 16),
               color: theme.scaffoldBackgroundColor,
               bordered: true,
@@ -66,12 +69,15 @@ class HomeView extends GetView<HomeController> {
     List<Widget> tabs = [];
 
     for (int i = 0; i < controller.navItems.length; i++) {
-      tabs.add(Container(
-          child: SVG(controller.navItems[i].icon,
-              color: (controller.currentIndex.value == i)
-                  ? theme.colorScheme.primary
-                  : theme.colorScheme.onBackground.withAlpha(200),
-              size: controller.navItems[i].size)));
+      tabs.add(
+        SVG(
+          controller.navItems[i].icon,
+          color: (controller.currentIndex.value == i)
+              ? theme.colorScheme.primary
+              : theme.colorScheme.onBackground,
+          size: controller.navItems[i].size,
+        ),
+      );
     }
     return tabs;
   }

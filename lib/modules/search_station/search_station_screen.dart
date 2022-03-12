@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/models/responses/station_response.dart';
-import 'package:yht_ticket/services/station_service.dart';
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/theme/text_style.dart';
 import 'package:yht_ticket/widgets/button.dart';
@@ -82,7 +80,10 @@ class SearchStationScreen extends GetView<SearchStationController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: const Icon(MdiIcons.chevronLeft),
+                    child: const Icon(
+                      MdiIcons.chevronLeft,
+                      size: 22,
+                    ),
                   ),
                 ),
                 textInputAction: TextInputAction.search,
@@ -92,6 +93,7 @@ class SearchStationScreen extends GetView<SearchStationController> {
             ),
             Expanded(
               child: ListView(
+                padding: FxSpacing.top(16),
                 children: [
                   controller.lastSearchedStations.isNotEmpty
                       ? Container(
@@ -183,21 +185,27 @@ class SearchStationScreen extends GetView<SearchStationController> {
               CircleAvatar(
                 backgroundColor: theme.colorScheme.primary,
                 radius: 20,
-                child: FxText.b1(stationName[0],
-                    color: theme.colorScheme.onPrimary, fontWeight: 600),
+                child: FxText.b1(
+                  stationName[0],
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: 600,
+                ),
               ),
               Expanded(
                 child: Container(
                   margin: FxSpacing.left(20),
-                  child: FxText.b2(stationName,
-                      color: theme.colorScheme.onBackground, fontWeight: 600),
+                  child: FxText.b2(
+                    stationName,
+                    color: theme.colorScheme.onBackground,
+                    fontWeight: 600,
+                  ),
                 ),
               ),
               InkWell(
                 onTap: () {},
                 child: Icon(
                   MdiIcons.chevronRight,
-                  color: theme.colorScheme.onBackground.withAlpha(80),
+                  color: theme.colorScheme.onBackground.withAlpha(100),
                 ),
               )
             ],

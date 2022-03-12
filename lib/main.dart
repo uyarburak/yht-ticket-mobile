@@ -51,7 +51,7 @@ class App extends StatelessWidget {
       initialBinding: AppBinding(),
       smartManagement: SmartManagement.keepFactory,
       title: 'YHT Bilet Alarm',
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.theme,
       locale: const Locale('tr', 'TR'),
       fallbackLocale: const Locale('tr', 'TR'),
       builder: EasyLoading.init(),

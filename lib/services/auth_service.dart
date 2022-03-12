@@ -60,7 +60,7 @@ class AuthService extends GetxService {
 
       final prefs = Get.find<SharedPreferences>();
       prefs.clear();
-      Get.offAndToNamed(Routes.LOGIN);
+      Get.offAndToNamed(Routes.INTRO);
     }
   }
 }

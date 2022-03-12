@@ -7,49 +7,44 @@ import 'package:skeleton_loader/skeleton_loader.dart';
 import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/widgets/button.dart';
+import 'package:yht_ticket/widgets/spacing.dart';
+import 'package:yht_ticket/widgets/text.dart';
 
 import 'history_controller.dart';
 
 class HistoryScreen extends GetView<HistoryController> {
   const HistoryScreen({Key? key}) : super(key: key);
 
+  static ThemeData theme = AppTheme.theme;
+  static CustomTheme customTheme = AppTheme.customTheme;
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          title: FxText.sh1("Alarm Geçmişi", fontWeight: 600),
+        ),
         body: RefreshIndicator(
           onRefresh: () async {
             return controller.refreshAlerts();
           },
-          color: AppTheme.yhtTheme.primary,
-          backgroundColor: AppTheme.yhtTheme.bgLayer2,
-          child: Container(
-            padding: Spacing.top(24),
-            color: AppTheme.yhtTheme.bgLayer1,
-            child: ListView(
-              padding: Spacing.zero,
-              children: <Widget>[
-                Container(
-                  margin: Spacing.top(16),
-                  child: Center(
-                    child: Text(
-                      "Alarm Geçmişi",
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText1,
-                          color: AppTheme.yhtTheme.onBgLayer1,
-                          fontWeight: 600),
-                    ),
-                  ),
-                ),
-                controller.loading.isTrue
-                    ? _buildSkeletonLoader()
-                    : controller.completedAlerts.isEmpty &&
-                            controller.activeAlerts.isEmpty
-                        ? _buildAlertsNotFound()
-                        : _buildList()
-              ],
-            ),
+          color: theme.primaryColor,
+          backgroundColor: customTheme.card,
+          child: ListView(
+            padding: FxSpacing.zero,
+            children: <Widget>[
+              controller.loading.isTrue
+                  ? _buildSkeletonLoader()
+                  : controller.completedAlerts.isEmpty &&
+                          controller.activeAlerts.isEmpty
+                      ? _buildAlertsNotFound()
+                      : _buildList()
+            ],
           ),
         ),
       ),
@@ -57,89 +52,76 @@ class HistoryScreen extends GetView<HistoryController> {
   }
 
   Widget _buildList() {
-    return Container(
-      margin: Spacing.top(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          controller.activeAlerts.isNotEmpty
-              ? Container(
-                  margin: Spacing.fromLTRB(24, 16, 0, 8),
-                  child: Text(
-                    "DEVAM EDEN ALARMLAR",
-                    style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.caption,
-                        fontWeight: 700,
-                        color: AppTheme.yhtTheme.onBgLayer1Muted),
-                  ),
-                )
-              : const SizedBox(),
-          ...controller.activeAlerts.map((e) => singleTask(e.id,
-              task: '${e.departureStationName} - ${e.destinationStationName}',
-              subject: DateFormat("d MMMM HH:mm", 'tr_TR').format(e.startDate),
-              status: e.alertStatusType)),
-          controller.completedAlerts.isNotEmpty
-              ? Container(
-                  margin: Spacing.fromLTRB(24, 24, 0, 8),
-                  child: Text(
-                    "GEÇMİŞ ALARMLAR",
-                    style: AppTheme.getTextStyle(
-                      AppTheme.theme.textTheme.caption,
-                      fontWeight: 700,
-                      color: AppTheme.yhtTheme.onBgLayer1Muted,
-                    ),
-                  ),
-                )
-              : const SizedBox(),
-          ...controller.completedAlerts.map(
-            (e) => singleTask(
-              e.id,
-              task: '${e.departureStationName} - ${e.destinationStationName}',
-              subject: DateFormat("d MMMM HH:mm", 'tr_TR').format(e.startDate),
-              status: e.alertStatusType,
-              submissionDate:
-                  DateFormat("dd/MM/yy", 'tr_TR').format(e.lastModifiedAt),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        controller.activeAlerts.isNotEmpty
+            ? Container(
+                margin: FxSpacing.fromLTRB(24, 8, 0, 8),
+                child: FxText.caption(
+                  "DEVAM EDEN ALARMLAR",
+                  fontWeight: 700,
+                  muted: true,
+                ),
+              )
+            : const SizedBox(),
+        ...controller.activeAlerts.map((e) => singleTask(e.id,
+            task: '${e.departureStationName} - ${e.destinationStationName}',
+            subject: DateFormat("d MMMM HH:mm", 'tr_TR').format(e.startDate),
+            status: e.alertStatusType)),
+        controller.completedAlerts.isNotEmpty
+            ? Container(
+                margin: FxSpacing.fromLTRB(24, 24, 0, 8),
+                child: FxText.caption(
+                  "GEÇMİŞ ALARMLAR",
+                  fontWeight: 700,
+                  muted: true,
+                ),
+              )
+            : const SizedBox(),
+        ...controller.completedAlerts.map(
+          (e) => singleTask(
+            e.id,
+            task: '${e.departureStationName} - ${e.destinationStationName}',
+            subject: DateFormat("d MMMM HH:mm", 'tr_TR').format(e.startDate),
+            status: e.alertStatusType,
+            submissionDate:
+                DateFormat("dd/MM/yy", 'tr_TR').format(e.lastModifiedAt),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget singleTask(String alertId,
       {String? subject, String? task, String? submissionDate, int status = 0}) {
     IconData iconData;
-    Color iconBG, iconColor, statusColor;
+    Color iconColor, statusColor;
     String statusText = '';
     if (status == AlertStatus.active || status == AlertStatus.created) {
-      iconBG = AppTheme.yhtTheme.primary;
-      iconColor = AppTheme.yhtTheme.onPrimary;
-      iconData = MdiIcons.alarm;
-      statusColor = AppTheme.yhtTheme.primary;
+      iconColor = theme.primaryColor;
+      iconData = MdiIcons.bell;
+      statusColor = theme.primaryColor;
       //statusText = "Devam ediyor";
     } else if (status == AlertStatus.paymentRequired) {
-      iconBG = AppTheme.customTheme.colorInfo;
-      iconColor = AppTheme.customTheme.onInfo;
+      iconColor = customTheme.colorInfo;
       iconData = MdiIcons.cashMultiple;
-      statusColor = AppTheme.customTheme.colorInfo;
+      statusColor = customTheme.colorInfo;
       statusText = "Ödeme bekliyor";
     } else if (status == AlertStatus.cancelledByUser) {
-      iconBG = AppTheme.customTheme.colorInfo;
-      iconColor = AppTheme.customTheme.onInfo;
+      iconColor = customTheme.colorError;
       iconData = MdiIcons.stop;
-      statusColor = AppTheme.customTheme.colorInfo;
+      statusColor = customTheme.colorError;
       statusText = "Durduruldu";
     } else if (status == AlertStatus.completed) {
-      iconBG = AppTheme.customTheme.disabledColor;
-      iconColor = AppTheme.customTheme.onDisabled;
+      iconColor = customTheme.disabledColor;
       iconData = MdiIcons.checkAll;
-      statusColor = AppTheme.customTheme.disabledColor;
+      statusColor = customTheme.disabledColor;
       statusText = "Tamamlandı";
     } else {
-      iconBG = AppTheme.customTheme.disabledColor;
-      iconColor = AppTheme.customTheme.onDisabled;
+      iconColor = customTheme.disabledColor;
       iconData = MdiIcons.help;
-      statusColor = AppTheme.customTheme.disabledColor;
+      statusColor = customTheme.disabledColor;
       statusText = "???";
     }
 
@@ -148,21 +130,22 @@ class HistoryScreen extends GetView<HistoryController> {
         Get.toNamed(Routes.ALERT_DETAILS(alertId));
       },
       child: Container(
-        padding: Spacing.all(16),
-        margin: Spacing.fromLTRB(24, 8, 24, 8),
+        padding: FxSpacing.all(16),
+        margin: FxSpacing.fromLTRB(24, 8, 24, 8),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: AppTheme.yhtTheme.bgLayer2,
+          color: customTheme.card,
           borderRadius: BorderRadius.all(Radius.circular(MySize.size8!)),
           boxShadow: const [],
-          border: Border.all(color: AppTheme.yhtTheme.bgLayer3, width: 1),
+          border: Border.all(color: customTheme.cardDark, width: 1),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              padding: Spacing.all(6),
-              decoration: BoxDecoration(color: iconBG, shape: BoxShape.circle),
+              padding: FxSpacing.all(6),
+              decoration: BoxDecoration(
+                  color: iconColor.withAlpha(80), shape: BoxShape.circle),
               child: Icon(
                 iconData,
                 color: iconColor,
@@ -171,26 +154,20 @@ class HistoryScreen extends GetView<HistoryController> {
             ),
             Expanded(
               child: Container(
-                margin: Spacing.left(16),
+                margin: FxSpacing.left(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
+                    FxText.b1(
                       subject!,
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText1,
-                          color: AppTheme.yhtTheme.onBgLayer2,
-                          fontWeight: 600),
+                      fontWeight: 600,
                     ),
                     Container(
-                      margin: Spacing.top(2),
-                      child: Text(
+                      margin: FxSpacing.top(2),
+                      child: FxText.caption(
                         task!,
-                        style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.caption,
-                          color: AppTheme.yhtTheme.onBgLayer2Muted,
-                          fontWeight: 600,
-                        ),
+                        fontWeight: 600,
+                        muted: true,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -201,23 +178,20 @@ class HistoryScreen extends GetView<HistoryController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Text(
+                FxText.caption(
                   submissionDate ?? '',
-                  style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
-                      fontSize: 12,
-                      letterSpacing: 0.2,
-                      color: AppTheme.yhtTheme.onBgLayer2Muted,
-                      fontWeight: 600),
+                  fontSize: 12,
+                  letterSpacing: 0.2,
+                  muted: true,
+                  fontWeight: 600,
                 ),
                 Container(
-                  margin: Spacing.top(2),
-                  child: Text(
+                  margin: FxSpacing.top(2),
+                  child: FxText.b2(
                     statusText,
-                    style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.bodyText2,
-                        color: statusColor,
-                        letterSpacing: 0,
-                        fontWeight: status == 3 ? 600 : 500),
+                    color: statusColor,
+                    letterSpacing: 0,
+                    fontWeight: status == 3 ? 600 : 500,
                   ),
                 ),
               ],
@@ -229,44 +203,41 @@ class HistoryScreen extends GetView<HistoryController> {
   }
 
   Widget _buildSkeletonLoader() {
-    return Container(
-      margin: Spacing.top(8),
-      child: SkeletonLoader(
-        builder: Container(
-          padding: Spacing.all(16),
-          margin: Spacing.fromLTRB(24, 8, 24, 8),
-          child: Row(
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: AppTheme.yhtTheme.bgLayer2,
-                radius: MySize.size16,
+    return SkeletonLoader(
+      builder: Container(
+        padding: FxSpacing.all(16),
+        margin: FxSpacing.fromLTRB(24, 8, 24, 8),
+        child: Row(
+          children: <Widget>[
+            CircleAvatar(
+              backgroundColor: customTheme.shimmerBaseColor,
+              radius: MySize.size16,
+            ),
+            SizedBox(width: MySize.size16!),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    height: 10,
+                    color: customTheme.shimmerHighlightColor,
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    height: 12,
+                    color: customTheme.shimmerHighlightColor,
+                  ),
+                ],
               ),
-              SizedBox(width: MySize.size16!),
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: double.infinity,
-                      height: 10,
-                      color: AppTheme.yhtTheme.bgLayer2,
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      width: double.infinity,
-                      height: 12,
-                      color: AppTheme.yhtTheme.bgLayer2,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-        items: 20,
-        period: const Duration(seconds: 2),
-        highlightColor: AppTheme.yhtTheme.primary,
-        direction: SkeletonDirection.ltr,
       ),
+      items: 20,
+      period: const Duration(seconds: 2),
+      highlightColor: customTheme.shimmerBaseColor,
+      direction: SkeletonDirection.ltr,
     );
   }
 
@@ -277,30 +248,29 @@ class HistoryScreen extends GetView<HistoryController> {
         Lottie.asset("assets/lotties/629-empty-box.json"),
         Container(
           margin: EdgeInsets.only(top: MySize.size24!),
-          child: Text(
+          child: FxText.sh1(
             "Gösterilecek alarm bulunamadı!",
-            style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
-                color: AppTheme.theme.colorScheme.onBackground,
-                fontWeight: 600,
-                letterSpacing: 0),
+            fontWeight: 600,
+            letterSpacing: 0,
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(top: MySize.size24!),
-          child: ElevatedButton.icon(
-              style: ButtonStyle(
-                  padding: MaterialStateProperty.all(Spacing.xy(16, 0))),
-              onPressed: () {
-                //controller.getNotifications();
-              },
-              icon: const Icon(MdiIcons.plus),
-              label: Text("Alarm oluştur",
-                  style: AppTheme.getTextStyle(
-                      AppTheme.theme.textTheme.bodyText2,
-                      fontWeight: 600,
-                      color: AppTheme.theme.colorScheme.onPrimary,
-                      letterSpacing: 0.5))),
-        )
+        FxSpacing.height(24),
+        FxButton(
+          borderRadiusAll: 4,
+          onPressed: () {},
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(MdiIcons.plus),
+              FxText.b2(
+                "Alarm oluştur",
+                fontWeight: 600,
+                color: theme.colorScheme.onPrimary,
+                letterSpacing: 0.5,
+              )
+            ],
+          ),
+        ),
       ],
     );
   }

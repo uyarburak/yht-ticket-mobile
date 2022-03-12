@@ -5,6 +5,8 @@ part of 'app_pages.dart';
 abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
 
+  static const INTRO = _Paths.INTRO;
+
   static const LOGIN = _Paths.LOGIN;
   static String LOGIN_THEN(String afterSuccessfulLogin) =>
       '$LOGIN?then=${Uri.encodeQueryComponent(afterSuccessfulLogin)}';
@@ -24,6 +26,8 @@ abstract class Routes {
 
 abstract class _Paths {
   static const SPLASH = '/splash';
+
+  static const INTRO = '/intro';
 
   static const LOGIN = '/login';
   static const FORGOT_PASSWORD = "/forgot-password";

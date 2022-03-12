@@ -54,18 +54,6 @@ class PopularDestinationsGridview extends StatelessWidget {
                 name: 'Eskişehir',
                 displayName: 'Eskişehir',
               ),
-              StationInfo(
-                name: 'Bozüyük YHT',
-                displayName: 'Bozüyük YHT',
-              ),
-              StationInfo(
-                name: 'Bilecik YHT',
-                displayName: 'Bilecik YHT',
-              ),
-              StationInfo(
-                name: 'Arifiye',
-                displayName: 'Arifiye',
-              ),
             ],
           ),
         ),
@@ -197,7 +185,7 @@ class PopularDestinationsGridview extends StatelessWidget {
         color: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-              color: customTheme.card,
+              color: theme.backgroundColor,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(MySize.size16!),
                   topRight: Radius.circular(MySize.size16!))),

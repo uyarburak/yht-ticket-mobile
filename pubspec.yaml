@@ -53,6 +53,7 @@ dependencies:
   snapping_sheet: ^3.1.0
   signalr_core: ^1.1.1
   flutter_svg: ^1.0.3
+  flutter_feather_icons: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:

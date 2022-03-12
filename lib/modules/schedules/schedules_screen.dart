@@ -4,12 +4,18 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/theme/text_style.dart';
+import 'package:yht_ticket/widgets/spacing.dart';
+import 'package:yht_ticket/widgets/text.dart';
 
 import 'schedules_controller.dart';
 
 class SchedulesScreen extends GetView<SchedulesController> {
-  const SchedulesScreen({Key? key}) : super(key: key);
+  SchedulesScreen({Key? key}) : super(key: key);
+
+  final theme = AppTheme.theme;
+  final customTheme = AppTheme.customTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -17,35 +23,27 @@ class SchedulesScreen extends GetView<SchedulesController> {
       () => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            elevation: 0,
-            backgroundColor: AppTheme.yhtTheme.bgLayer2,
+            elevation: 0.2,
             centerTitle: true,
             leading: InkWell(
-              onTap: Get.back,
-              child: Icon(
+              onTap: () {
+                Get.back();
+              },
+              child: const Icon(
                 MdiIcons.chevronLeft,
-                color: AppTheme.yhtTheme.onBgLayer2,
               ),
             ),
-            title: Text(
-              '${controller.departure} - ${controller.destination}',
-              style: AppTheme.getTextStyle(AppTheme.theme.textTheme.headline6,
-                  color: AppTheme.yhtTheme.onBgLayer2, fontWeight: 600),
-            ),
+            title: FxText.sh1(
+                '${controller.departure} - ${controller.destination}',
+                fontWeight: 600),
             actions: [
               GestureDetector(
                 onTap: controller.swapStations,
-                child: Icon(
-                  MdiIcons.swapHorizontal,
-                  color: AppTheme.yhtTheme.onBgLayer2Muted,
-                ),
+                child: const Icon(MdiIcons.swapHorizontal),
               ),
-              SizedBox(
-                width: MySize.size24,
-              ),
+              FxSpacing.width(24),
             ],
           ),
-          backgroundColor: AppTheme.yhtTheme.bgLayer1,
           body: Column(
             children: [
               Expanded(
@@ -53,105 +51,101 @@ class SchedulesScreen extends GetView<SchedulesController> {
                   padding: Spacing.fromLTRB(24, 8, 24, 0),
                   children: [
                     Container(
-                      margin: Spacing.top(12),
+                      margin: FxSpacing.top(12),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: controller.days
-                              .map(
-                                (date) => singleDateWidget(date),
-                              )
-                              .toList()),
+                          children: [
+                            ...controller.days
+                                .map(
+                                  (date) => singleDateWidget(date),
+                                )
+                                .toList(),
+                            _buildDateSelector(),
+                          ]),
                     ),
                     Container(
                       margin: Spacing.top(24),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          FxText.caption(
                             "SEFERLER",
-                            style: AppTheme.getTextStyle(
-                                AppTheme.theme.textTheme.caption,
-                                color: AppTheme.yhtTheme.onBgLayer1Muted,
-                                fontWeight: 700),
+                            fontWeight: 700,
+                            muted: true,
                           ),
-                          Text(
+                          FxText.caption(
                             DateFormat('d MMMM EEEE', 'tr_TR')
                                 .format(controller.selectedDate.value),
-                            style: AppTheme.getTextStyle(
-                                AppTheme.theme.textTheme.caption,
-                                color: AppTheme.yhtTheme.onBgLayer1Muted,
-                                muted: true,
-                                fontWeight: 500),
+                            muted: true,
+                            fontWeight: 500,
                           ),
                         ],
                       ),
                     ),
                     _buildSchedules(),
-                    const SizedBox(
-                      height: 5,
-                    ),
                   ],
                 ),
               ),
               controller.selectedSchedules.isNotEmpty
                   ? Container(
-                      color: AppTheme.yhtTheme.bgLayer2,
-                      padding: Spacing.fromLTRB(24, 16, 24, 16),
+                      color: customTheme.card,
+                      margin: FxSpacing.top(4),
+                      padding: FxSpacing.xy(24, 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           RichText(
-                            text: TextSpan(children: <TextSpan>[
-                              TextSpan(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
                                   text: controller.selectedSchedules.length
                                       .toString(),
-                                  style: AppTheme.getTextStyle(
-                                      AppTheme.theme.textTheme.bodyText1,
-                                      fontWeight: 700,
-                                      letterSpacing: 0,
-                                      color: AppTheme.yhtTheme.primary)),
-                              TextSpan(
+                                  style: FxTextStyle.b1(
+                                    fontWeight: 800,
+                                    letterSpacing: 1,
+                                    color: theme.primaryColor,
+                                  ),
+                                ),
+                                TextSpan(
                                   text: " sefer seçildi",
-                                  style: AppTheme.getTextStyle(
-                                    AppTheme.theme.textTheme.caption,
+                                  style: FxTextStyle.caption(
                                     fontWeight: 600,
                                     letterSpacing: 0,
-                                    color: AppTheme.yhtTheme.onBgLayer2,
-                                  )),
-                            ]),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           InkWell(
                             onTap: controller.createAlerts,
                             child: Container(
                               padding: Spacing.all(8),
                               decoration: BoxDecoration(
-                                  color: AppTheme.yhtTheme.primary,
+                                  color: theme.primaryColor,
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(MySize.size40!))),
                               child: Row(
                                 children: [
                                   Container(
                                     margin: Spacing.left(12),
-                                    child: Text(
+                                    child: FxText.caption(
                                       "TAMAM".toUpperCase(),
-                                      style: AppTheme.getTextStyle(
-                                          AppTheme.theme.textTheme.caption,
-                                          fontSize: 12,
-                                          letterSpacing: 0.7,
-                                          color: AppTheme.yhtTheme.onPrimary,
-                                          fontWeight: 600),
+                                      fontSize: 12,
+                                      letterSpacing: 0.7,
+                                      color: theme.colorScheme.onPrimary,
+                                      fontWeight: 600,
                                     ),
                                   ),
                                   Container(
                                     margin: Spacing.left(16),
                                     padding: Spacing.all(4),
                                     decoration: BoxDecoration(
-                                        color: AppTheme.yhtTheme.onPrimary,
+                                        color: theme.colorScheme.onPrimary,
                                         shape: BoxShape.circle),
                                     child: Icon(
                                       MdiIcons.chevronRight,
                                       size: MySize.size20,
-                                      color: AppTheme.yhtTheme.primary,
+                                      color: theme.colorScheme.primary,
                                     ),
                                   )
                                 ],
@@ -162,57 +156,50 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       ),
                     )
                   : Container(
-                      color: AppTheme.yhtTheme.bgLayer2,
-                      padding: Spacing.fromLTRB(24, 16, 24, 16),
+                      color: customTheme.card,
+                      margin: FxSpacing.top(4),
+                      padding: FxSpacing.xy(24, 16),
                       child: Row(
                         children: [
                           Icon(
                             MdiIcons.information,
-                            color: AppTheme.yhtTheme.onBgLayer2Muted,
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(
+                            child: FxText.caption(
                               "Sefer seçiniz",
-                              style: AppTheme.getTextStyle(
-                                AppTheme.theme.textTheme.caption,
-                                fontWeight: 600,
-                                letterSpacing: 0,
-                                color: AppTheme.yhtTheme.onBgLayer2Muted,
-                              ),
+                              fontWeight: 600,
+                              letterSpacing: 0,
+                              muted: true,
                             ),
                           ),
                           Container(
                             padding: Spacing.all(8),
                             decoration: BoxDecoration(
-                                color: AppTheme.yhtTheme.bgLayer3,
+                                color: customTheme.cardDark,
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(MySize.size40!))),
                             child: Row(
                               children: [
                                 Container(
                                   margin: Spacing.left(12),
-                                  child: Text(
+                                  child: FxText.caption(
                                     "TAMAM".toUpperCase(),
-                                    style: AppTheme.getTextStyle(
-                                        AppTheme.theme.textTheme.caption,
-                                        fontSize: 12,
-                                        letterSpacing: 0.7,
-                                        color:
-                                            AppTheme.yhtTheme.onBgLayer3Muted,
-                                        fontWeight: 600),
+                                    fontSize: 12,
+                                    letterSpacing: 0.7,
+                                    muted: true,
+                                    fontWeight: 600,
                                   ),
                                 ),
                                 Container(
                                   margin: Spacing.left(16),
                                   padding: Spacing.all(4),
                                   decoration: BoxDecoration(
-                                      color: AppTheme.yhtTheme.bgLayer2,
+                                      color: customTheme.card,
                                       shape: BoxShape.circle),
                                   child: Icon(
                                     MdiIcons.chevronRight,
                                     size: MySize.size20,
-                                    color: AppTheme.yhtTheme.onBgLayer2Muted,
                                   ),
                                 )
                               ],
@@ -234,17 +221,16 @@ class SchedulesScreen extends GetView<SchedulesController> {
         width: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(MySize.size6!)),
-          color: AppTheme.yhtTheme.primary,
+          color: theme.primaryColor,
         ),
         padding: Spacing.fromLTRB(0, 8, 0, 14),
         child: Column(
           children: [
-            Text(
+            FxText.caption(
               DateFormat('dd\nE', 'tr-TR').format(date),
-              style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
-                  fontWeight: 600,
-                  color: AppTheme.yhtTheme.onPrimary,
-                  height: 1.9),
+              fontWeight: 600,
+              color: theme.colorScheme.onPrimary,
+              height: 1.9,
               textAlign: TextAlign.center,
             ),
             Container(
@@ -252,7 +238,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
               height: MySize.size8,
               width: MySize.size8,
               decoration: BoxDecoration(
-                  color: AppTheme.yhtTheme.onPrimary, shape: BoxShape.circle),
+                  color: theme.colorScheme.onPrimary, shape: BoxShape.circle),
             )
           ],
         ),
@@ -266,21 +252,42 @@ class SchedulesScreen extends GetView<SchedulesController> {
         width: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(MySize.size6!)),
-          color: AppTheme.yhtTheme.bgLayer2,
+          color: customTheme.card,
         ),
         padding: Spacing.fromLTRB(0, 8, 0, 14),
-        child: Column(
-          children: [
-            Text(
-              DateFormat('dd\nE', 'tr-TR').format(date),
-              style: AppTheme.getTextStyle(AppTheme.theme.textTheme.caption,
-                  fontWeight: 600,
-                  color: AppTheme.yhtTheme.onBgLayer2,
-                  height: 1.9),
-              textAlign: TextAlign.center,
-            )
-          ],
+        child: FxText.caption(
+          DateFormat('dd\nE', 'tr-TR').format(date),
+          fontWeight: 600,
+          height: 1.9,
+          textAlign: TextAlign.center,
         ),
+      ),
+    );
+  }
+
+  Widget _buildDateSelector() {
+    return InkWell(
+      onTap: () async {
+        var date = await showDatePicker(
+          context: Get.context!,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime.now().add(
+            Duration(days: 60),
+          ),
+        );
+
+        if (date != null) controller.setSelectedDate(date);
+      },
+      child: Container(
+        width: 50,
+        height: 70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size6!)),
+          color: customTheme.card,
+        ),
+        padding: Spacing.fromLTRB(0, 8, 0, 14),
+        child: Icon(MdiIcons.calendar),
       ),
     );
   }
@@ -294,7 +301,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
         margin: Spacing.top(16),
         padding: Spacing.vertical(16),
         decoration: BoxDecoration(
-          color: AppTheme.yhtTheme.bgLayer3,
+          color: customTheme.card,
           borderRadius: BorderRadius.all(Radius.circular(MySize.size16!)),
         ),
         child: Column(
@@ -306,12 +313,10 @@ class SchedulesScreen extends GetView<SchedulesController> {
             ),
             Container(
               margin: EdgeInsets.only(top: MySize.size24!),
-              child: Text(
+              child: FxText.sh1(
                 "Sefer bulunamadı :(",
-                style: AppTheme.getTextStyle(AppTheme.theme.textTheme.subtitle1,
-                    color: AppTheme.yhtTheme.onBgLayer3,
-                    fontWeight: 600,
-                    letterSpacing: 0),
+                fontWeight: 600,
+                letterSpacing: 0,
               ),
             ),
           ],
@@ -321,7 +326,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
     return Container(
       margin: Spacing.top(16),
       decoration: BoxDecoration(
-        color: AppTheme.yhtTheme.bgLayer3,
+        color: customTheme.card,
         borderRadius: BorderRadius.all(Radius.circular(MySize.size16!)),
       ),
       child: Column(
@@ -344,7 +349,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       trailing: Checkbox(
                         value: e.selected,
                         fillColor: MaterialStateColor.resolveWith(
-                            (states) => AppTheme.yhtTheme.primary),
+                            (states) => theme.primaryColor),
                         onChanged: (value) {
                           e.selected = value!;
                           if (item.wagonTypes.every(
@@ -360,17 +365,14 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       dense: true,
                       leading: Icon(
                         MdiIcons.train,
-                        color: AppTheme.yhtTheme.onBgLayer3Muted,
                       ),
-                      title: Text(e.name,
-                          style: AppTheme.getTextStyle(
-                              AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.yhtTheme.onBgLayer3)),
-                      subtitle: Text(
-                          '${e.price.toStringAsFixed(2)} TL (${e.wagons.length} vagon)',
-                          style: AppTheme.getTextStyle(
-                              AppTheme.theme.textTheme.bodyText2,
-                              color: AppTheme.yhtTheme.onBgLayer3Muted)),
+                      title: FxText.b2(
+                        e.name,
+                      ),
+                      subtitle: FxText.b2(
+                        '${e.price.toStringAsFixed(2)} TL (${e.wagons.length} vagon)',
+                        muted: true,
+                      ),
                     ))
                 .toList();
           }
@@ -379,13 +381,12 @@ class SchedulesScreen extends GetView<SchedulesController> {
               i > 0
                   ? Divider(
                       height: 0.3,
-                      color: AppTheme.yhtTheme.bgLayer4,
                     )
                   : const SizedBox(),
               CheckboxListTile(
                 value: item.selected,
-                activeColor: MaterialStateColor.resolveWith(
-                    (states) => AppTheme.yhtTheme.primary),
+                // activeColor: MaterialStateColor.resolveWith(
+                //     (states) => theme.colorScheme.secondary),
                 onChanged: (value) {
                   item.selected = value!;
                   for (var element in item.wagonTypes) {
@@ -393,15 +394,14 @@ class SchedulesScreen extends GetView<SchedulesController> {
                   }
                   controller.schedules.value = controller.schedules.toList();
                 },
-                title: Text(
-                    "${DateFormat.Hm().format(item.startDate)} - ${DateFormat.Hm().format(item.endDate)}",
-                    style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.bodyText1,
-                        color: AppTheme.yhtTheme.onBgLayer3)),
-                subtitle: Text(sDuration,
-                    style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.bodyText2,
-                        color: AppTheme.yhtTheme.onBgLayer3)),
+                title: FxText.b1(
+                  "${DateFormat.Hm().format(item.startDate)} - ${DateFormat.Hm().format(item.endDate)}",
+                  fontWeight: 600,
+                ),
+                subtitle: FxText.b2(
+                  sDuration,
+                  muted: true,
+                ),
               ),
               ...wagons,
             ],

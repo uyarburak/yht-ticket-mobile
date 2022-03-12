@@ -6,6 +6,7 @@ import 'package:yht_ticket/modules/forgot_password/forgot_password_screen.dart';
 import 'package:yht_ticket/modules/history/history_screen.dart';
 import 'package:yht_ticket/modules/home/home_binding.dart';
 import 'package:yht_ticket/modules/home/home_view.dart';
+import 'package:yht_ticket/modules/intro/intro_screen.dart';
 import 'package:yht_ticket/modules/login/login_binding.dart';
 import 'package:yht_ticket/modules/login/login_screen.dart';
 import 'package:yht_ticket/modules/notifications/notifications_binding.dart';
@@ -27,6 +28,10 @@ class AppPages {
       name: Routes.SPLASH,
       page: () => const SplashScreen(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: Routes.INTRO,
+      page: () => const IntroScreen(),
     ),
     GetPage(
       name: Routes.LOGIN,
@@ -62,10 +67,12 @@ class AppPages {
       name: Routes.NOTIFICATIONS,
       page: () => NotificationsScreen(),
       binding: NotificationsBinding(),
+      popGesture: true,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: Routes.SCHEDULES,
-      page: () => const SchedulesScreen(),
+      page: () => SchedulesScreen(),
       binding: SchedulesBinding(),
     ),
     GetPage(

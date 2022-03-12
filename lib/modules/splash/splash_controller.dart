@@ -10,7 +10,7 @@ class SplashController extends GetxController {
     if (AuthService.to.isLoggedInValue) {
       Get.offAndToNamed(Routes.DASHBOARD);
     } else {
-      Get.offAndToNamed(Routes.LOGIN);
+      Get.offAndToNamed(Routes.INTRO);
     }
   }
 }

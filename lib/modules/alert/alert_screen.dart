@@ -1,50 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:yht_ticket/models/models.dart';
-import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/widgets/spacing.dart';
+import 'package:yht_ticket/widgets/text.dart';
 
 import 'alert_controller.dart';
 
 class AlertScreen extends GetView<AlertController> {
   const AlertScreen({Key? key}) : super(key: key);
 
+  static var theme = AppTheme.theme;
+  static var customTheme = AppTheme.customTheme;
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          backgroundColor: AppTheme.yhtTheme.bgLayer2,
+          elevation: 0.2,
           centerTitle: true,
           leading: InkWell(
-            onTap: Get.back,
-            child: Icon(
+            onTap: () {
+              Get.back();
+            },
+            child: const Icon(
               MdiIcons.chevronLeft,
-              color: AppTheme.yhtTheme.onBgLayer1,
             ),
           ),
-          title: Text(
-            '${controller.alert.value?.departureStationName} - ${controller.alert.value?.destinationStationName}',
-            style: AppTheme.getTextStyle(
-              AppTheme.theme.textTheme.headline6,
-              color: AppTheme.yhtTheme.onBgLayer1,
-              fontWeight: 600,
-            ),
+          title: Column(
+            children: [
+              FxText.sh1(
+                '${controller.alert.value?.departureStationName} - ${controller.alert.value?.destinationStationName}',
+                fontWeight: 600,
+              ),
+              controller.alert.value != null
+                  ? FxText.sh2(
+                      '${DateFormat('dd MMMM EEEE, HH:mm', 'tr_TR').format(controller.alert.value!.startDate)}',
+                      muted: true,
+                      fontSize: 13,
+                    )
+                  : SizedBox(),
+            ],
           ),
           actions: [
             GestureDetector(
               onTap: controller.onInfoButtonClicked,
               child: Icon(
                 MdiIcons.information,
-                color: AppTheme.yhtTheme.onBgLayer1Muted,
+                color: theme.colorScheme.onBackground,
               ),
             ),
-            SizedBox(
-              width: MySize.size24,
-            ),
+            FxSpacing.width(24),
           ],
         ),
         body: SnappingSheet(
@@ -66,7 +76,7 @@ class AlertScreen extends GetView<AlertController> {
               snappingDuration: Duration(milliseconds: 600),
             ),
             SnappingPosition.pixels(
-              positionPixels: MediaQuery.of(context).size.height - 110,
+              positionPixels: Get.size.height - 56 - Get.statusBarHeight,
               snappingCurve: Curves.ease,
               snappingDuration: const Duration(milliseconds: 500),
             ),
@@ -95,7 +105,7 @@ class AlertScreen extends GetView<AlertController> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppTheme.yhtTheme.bgLayer3,
+            color: customTheme.card,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(14),
               topRight: Radius.circular(14),
@@ -103,19 +113,16 @@ class AlertScreen extends GetView<AlertController> {
           ),
           child: Row(
             children: [
-              Text(
+              FxText.sh1(
                 'OLAYLAR',
-                style: AppTheme.getTextStyle(
-                  AppTheme.theme.textTheme.subtitle1,
-                  color: AppTheme.yhtTheme.onBgLayer3Muted,
-                  fontWeight: 600,
-                ),
+                fontWeight: 600,
+                xMuted: true,
               ),
               const Spacer(),
               InkWell(
                 child: Icon(
                   Icons.delete,
-                  color: AppTheme.yhtTheme.onBgLayer3Muted,
+                  color: theme.colorScheme.onBackground.withAlpha(120),
                 ),
                 onTap: () {
                   //_controller.logs.clear();
@@ -126,11 +133,11 @@ class AlertScreen extends GetView<AlertController> {
         ),
         Positioned(
           top: -2,
-          left: Get.width / 2 - 16,
+          left: Get.width / 2 - 15,
           child: Icon(
             Icons.horizontal_rule_rounded,
-            color: AppTheme.yhtTheme.onBgLayer3Muted,
             size: 30,
+            color: theme.colorScheme.onBackground.withAlpha(120),
           ),
         ),
       ],
@@ -139,21 +146,16 @@ class AlertScreen extends GetView<AlertController> {
 
   Widget _buildSheetBelow() {
     return Container(
-      color: AppTheme.yhtTheme.bgLayer3,
+      color: customTheme.card,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: controller.alert.value?.notifications.isEmpty ?? true
           ? ListTile(
               contentPadding: EdgeInsets.zero,
               horizontalTitleGap: 0,
-              leading: Icon(
-                Icons.info,
-                color: AppTheme.yhtTheme.onBgLayer3Muted,
-              ),
-              title: Text(
+              leading: Icon(Icons.info),
+              title: FxText.b3(
                 'Henüz yukarıdaki vagonlarda bir değişim olmadı. Koltuklarda bir değişim olduğunda burada göreceksiniz.',
-                style: TextStyle(
-                  color: AppTheme.yhtTheme.onBgLayer3Muted,
-                ),
+                muted: true,
               ),
             )
           : ListView.builder(
@@ -171,21 +173,13 @@ class AlertScreen extends GetView<AlertController> {
                                   ? Colors.blue.shade300
                                   : Colors.pink.shade300),
                       const SizedBox(width: 8),
-                      Text(
+                      FxText.b2(
                         item.toString(),
-                        style: TextStyle(
-                          color: AppTheme.yhtTheme.onBgLayer3,
-                          fontSize: 15,
-                        ),
                       ),
                       const Spacer(),
-                      Text(
+                      FxText.overline(
                         '${item.createdAt.hour.toString().padLeft(2, '0')}:${item.createdAt.minute.toString().padLeft(2, '0')}',
-                        style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.overline,
-                          color: AppTheme.yhtTheme.onBgLayer3Muted,
-                          fontWeight: 500,
-                        ),
+                        fontWeight: 500,
                       ),
                     ],
                   ),
@@ -198,17 +192,12 @@ class AlertScreen extends GetView<AlertController> {
   Container _buildGridView() {
     return Container(
       padding: const EdgeInsets.all(16),
-      color: AppTheme.yhtTheme.bgLayer1,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          FxText.sh1(
             'BOŞ KOLTUKLAR',
-            style: AppTheme.getTextStyle(
-              AppTheme.theme.textTheme.subtitle1,
-              color: AppTheme.yhtTheme.onBgLayer1,
-              fontWeight: 600,
-            ),
+            fontWeight: 600,
           ),
           const SizedBox(height: 16),
           controller.alert.value != null
@@ -233,32 +222,33 @@ class AlertScreen extends GetView<AlertController> {
   }
 
   Widget _buildWagon(ScheduleWagon wagon) {
+    var hasEmptySeats = (wagon.emptyCount ?? 0) > 0;
     return Container(
       width: ((Get.width - 32 - 16) / 3).floorToDouble(),
       //height: 30,
       decoration: BoxDecoration(
-        color: AppTheme.yhtTheme.bgLayer2,
+        color: hasEmptySeats ? theme.primaryColor : customTheme.card,
         borderRadius: BorderRadius.circular(12),
+        border: hasEmptySeats
+            ? null
+            : Border.all(
+                color: customTheme.borderDark,
+              ),
       ),
       child: Column(
         children: [
-          const SizedBox(height: 10),
-          Text(
+          FxSpacing.height(10),
+          FxText.h1(
             wagon.emptyCount.toString(),
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: AppTheme.yhtTheme.onBgLayer2,
-            ),
+            color: hasEmptySeats ? theme.colorScheme.onPrimary : null,
           ),
           //const Spacer(),
-          Text(
+          FxText.caption(
             '${wagon.wagon}. Vagon',
-            style: TextStyle(
-              color: AppTheme.yhtTheme.onBgLayer2Muted,
-            ),
+            muted: true,
+            color: hasEmptySeats ? theme.colorScheme.onPrimary : null,
           ),
-          const SizedBox(height: 10),
+          FxSpacing.height(10),
         ],
       ),
     );

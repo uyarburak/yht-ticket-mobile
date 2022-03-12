@@ -13,7 +13,7 @@ class SchedulesController extends GetxController {
     var now = DateTime.now();
     var today = DateTime(now.year, now.month, now.day);
     days.value =
-        List.generate(6, (index) => today.add(Duration(days: index))).toList();
+        List.generate(5, (index) => today.add(Duration(days: index))).toList();
 
     selectedDate = today.obs;
     departure = Get.parameters['departure']!.obs;

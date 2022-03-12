@@ -3,6 +3,8 @@ import 'package:yht_ticket/api/api.dart';
 import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/shared/utils/focus.dart';
 
+import 'widgets/search_schedule_bottom_sheet.dart';
+
 class DashboardController extends GetxController {
   final BaseApiRepository apiRepository;
   DashboardController({required this.apiRepository});
@@ -46,5 +48,9 @@ class DashboardController extends GetxController {
     } finally {
       loading.value = false;
     }
+  }
+
+  void onClickSearchScheduleButton() {
+    Get.bottomSheet(const SearchScheduleBottomSheet());
   }
 }

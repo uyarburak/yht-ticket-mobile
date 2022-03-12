@@ -31,10 +31,22 @@ class ActiveAlertsWidget extends StatelessWidget {
   }
 
   Widget _buildList(RxList<AlertResponse> alerts) {
+    var customTheme = AppTheme.customTheme;
+
     return Column(
       children: [
-        FxSpacing.height(24),
-        ...alerts.map((e) => _buildActiveAlert(alert: e)).toList(),
+        FxSpacing.height(16),
+        ...List.generate(alerts.length * 2, (index) {
+          if (index == alerts.length * 2 - 1) return FxSpacing.height(24);
+          if (index % 2 == 1) {
+            return Divider(
+              height: 0,
+              color: customTheme.borderDark,
+            );
+          }
+
+          return _buildActiveAlert(alert: alerts[index ~/ 2]);
+        }).toList(),
       ],
     );
   }
@@ -42,52 +54,55 @@ class ActiveAlertsWidget extends StatelessWidget {
   Widget _buildEmptyList() {
     var theme = AppTheme.theme;
     var customTheme = AppTheme.customTheme;
-    return Container(
-      margin: Spacing.y(24),
-      padding: Spacing.xy(16, 24),
-      decoration: BoxDecoration(
-        color: theme.primaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(MySize.size12!)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            padding: FxSpacing.all(8),
-            decoration: const BoxDecoration(
-                color: Colors.white24,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-            child: const Icon(
-              MdiIcons.alarmPlus,
-              color: Colors.white,
+    return GestureDetector(
+      onTap: _dashboardController.onClickSearchScheduleButton,
+      child: Container(
+        margin: Spacing.xy(20, 16),
+        padding: Spacing.xy(16, 24),
+        decoration: BoxDecoration(
+          color: theme.primaryColor,
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size12!)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: FxSpacing.all(8),
+              decoration: const BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              child: const Icon(
+                MdiIcons.alarmPlus,
+                color: Colors.white,
+              ),
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FxText.b1(
-                "Yeni alarm oluştur!",
-                color: theme.colorScheme.onPrimary,
-                fontWeight: 600,
-              ),
-              Container(
-                margin: Spacing.top(6),
-                width: MySize.safeWidth! * 0.6,
-                child: FxText.b2(
-                  "Koltuk boşaldığında haberin olsun",
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FxText.b1(
+                  "Yeni alarm oluştur!",
                   color: theme.colorScheme.onPrimary,
-                  fontWeight: 500,
-                  muted: true,
+                  fontWeight: 600,
                 ),
-              ),
-            ],
-          ),
-          Icon(
-            MdiIcons.chevronRight,
-            color: theme.colorScheme.onPrimary,
-            size: 20,
-          ),
-        ],
+                Container(
+                  margin: Spacing.top(6),
+                  width: MySize.safeWidth! * 0.6,
+                  child: FxText.b2(
+                    "Koltuk boşaldığında haberin olsun",
+                    color: theme.colorScheme.onPrimary,
+                    fontWeight: 500,
+                    muted: true,
+                  ),
+                ),
+              ],
+            ),
+            Icon(
+              MdiIcons.chevronRight,
+              color: theme.colorScheme.onPrimary,
+              size: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -122,7 +137,9 @@ class ActiveAlertsWidget extends StatelessWidget {
         Get.toNamed(Routes.ALERT_DETAILS(alert.id));
       },
       child: Container(
-        margin: Spacing.bottom(24),
+        //margin: Spacing.bottom(24),
+        padding: FxSpacing.xy(20, 16),
+        color: customTheme.card,
         child: Stack(
           children: [
             Row(
@@ -173,7 +190,7 @@ class ActiveAlertsWidget extends StatelessWidget {
                 ),
                 Icon(
                   MdiIcons.chevronRight,
-                  color: theme.primaryColor,
+                  color: theme.colorScheme.onBackground.withAlpha(120),
                 ),
               ],
             ),
@@ -183,11 +200,11 @@ class ActiveAlertsWidget extends StatelessWidget {
                     left: 25,
                     child: CircleAvatar(
                       maxRadius: 10,
-                      backgroundColor: Colors.red.shade400,
+                      backgroundColor: theme.colorScheme.secondary,
                       child: Center(
                         child: FxText.overline(
                           alert.unreadNotificationCount.toString(),
-                          color: Colors.white,
+                          color: theme.colorScheme.onSecondary,
                           fontWeight: 600,
                           fontSize: 11,
                         ),
