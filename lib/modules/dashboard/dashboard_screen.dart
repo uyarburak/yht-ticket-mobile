@@ -15,14 +15,11 @@ import 'widgets/notification_icon_button.dart';
 class DashboardScreen extends GetView<DashboardController> {
   DashboardScreen({Key? key}) : super(key: key);
 
-  late ThemeData theme;
-  late CustomTheme customTheme;
+  final ThemeData theme = AppTheme.theme;
+  final CustomTheme customTheme = AppTheme.customTheme;
 
   @override
   Widget build(BuildContext context) {
-    theme = AppTheme.theme;
-    customTheme = AppTheme.customTheme;
-
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
@@ -49,7 +46,7 @@ class DashboardScreen extends GetView<DashboardController> {
                         fontWeight: 400,
                         letterSpacing: 0,
                       ),
-                      FxText.h5(
+                      const FxText.h5(
                         "YHT Koltuk Alarmı",
                         fontWeight: 700,
                         letterSpacing: -0.3,
@@ -91,7 +88,7 @@ class DashboardScreen extends GetView<DashboardController> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    FxText.b1(
+                    const FxText.b1(
                       "Tren seferi ara...",
                       muted: true,
                       fontWeight: 500,
@@ -103,7 +100,7 @@ class DashboardScreen extends GetView<DashboardController> {
             FxSpacing.height(20),
             Padding(
               padding: FxSpacing.x(20),
-              child: FxText.t3(
+              child: const FxText.t3(
                 "ALARMLARIM",
                 fontWeight: 700,
                 muted: true,
@@ -112,7 +109,7 @@ class DashboardScreen extends GetView<DashboardController> {
             ActiveAlertsWidget(),
             Padding(
               padding: FxSpacing.x(20),
-              child: FxText.t3(
+              child: const FxText.t3(
                 "POPÜLER ŞEHİRLER",
                 fontWeight: 700,
                 muted: true,

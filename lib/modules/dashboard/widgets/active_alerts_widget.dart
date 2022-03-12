@@ -53,7 +53,6 @@ class ActiveAlertsWidget extends StatelessWidget {
 
   Widget _buildEmptyList() {
     var theme = AppTheme.theme;
-    var customTheme = AppTheme.customTheme;
     return GestureDetector(
       onTap: _dashboardController.onClickSearchScheduleButton,
       child: Container(
@@ -153,7 +152,8 @@ class ActiveAlertsWidget extends StatelessWidget {
                     padding: FxSpacing.all(8),
                     decoration: BoxDecoration(
                         color: theme.primaryColor.withAlpha(24),
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8))),
                     child: Icon(
                       MdiIcons.train,
                       color: theme.primaryColor,

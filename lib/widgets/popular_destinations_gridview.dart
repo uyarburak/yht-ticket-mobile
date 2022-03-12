@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/shared/utils/common_widget.dart';
 import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/widgets/text.dart';
@@ -179,7 +178,6 @@ class PopularDestinationsGridview extends StatelessWidget {
 
   void _showBottomSheet(List<StationInfo> stations) {
     var theme = AppTheme.theme;
-    var customTheme = AppTheme.customTheme;
     Get.bottomSheet(
       Container(
         color: Colors.transparent,

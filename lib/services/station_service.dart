@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turkish/turkish.dart';
@@ -51,13 +49,13 @@ class StationService extends GetxService {
     lastSearchedStations.insert(0, stationName);
 
     Get.find<SharedPreferences>().setStringList(
-        StorageConstants.lastSearchedStations, lastSearchedStations.value);
+        StorageConstants.lastSearchedStations, lastSearchedStations);
   }
 
   Future removeStationFromLastSearchedList(String stationName) async {
     lastSearchedStations.remove(stationName);
 
     Get.find<SharedPreferences>().setStringList(
-        StorageConstants.lastSearchedStations, lastSearchedStations.value);
+        StorageConstants.lastSearchedStations, lastSearchedStations);
   }
 }

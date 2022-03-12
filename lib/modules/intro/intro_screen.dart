@@ -13,7 +13,6 @@ class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = AppTheme.theme;
-    var customTheme = AppTheme.customTheme;
 
     return Scaffold(
       body: Column(
@@ -36,7 +35,7 @@ class IntroScreen extends StatelessWidget {
             color: theme.colorScheme.secondary,
           ),
           FxSpacing.height(20),
-          FxText.b2(
+          const FxText.b2(
             'Hemen alarm kur, koltuk boşaldığında haberin olsun!',
             xMuted: true,
             textAlign: TextAlign.center,

@@ -32,11 +32,11 @@ class _SearchScheduleBottomSheetState extends State<SearchScheduleBottomSheet> {
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16), topRight: Radius.circular(16))),
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              FxText.sh1("Sefer Arama", fontWeight: 700),
+              const FxText.sh1("Sefer Arama", fontWeight: 700),
               _buildSelectionInput(
                 "Biniş İstasyonu",
                 MdiIcons.locationExit,
@@ -66,7 +66,7 @@ class _SearchScheduleBottomSheetState extends State<SearchScheduleBottomSheet> {
                 destinationStation,
               ),
               Container(
-                margin: EdgeInsets.only(top: 16),
+                margin: const EdgeInsets.only(top: 16),
                 child: FxButton.block(
                   elevation: 0,
                   borderRadiusAll: 4,

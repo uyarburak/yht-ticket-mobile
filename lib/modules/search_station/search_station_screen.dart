@@ -13,8 +13,8 @@ import 'search_station_controller.dart';
 class SearchStationScreen extends GetView<SearchStationController> {
   SearchStationScreen({Key? key}) : super(key: key);
 
-  var theme = AppTheme.theme;
-  var customTheme = AppTheme.customTheme;
+  final theme = AppTheme.theme;
+  final customTheme = AppTheme.customTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +101,7 @@ class SearchStationScreen extends GetView<SearchStationController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              FxText.b2(
+                              const FxText.b2(
                                 "Son aradıklarınız",
                                 fontWeight: 700,
                                 muted: true,
@@ -220,91 +220,93 @@ class SearchStationScreen extends GetView<SearchStationController> {
       onTap: () => controller.onStationPressed(name),
       onLongPress: () {
         // TODO make this dialog a seperate widget.
-        Get.dialog(Dialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          child: Container(
-            padding: FxSpacing.all(20),
-            decoration: BoxDecoration(
-              color: theme.backgroundColor,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 10.0),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Center(
-                        child: FxText.h6("Geçmişten sil", fontWeight: 600),
-                      ),
-                    ),
-                    const Icon(Icons.history)
-                  ],
-                ),
-                const Divider(),
-                Container(
-                  margin: FxSpacing.only(top: 8),
-                  child: RichText(
-                    text: TextSpan(
-                        style: FxTextStyle.sh2(
-                            fontWeight: 600, letterSpacing: 0.2),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: "Geçmişinizden ",
-                          ),
-                          TextSpan(
-                              text: name,
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: theme.colorScheme.primary)),
-                          TextSpan(
-                              text:
-                                  " istasyonunu silmek istediğinizden emin misiniz?"),
-                        ]),
+        Get.dialog(
+          Dialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            child: Container(
+              padding: FxSpacing.all(20),
+              decoration: BoxDecoration(
+                color: theme.backgroundColor,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10.0,
+                    offset: Offset(0.0, 10.0),
                   ),
-                ),
-                Container(
-                    margin: FxSpacing.top(24),
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        FxButton.text(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: FxText.b2(
-                              "Vazgeç",
-                              fontWeight: 600,
-                              color: theme.colorScheme.primary,
-                            )),
-                        FxButton(
-                            backgroundColor: theme.colorScheme.primary,
-                            borderRadiusAll: 4,
-                            elevation: 0,
-                            onPressed: () {
-                              controller.onStationRemovedFromHistory(name);
-                              Get.back();
-                            },
-                            child: FxText.b2("Sil",
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: const [
+                      Expanded(
+                        child: Center(
+                          child: FxText.h6("Geçmişten sil", fontWeight: 600),
+                        ),
+                      ),
+                      Icon(Icons.history)
+                    ],
+                  ),
+                  const Divider(),
+                  Container(
+                    margin: FxSpacing.only(top: 8),
+                    child: RichText(
+                      text: TextSpan(
+                          style: FxTextStyle.sh2(
+                              fontWeight: 600, letterSpacing: 0.2),
+                          children: <TextSpan>[
+                            const TextSpan(
+                              text: "Geçmişinizden ",
+                            ),
+                            TextSpan(
+                                text: name,
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: theme.colorScheme.primary)),
+                            const TextSpan(
+                                text:
+                                    " istasyonunu silmek istediğinizden emin misiniz?"),
+                          ]),
+                    ),
+                  ),
+                  Container(
+                      margin: FxSpacing.top(24),
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          FxButton.text(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: FxText.b2(
+                                "Vazgeç",
                                 fontWeight: 600,
-                                color: theme.colorScheme.onPrimary)),
-                      ],
-                    )),
-              ],
+                                color: theme.colorScheme.primary,
+                              )),
+                          FxButton(
+                              backgroundColor: theme.colorScheme.primary,
+                              borderRadiusAll: 4,
+                              elevation: 0,
+                              onPressed: () {
+                                controller.onStationRemovedFromHistory(name);
+                                Get.back();
+                              },
+                              child: FxText.b2("Sil",
+                                  fontWeight: 600,
+                                  color: theme.colorScheme.onPrimary)),
+                        ],
+                      )),
+                ],
+              ),
             ),
           ),
-        ));
+        );
       },
       child: FxContainer(
         color: customTheme.card,

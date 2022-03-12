@@ -21,8 +21,8 @@ class NotificationsScreen extends GetView<NotificationsController> {
     timeago.setLocaleMessages('tr', timeago.TrMessages());
   }
 
-  var theme = AppTheme.theme;
-  var customTheme = AppTheme.customTheme;
+  final theme = AppTheme.theme;
+  final customTheme = AppTheme.customTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
             MdiIcons.chevronLeft,
           ),
         ),
-        title: FxText.sh1("Bildirimler", fontWeight: 600),
+        title: const FxText.sh1("Bildirimler", fontWeight: 600),
       ),
       body: Obx(
         () {
@@ -50,7 +50,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
                   Lottie.asset("assets/lotties/781-no-notifications.json"),
                   Container(
                     margin: EdgeInsets.only(top: MySize.size24!),
-                    child: FxText.sh2(
+                    child: const FxText.sh2(
                       "Gösterilecek bildirim bulunamadı!",
                       fontWeight: 600,
                       letterSpacing: 0,
@@ -84,34 +84,29 @@ class NotificationsScreen extends GetView<NotificationsController> {
             onRefresh: controller.getNotifications,
             color: theme.primaryColor,
             backgroundColor: customTheme.card,
-            child: Container(
-              //margin: Spacing.horizontal(MySize.size24!),
-              child: GroupListView(
-                sectionsCount: grouped.keys.length,
-                countOfItemInSection: (int section) {
-                  return grouped[grouped.keys.toList()[section]]!.length;
-                },
-                itemBuilder: (BuildContext context, IndexPath index) {
-                  return _buildNotification(grouped[
-                      grouped.keys.toList()[index.section]]![index.index]);
-                },
-                groupHeaderBuilder: (BuildContext context, int section) {
-                  return Container(
-                    margin: FxSpacing.y(12),
-                    padding: FxSpacing.x(24),
-                    child: FxText.b1(
-                      grouped.keys.toList()[section],
-                      fontWeight: 600,
-                      muted: true,
-                    ),
-                  );
-                },
-                separatorBuilder: (ctx, _) {
-                  return Divider(
-                    height: 0.5,
-                  );
-                },
-              ),
+            child: GroupListView(
+              sectionsCount: grouped.keys.length,
+              countOfItemInSection: (int section) {
+                return grouped[grouped.keys.toList()[section]]!.length;
+              },
+              itemBuilder: (BuildContext context, IndexPath index) {
+                return _buildNotification(grouped[
+                    grouped.keys.toList()[index.section]]![index.index]);
+              },
+              groupHeaderBuilder: (BuildContext context, int section) {
+                return Container(
+                  margin: FxSpacing.y(12),
+                  padding: FxSpacing.x(24),
+                  child: FxText.b1(
+                    grouped.keys.toList()[section],
+                    fontWeight: 600,
+                    muted: true,
+                  ),
+                );
+              },
+              separatorBuilder: (ctx, _) {
+                return const Divider(height: 0.5);
+              },
             ),
           );
         },

@@ -68,7 +68,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          FxText.caption(
+                          const FxText.caption(
                             "SEFERLER",
                             fontWeight: 700,
                             muted: true,
@@ -161,11 +161,11 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       padding: FxSpacing.xy(24, 16),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             MdiIcons.information,
                           ),
                           const SizedBox(width: 8),
-                          Expanded(
+                          const Expanded(
                             child: FxText.caption(
                               "Sefer seçiniz",
                               fontWeight: 600,
@@ -273,7 +273,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
           initialDate: DateTime.now(),
           firstDate: DateTime.now(),
           lastDate: DateTime.now().add(
-            Duration(days: 60),
+            const Duration(days: 60),
           ),
         );
 
@@ -287,7 +287,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
           color: customTheme.card,
         ),
         padding: Spacing.fromLTRB(0, 8, 0, 14),
-        child: Icon(MdiIcons.calendar),
+        child: const Icon(MdiIcons.calendar),
       ),
     );
   }
@@ -313,7 +313,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
             ),
             Container(
               margin: EdgeInsets.only(top: MySize.size24!),
-              child: FxText.sh1(
+              child: const FxText.sh1(
                 "Sefer bulunamadı :(",
                 fontWeight: 600,
                 letterSpacing: 0,
@@ -363,7 +363,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
                       horizontalTitleGap: 0,
                       contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                       dense: true,
-                      leading: Icon(
+                      leading: const Icon(
                         MdiIcons.train,
                       ),
                       title: FxText.b2(
@@ -379,7 +379,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
           return Column(
             children: [
               i > 0
-                  ? Divider(
+                  ? const Divider(
                       height: 0.3,
                     )
                   : const SizedBox(),

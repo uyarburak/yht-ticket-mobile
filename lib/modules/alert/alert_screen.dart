@@ -39,11 +39,12 @@ class AlertScreen extends GetView<AlertController> {
               ),
               controller.alert.value != null
                   ? FxText.sh2(
-                      '${DateFormat('dd MMMM EEEE, HH:mm', 'tr_TR').format(controller.alert.value!.startDate)}',
+                      DateFormat('dd MMMM EEEE, HH:mm', 'tr_TR')
+                          .format(controller.alert.value!.startDate),
                       muted: true,
                       fontSize: 13,
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ],
           ),
           actions: [
@@ -113,7 +114,7 @@ class AlertScreen extends GetView<AlertController> {
           ),
           child: Row(
             children: [
-              FxText.sh1(
+              const FxText.sh1(
                 'OLAYLAR',
                 fontWeight: 600,
                 xMuted: true,
@@ -149,7 +150,7 @@ class AlertScreen extends GetView<AlertController> {
       color: customTheme.card,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: controller.alert.value?.notifications.isEmpty ?? true
-          ? ListTile(
+          ? const ListTile(
               contentPadding: EdgeInsets.zero,
               horizontalTitleGap: 0,
               leading: Icon(Icons.info),
@@ -195,7 +196,7 @@ class AlertScreen extends GetView<AlertController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FxText.sh1(
+          const FxText.sh1(
             'BOŞ KOLTUKLAR',
             fontWeight: 600,
           ),

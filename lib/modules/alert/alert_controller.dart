@@ -4,7 +4,6 @@ import 'package:yht_ticket/api/api.dart';
 import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/modules/alert/widgets/alert_info_dialog.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/shared/utils/common_widget.dart';
 
 class AlertController extends GetxController {
   final String alertId;
@@ -30,10 +29,11 @@ class AlertController extends GetxController {
   connectToHub() async {
     hubConnection = HubConnectionBuilder()
         .withUrl(
-            'http://yhtbilet.link:5001/alert-seats-change',
-            HttpConnectionOptions(
-              logging: (level, message) => print(message),
-            ))
+          'http://yhtbilet.link:5001/alert-seats-change',
+          HttpConnectionOptions(
+            logging: (level, message) => print(message),
+          ),
+        )
         .build();
 
     await hubConnection.start();

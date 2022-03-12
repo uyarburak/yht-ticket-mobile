@@ -302,7 +302,6 @@ class FakeApiRepository implements BaseApiRepository {
 
   @override
   Future<bool?> cancelAlert(String alertId) {
-    // TODO: implement cancelAlert
     throw UnimplementedError();
   }
 }

@@ -167,7 +167,7 @@ class FxTextStyle {
       double? height,
       double wordSpacing = 0,
       double? fontSize}) {
-    double? finalFontSize = fontSize != null ? fontSize : textStyle!.fontSize;
+    double? finalFontSize = fontSize ?? textStyle!.fontSize;
 
     Color? finalColor;
     if (color == null) {

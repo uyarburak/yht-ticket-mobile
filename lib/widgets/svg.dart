@@ -7,7 +7,8 @@ class SVG extends StatefulWidget {
   final Color? color;
   final double? size;
 
-  const SVG(this.image, {this.color, this.size = 24});
+  const SVG(this.image, {Key? key, this.color, this.size = 24})
+      : super(key: key);
 
   @override
   _FxTwoToneIconState createState() => _FxTwoToneIconState();

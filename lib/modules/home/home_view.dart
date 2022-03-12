@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/widgets/container.dart';
 import 'package:yht_ticket/widgets/spacing.dart';
@@ -11,13 +9,10 @@ import 'package:yht_ticket/widgets/tab_indicator.dart';
 import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  late ThemeData theme;
-  late CustomTheme customTheme;
+  final theme = AppTheme.theme;
+  final customTheme = AppTheme.customTheme;
   HomeView(int index, {Key? key}) : super(key: key) {
     controller.changePage(index);
-
-    theme = AppTheme.theme;
-    customTheme = AppTheme.customTheme;
   }
 
   @override

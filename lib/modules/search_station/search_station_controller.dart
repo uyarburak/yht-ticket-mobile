@@ -62,13 +62,14 @@ class SearchStationController extends GetxController {
   var _stations = RxList<StationResponse>.empty();
 
   List<StationResponse> get filteredStations {
-    if (searchQueryLower.isNotEmpty)
+    if (searchQueryLower.isNotEmpty) {
       return _stations
           .where(
               (element) => element.nameLower.startsWith(searchQueryLower.value))
           .toList();
+    }
 
-    return _stations.value;
+    return _stations;
   }
 
   RxList<String> get lastSearchedStations =>

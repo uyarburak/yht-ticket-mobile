@@ -9,7 +9,6 @@ import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/theme/text_style.dart';
 import 'package:yht_ticket/widgets/button.dart';
-import 'package:yht_ticket/widgets/container.dart';
 import 'package:yht_ticket/widgets/spacing.dart';
 import 'package:yht_ticket/widgets/text.dart';
 
@@ -134,9 +133,9 @@ class ProfileScreen extends GetView<ProfileController> {
                             ),
                             Container(
                               margin: EdgeInsets.only(left: MySize.size16!),
-                              child: FxText.b2(
+                              child: const FxText.b2(
                                 "Standart Üye",
-                                color: const Color(0xffFFDF00),
+                                color: Color(0xffFFDF00),
                                 fontWeight: 600,
                                 letterSpacing: 0.2,
                               ),
@@ -240,19 +239,19 @@ class ProfileScreen extends GetView<ProfileController> {
   List<Widget> _buildList() {
     return [
       _buildSingleRow('Profili Düzenle', FeatherIcons.user),
-      Divider(),
+      const Divider(),
       _buildSingleRow('Bildirimlerim', FeatherIcons.bell),
-      Divider(),
+      const Divider(),
       _buildSingleRow('Dil', FeatherIcons.globe),
-      Divider(),
+      const Divider(),
       _buildSingleRow('Karanlık Mod', FeatherIcons.moon),
-      Divider(),
+      const Divider(),
       _buildSingleRow('Referanslarım', FeatherIcons.users),
-      Divider(),
+      const Divider(),
       _buildSingleRow('Yardım', FeatherIcons.headphones),
-      Divider(),
+      const Divider(),
       _buildSingleRow('Ödeme Geçmişi', FeatherIcons.shoppingCart),
-      Divider(),
+      const Divider(),
       FxSpacing.height(20),
       Center(
         child: RichText(
@@ -296,7 +295,7 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
       ),
       FxSpacing.height(20),
-      Divider(),
+      const Divider(),
       FxSpacing.height(20),
       FxText.button(
         "© 2022 Updown Mobile (v1.0.1)",

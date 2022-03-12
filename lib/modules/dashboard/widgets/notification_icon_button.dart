@@ -16,7 +16,6 @@ class NotificationIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = AppTheme.theme;
-    var customTheme = AppTheme.customTheme;
 
     return InkWell(
       onTap: () {

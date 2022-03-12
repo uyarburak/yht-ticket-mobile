@@ -27,7 +27,7 @@ class HistoryScreen extends GetView<HistoryController> {
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          title: FxText.sh1("Alarm Geçmişi", fontWeight: 600),
+          title: const FxText.sh1("Alarm Geçmişi", fontWeight: 600),
         ),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -58,7 +58,7 @@ class HistoryScreen extends GetView<HistoryController> {
         controller.activeAlerts.isNotEmpty
             ? Container(
                 margin: FxSpacing.fromLTRB(24, 8, 0, 8),
-                child: FxText.caption(
+                child: const FxText.caption(
                   "DEVAM EDEN ALARMLAR",
                   fontWeight: 700,
                   muted: true,
@@ -72,7 +72,7 @@ class HistoryScreen extends GetView<HistoryController> {
         controller.completedAlerts.isNotEmpty
             ? Container(
                 margin: FxSpacing.fromLTRB(24, 24, 0, 8),
-                child: FxText.caption(
+                child: const FxText.caption(
                   "GEÇMİŞ ALARMLAR",
                   fontWeight: 700,
                   muted: true,
@@ -248,7 +248,7 @@ class HistoryScreen extends GetView<HistoryController> {
         Lottie.asset("assets/lotties/629-empty-box.json"),
         Container(
           margin: EdgeInsets.only(top: MySize.size24!),
-          child: FxText.sh1(
+          child: const FxText.sh1(
             "Gösterilecek alarm bulunamadı!",
             fontWeight: 600,
             letterSpacing: 0,

@@ -69,27 +69,27 @@ class AppTheme {
     brightness: Brightness.light,
 
     /// Primary Color
-    primaryColor: Color(0xfffe755c),
+    primaryColor: const Color(0xfffe755c),
 
     /// Scaffold and Background color
-    backgroundColor: Color(0xffffffff),
-    scaffoldBackgroundColor: Color(0xffffffff),
+    backgroundColor: const Color(0xffffffff),
+    scaffoldBackgroundColor: const Color(0xffffffff),
     canvasColor: Colors.transparent,
 
     /// AppBar Theme
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
         backgroundColor: Color(0xffffffff),
         iconTheme: IconThemeData(color: Color(0xff495057)),
         actionsIconTheme: IconThemeData(color: Color(0xff495057))),
 
     /// Card Theme
-    cardTheme: CardTheme(color: Color(0xfff6f6f6)),
+    cardTheme: const CardTheme(color: Color(0xfff6f6f6)),
 
     textTheme: TextTheme(
         headline6: GoogleFonts.aBeeZee(), bodyText1: GoogleFonts.abel()),
 
     /// Colorscheme
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
         primary: Color(0xfffe755c),
         onPrimary: Color(0xffeeeeee),
         primaryVariant: Color(0xfffe755c),
@@ -102,24 +102,25 @@ class AppTheme {
 
     /// Floating Action Theme
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Color(0xfffe755c),
-        splashColor: Color(0xffeeeeee).withAlpha(100),
+        backgroundColor: const Color(0xfffe755c),
+        splashColor: const Color(0xffeeeeee).withAlpha(100),
         highlightElevation: 8,
         elevation: 4,
-        focusColor: Color(0xfffe755c),
-        hoverColor: Color(0xfffe755c),
-        foregroundColor: Color(0xffeeeeee)),
+        focusColor: const Color(0xfffe755c),
+        hoverColor: const Color(0xfffe755c),
+        foregroundColor: const Color(0xffeeeeee)),
 
     /// Divider Theme
-    dividerTheme: DividerThemeData(color: Color(0xffe8e8e8), thickness: 1),
-    dividerColor: Color(0xffe8e8e8),
+    dividerTheme:
+        const DividerThemeData(color: Color(0xffe8e8e8), thickness: 1),
+    dividerColor: const Color(0xffe8e8e8),
 
     /// Bottom AppBar Theme
     bottomAppBarTheme:
-        BottomAppBarTheme(color: Color(0xffeeeeee), elevation: 2),
+        const BottomAppBarTheme(color: Color(0xffeeeeee), elevation: 2),
 
     /// Tab bar Theme
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: const TabBarTheme(
       unselectedLabelColor: Color(0xff495057),
       labelColor: Color(0xff3d63ff),
       indicatorSize: TabBarIndicatorSize.label,
@@ -130,13 +131,13 @@ class AppTheme {
 
     /// CheckBox theme
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(Color(0xffeeeeee)),
-      fillColor: MaterialStateProperty.all(Color(0xff385b64)),
+      checkColor: MaterialStateProperty.all(const Color(0xffeeeeee)),
+      fillColor: MaterialStateProperty.all(const Color(0xff385b64)),
     ),
 
     /// Radio theme
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(Color(0xfffe755c)),
+      fillColor: MaterialStateProperty.all(const Color(0xfffe755c)),
     ),
 
     ///Switch Theme
@@ -149,7 +150,7 @@ class AppTheme {
           MaterialState.selected,
         };
         if (state.any(interactiveStates.contains)) {
-          return Color(0xffabb3ea);
+          return const Color(0xffabb3ea);
         }
         return null;
       }),
@@ -161,7 +162,7 @@ class AppTheme {
           MaterialState.selected,
         };
         if (state.any(interactiveStates.contains)) {
-          return Color(0xfff27a1a);
+          return const Color(0xfff27a1a);
         }
         return null;
       }),
@@ -169,26 +170,26 @@ class AppTheme {
 
     /// Slider Theme
     sliderTheme: SliderThemeData(
-      activeTrackColor: Color(0xff3d63ff),
-      inactiveTrackColor: Color(0xff3d63ff).withAlpha(140),
-      trackShape: RoundedRectSliderTrackShape(),
+      activeTrackColor: const Color(0xff3d63ff),
+      inactiveTrackColor: const Color(0xff3d63ff).withAlpha(140),
+      trackShape: const RoundedRectSliderTrackShape(),
       trackHeight: 4.0,
-      thumbColor: Color(0xff3d63ff),
-      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
-      overlayShape: RoundSliderOverlayShape(overlayRadius: 24.0),
-      tickMarkShape: RoundSliderTickMarkShape(),
+      thumbColor: const Color(0xff3d63ff),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10.0),
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 24.0),
+      tickMarkShape: const RoundSliderTickMarkShape(),
       inactiveTickMarkColor: Colors.red[100],
-      valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-      valueIndicatorTextStyle: TextStyle(
+      valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
+      valueIndicatorTextStyle: const TextStyle(
         color: Color(0xffeeeeee),
       ),
     ),
 
     /// Other Colors
     splashColor: Colors.white.withAlpha(100),
-    indicatorColor: Color(0xffeeeeee),
-    highlightColor: Color(0xffeeeeee),
-    errorColor: Color(0xfff0323c),
+    indicatorColor: const Color(0xffeeeeee),
+    highlightColor: const Color(0xffeeeeee),
+    errorColor: const Color(0xfff0323c),
   );
 
   /// -------------------------- Dark Theme  -------------------------------------------- ///
@@ -197,21 +198,21 @@ class AppTheme {
     brightness: Brightness.dark,
 
     /// Primary Color
-    primaryColor: Color(0xfff27a1a),
+    primaryColor: const Color(0xfff27a1a),
 
     /// Scaffold and Background color
-    scaffoldBackgroundColor: Color(0xff161616),
-    backgroundColor: Color(0xff161616),
+    scaffoldBackgroundColor: const Color(0xff161616),
+    backgroundColor: const Color(0xff161616),
     canvasColor: Colors.transparent,
 
     /// AppBar Theme
-    appBarTheme: AppBarTheme(backgroundColor: Color(0xff161616)),
+    appBarTheme: const AppBarTheme(backgroundColor: Color(0xff161616)),
 
     /// Card Theme
-    cardTheme: CardTheme(color: Color(0xff222327)),
+    cardTheme: const CardTheme(color: Color(0xff222327)),
 
     /// Colorscheme
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       primary: Color(0xfff27a1a),
       primaryVariant: Color(0xfff27a1a),
       secondary: Color(0xfff27a1a),
@@ -224,7 +225,7 @@ class AppTheme {
     ),
 
     /// Input (Text-Field) Theme
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(width: 1, color: Color(0xfff27a1a)),
@@ -239,25 +240,26 @@ class AppTheme {
     ),
 
     /// Divider Color
-    dividerTheme: DividerThemeData(color: Color(0xff363636), thickness: 1),
-    dividerColor: Color(0xff363636),
+    dividerTheme:
+        const DividerThemeData(color: Color(0xff363636), thickness: 1),
+    dividerColor: const Color(0xff363636),
 
     /// Floating Action Theme
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Color(0xfff27a1a),
+        backgroundColor: const Color(0xfff27a1a),
         splashColor: Colors.white.withAlpha(100),
         highlightElevation: 8,
         elevation: 4,
-        focusColor: Color(0xfff27a1a),
-        hoverColor: Color(0xfff27a1a),
+        focusColor: const Color(0xfff27a1a),
+        hoverColor: const Color(0xfff27a1a),
         foregroundColor: Colors.white),
 
     /// Bottom AppBar Theme
     bottomAppBarTheme:
-        BottomAppBarTheme(color: Color(0xff464c52), elevation: 2),
+        const BottomAppBarTheme(color: Color(0xff464c52), elevation: 2),
 
     /// Tab bar Theme
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: const TabBarTheme(
       unselectedLabelColor: Color(0xff495057),
       labelColor: Color(0xfff27a1a),
       indicatorSize: TabBarIndicatorSize.label,
@@ -276,7 +278,7 @@ class AppTheme {
           MaterialState.selected,
         };
         if (state.any(interactiveStates.contains)) {
-          return Color(0xffabb3ea);
+          return const Color(0xffabb3ea);
         }
         return null;
       }),
@@ -288,7 +290,7 @@ class AppTheme {
           MaterialState.selected,
         };
         if (state.any(interactiveStates.contains)) {
-          return Color(0xfff27a1a);
+          return const Color(0xfff27a1a);
         }
         return null;
       }),
@@ -296,27 +298,27 @@ class AppTheme {
 
     /// Slider Theme
     sliderTheme: SliderThemeData(
-      activeTrackColor: Color(0xfff27a1a),
-      inactiveTrackColor: Color(0xfff27a1a).withAlpha(100),
-      trackShape: RoundedRectSliderTrackShape(),
+      activeTrackColor: const Color(0xfff27a1a),
+      inactiveTrackColor: const Color(0xfff27a1a).withAlpha(100),
+      trackShape: const RoundedRectSliderTrackShape(),
       trackHeight: 4.0,
-      thumbColor: Color(0xfff27a1a),
-      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
-      overlayShape: RoundSliderOverlayShape(overlayRadius: 24.0),
-      tickMarkShape: RoundSliderTickMarkShape(),
+      thumbColor: const Color(0xfff27a1a),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10.0),
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 24.0),
+      tickMarkShape: const RoundSliderTickMarkShape(),
       inactiveTickMarkColor: Colors.red[100],
-      valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-      valueIndicatorTextStyle: TextStyle(
+      valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
+      valueIndicatorTextStyle: const TextStyle(
         color: Colors.white,
       ),
     ),
 
     ///Other Color
     indicatorColor: Colors.white,
-    disabledColor: Color(0xffa3a3a3),
+    disabledColor: const Color(0xffa3a3a3),
     highlightColor: Colors.white.withAlpha(28),
     errorColor: Colors.orange,
-    cardColor: Color(0xff282a2b),
+    cardColor: const Color(0xff282a2b),
     splashColor: Colors.white.withAlpha(56),
   );
 }
