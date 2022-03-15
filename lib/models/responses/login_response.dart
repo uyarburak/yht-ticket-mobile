@@ -7,6 +7,7 @@ class LoginResponse {
   final String name;
   final String surname;
   final String avatarUrl;
+  final bool isGuest;
 
   LoginResponse({
     required this.token,
@@ -15,6 +16,7 @@ class LoginResponse {
     required this.name,
     required this.surname,
     required this.avatarUrl,
+    required this.isGuest,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class LoginResponse {
       'name': name,
       'surname': surname,
       'avatarUrl': avatarUrl,
+      'isGuest': isGuest,
     };
   }
 
@@ -36,6 +39,7 @@ class LoginResponse {
       name: map['name'] ?? '',
       surname: map['surname'] ?? '',
       avatarUrl: map['avatarUrl'] ?? '',
+      isGuest: map['isGuest'] ?? false,
     );
   }
 

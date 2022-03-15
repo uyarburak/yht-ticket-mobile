@@ -28,6 +28,7 @@ class HistoryScreen extends GetView<HistoryController> {
           elevation: 0,
           centerTitle: true,
           title: const FxText.sh1("Alarm Geçmişi", fontWeight: 600),
+          leading: FxSpacing.empty(),
         ),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -252,16 +253,23 @@ class HistoryScreen extends GetView<HistoryController> {
             "Gösterilecek alarm bulunamadı!",
             fontWeight: 600,
             letterSpacing: 0,
+            muted: true,
           ),
         ),
         FxSpacing.height(24),
         FxButton(
+          elevation: 0,
+          backgroundColor: theme.colorScheme.secondary,
+          splashColor: theme.colorScheme.onPrimary.withAlpha(30),
           borderRadiusAll: 4,
-          onPressed: () {},
+          onPressed: controller.onClickSearchScheduleButton,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(MdiIcons.plus),
+              Icon(
+                MdiIcons.plus,
+                color: theme.colorScheme.onPrimary,
+              ),
               FxText.b2(
                 "Alarm oluştur",
                 fontWeight: 600,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yht_ticket/modules/intro/intro_controller.dart';
 import 'package:yht_ticket/routes/app_pages.dart';
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/widgets/button.dart';
@@ -7,7 +8,7 @@ import 'package:yht_ticket/widgets/container.dart';
 import 'package:yht_ticket/widgets/spacing.dart';
 import 'package:yht_ticket/widgets/text.dart';
 
-class IntroScreen extends StatelessWidget {
+class IntroScreen extends GetView<IntroController> {
   const IntroScreen({Key? key}) : super(key: key);
 
   @override
@@ -80,7 +81,9 @@ class IntroScreen extends StatelessWidget {
                 ),
                 FxSpacing.height(20),
                 FxButton.text(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.loginAsGuest();
+                  },
                   splashColor: theme.colorScheme.onPrimary.withAlpha(90),
                   elevation: 0,
                   borderRadiusAll: 4,

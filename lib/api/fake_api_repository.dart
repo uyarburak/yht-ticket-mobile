@@ -233,7 +233,12 @@ class FakeApiRepository implements BaseApiRepository {
     await Future.delayed(const Duration(seconds: 2));
 
     return ProfileResponse(
-        email: 'john@doe.com', name: 'John Doe', credits: 12);
+      email: 'john@doe.com',
+      name: 'John Doe',
+      photo: '',
+      credits: 12,
+      isGuest: false,
+    );
   }
 
   @override

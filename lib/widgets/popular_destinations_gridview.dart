@@ -99,7 +99,7 @@ class PopularDestinationsGridview extends StatelessWidget {
         _buildDestination(
           PopularDestination(
             title: 'Kocaeli',
-            image: 'assets/images/istanbul-kare.jpg',
+            image: 'assets/images/kocaeli-kare.jpg',
             stations: [
               StationInfo(
                 name: 'İzmit YHT',

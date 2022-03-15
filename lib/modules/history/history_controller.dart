@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:yht_ticket/api/api.dart';
 import 'package:yht_ticket/models/models.dart';
+import 'package:yht_ticket/modules/dashboard/widgets/search_schedule_bottom_sheet.dart';
 import 'package:yht_ticket/shared/utils/focus.dart';
 
 class HistoryController extends GetxController {
@@ -61,5 +62,9 @@ class HistoryController extends GetxController {
     } finally {
       loading.value = false;
     }
+  }
+
+  void onClickSearchScheduleButton() {
+    Get.bottomSheet(const SearchScheduleBottomSheet());
   }
 }

@@ -45,39 +45,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   child: Column(
                     children: <Widget>[
                       controller.loading.isFalse
-                          ? Row(
-                              children: <Widget>[
-                                ClipRRect(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(MySize.size32!)),
-                                  child: Image(
-                                    image: NetworkImage(
-                                        controller.profile.value.photo ??
-                                            'https://via.placeholder.com/150'),
-                                    width: 54,
-                                    height: 54,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Container(
-                                  margin: FxSpacing.left(12),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      FxText.b1(
-                                        controller.profile.value.name,
-                                        fontWeight: 600,
-                                      ),
-                                      FxText.b2(
-                                        controller.profile.value.email,
-                                        fontWeight: 500,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )
+                          ? _buildProfileInfo()
                           : SkeletonLoader(
                               builder: Row(
                                 children: <Widget>[
@@ -113,47 +81,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               highlightColor: customTheme.shimmerBaseColor,
                               direction: SkeletonDirection.ltr,
                             ),
-                      Container(
-                        margin: EdgeInsets.only(top: MySize.size16!),
-                        padding: EdgeInsets.only(
-                            left: MySize.size16!,
-                            top: MySize.size8!,
-                            bottom: MySize.size8!,
-                            right: MySize.size16!),
-                        decoration: BoxDecoration(
-                            color: theme.colorScheme.secondary,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(MySize.size2))),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              MdiIcons.informationOutline,
-                              color: theme.colorScheme.onSecondary,
-                              size: MySize.size18,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: MySize.size16!),
-                              child: const FxText.b2(
-                                "Standart Üye",
-                                color: Color(0xffFFDF00),
-                                fontWeight: 600,
-                                letterSpacing: 0.2,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerRight,
-                                child: FxText.caption(
-                                  "Yükselt",
-                                  color: theme.colorScheme.onPrimary,
-                                  fontWeight: 600,
-                                  letterSpacing: 0.2,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      _buildMembershipInfo(),
                     ],
                   ),
                 ),
@@ -199,20 +127,20 @@ class ProfileScreen extends GetView<ProfileController> {
                         },
                         elevation: 0,
                         borderRadiusAll: 4,
-                        backgroundColor: theme.primaryColor,
+                        backgroundColor: theme.colorScheme.primary,
                         splashColor: theme.colorScheme.onPrimary.withAlpha(30),
                         child: Row(
                           children: [
                             Icon(
                               MdiIcons.plus,
-                              color: theme.colorScheme.onPrimary,
+                              color: theme.colorScheme.onSecondary,
                               size: MySize.size20,
                             ),
                             Container(
                               margin: Spacing.left(8),
                               child: FxText.button(
                                 "Kredi Yükle",
-                                color: theme.colorScheme.onPrimary,
+                                color: theme.colorScheme.onSecondary,
                                 fontWeight: 600,
                               ),
                             )
@@ -233,6 +161,133 @@ class ProfileScreen extends GetView<ProfileController> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildMembershipInfo() {
+    if (controller.profile.value.isGuest) {
+      return Container(
+        margin: EdgeInsets.only(top: MySize.size16!),
+        padding: EdgeInsets.only(
+            left: MySize.size16!,
+            top: MySize.size8!,
+            bottom: MySize.size8!,
+            right: MySize.size16!),
+        decoration: BoxDecoration(
+            color: theme.colorScheme.error,
+            borderRadius: BorderRadius.all(Radius.circular(MySize.size2))),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              MdiIcons.informationOutline,
+              color: theme.colorScheme.onSecondary,
+              size: MySize.size18,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: MySize.size16!),
+              child: const FxText.b2(
+                "Kayıtsız Kullanıcı",
+                color: Color(0xffFFDF00),
+                fontWeight: 600,
+                letterSpacing: 0.2,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerRight,
+                child: FxText.caption(
+                  "Ücretsiz Üye Ol",
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: 600,
+                  letterSpacing: 0.2,
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
+    return Container(
+      margin: EdgeInsets.only(top: MySize.size16!),
+      padding: EdgeInsets.only(
+          left: MySize.size16!,
+          top: MySize.size8!,
+          bottom: MySize.size8!,
+          right: MySize.size16!),
+      decoration: BoxDecoration(
+          color: theme.colorScheme.secondary,
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size2))),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            MdiIcons.informationOutline,
+            color: theme.colorScheme.onSecondary,
+            size: MySize.size18,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: MySize.size16!),
+            child: const FxText.b2(
+              "Standart Üye",
+              color: Color(0xffFFDF00),
+              fontWeight: 600,
+              letterSpacing: 0.2,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: FxText.caption(
+                "Yükselt",
+                color: theme.colorScheme.onPrimary,
+                fontWeight: 600,
+                letterSpacing: 0.2,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileInfo() {
+    if (controller.profile.value.isGuest) {
+      return Row(
+        children: [
+          FxText.b1('Ula sen kaydolmamissin ki'),
+        ],
+      );
+    }
+    return Row(
+      children: <Widget>[
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(MySize.size32!)),
+          child: Image(
+            image: NetworkImage(controller.profile.value.photo.isNotEmpty
+                ? controller.profile.value.photo
+                : 'https://via.placeholder.com/150'),
+            width: 54,
+            height: 54,
+            fit: BoxFit.fill,
+          ),
+        ),
+        Container(
+          margin: FxSpacing.left(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              FxText.b1(
+                controller.profile.value.name,
+                fontWeight: 600,
+              ),
+              FxText.b2(
+                controller.profile.value.email,
+                fontWeight: 500,
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 

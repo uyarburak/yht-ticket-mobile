@@ -9,6 +9,7 @@ import 'package:yht_ticket/shared/utils/size_config.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:yht_ticket/theme/new_app_theme.dart';
 import 'package:yht_ticket/theme/text_style.dart';
+import 'package:yht_ticket/widgets/button.dart';
 import 'package:yht_ticket/widgets/spacing.dart';
 import 'package:yht_ticket/widgets/text.dart';
 
@@ -56,25 +57,20 @@ class NotificationsScreen extends GetView<NotificationsController> {
                       letterSpacing: 0,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: MySize.size24!),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => theme.primaryColor),
-                          padding:
-                              MaterialStateProperty.all(Spacing.xy(16, 0))),
-                      onPressed: () {
-                        controller.getNotifications();
-                      },
-                      child: FxText.b2(
-                        "Tekrar dene",
-                        fontWeight: 600,
-                        color: theme.colorScheme.onPrimary,
-                        letterSpacing: 0.5,
-                      ),
+                  FxSpacing.height(20),
+                  FxButton(
+                    elevation: 0,
+                    borderRadiusAll: 4,
+                    backgroundColor: theme.colorScheme.secondary,
+                    splashColor: theme.colorScheme.onPrimary.withAlpha(30),
+                    child: FxText.b2(
+                      "Tekrar dene",
+                      fontWeight: 600,
+                      color: theme.colorScheme.onPrimary,
+                      letterSpacing: 0.5,
                     ),
-                  )
+                    onPressed: controller.getNotifications,
+                  ),
                 ],
               ),
             );
