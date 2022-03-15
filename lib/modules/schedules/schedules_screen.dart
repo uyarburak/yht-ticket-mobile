@@ -270,7 +270,7 @@ class SchedulesScreen extends GetView<SchedulesController> {
       onTap: () async {
         var date = await showDatePicker(
           context: Get.context!,
-          initialDate: DateTime.now(),
+          initialDate: controller.selectedDate.value,
           firstDate: DateTime.now(),
           lastDate: DateTime.now().add(
             const Duration(days: 60),
