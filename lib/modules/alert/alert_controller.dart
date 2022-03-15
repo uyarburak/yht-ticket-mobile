@@ -3,7 +3,6 @@ import 'package:signalr_core/signalr_core.dart';
 import 'package:yht_ticket/api/api.dart';
 import 'package:yht_ticket/models/models.dart';
 import 'package:yht_ticket/modules/alert/widgets/alert_info_dialog.dart';
-import 'package:yht_ticket/routes/app_pages.dart';
 
 class AlertController extends GetxController {
   final String alertId;
@@ -103,7 +102,7 @@ class AlertController extends GetxController {
     var response = await apiRepository.cancelAlert(alertId);
 
     if (response != null && response) {
-      Get.offAndToNamed(Routes.DASHBOARD);
+      Get.back(closeOverlays: true);
     }
   }
 }
