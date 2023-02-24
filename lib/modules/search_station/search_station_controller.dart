@@ -79,7 +79,7 @@ class SearchStationController extends GetxController {
     'Ankara Gar',
     'ERYAMAN YHT',
     'Polatlı YHT',
-    'Selçuklu YHT',
+    'Selçuklu YHT(Konya)',
     'Konya',
     'Çumra',
     'Karaman',

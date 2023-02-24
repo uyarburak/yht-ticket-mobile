@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yht_ticket/routes/app_pages.dart';
-import 'package:yht_ticket/shared/utils/common_widget.dart';
 import 'package:yht_ticket/shared/utils/regex.dart';
-import 'package:yht_ticket/shared/utils/size_config.dart';
-import 'package:yht_ticket/theme/theme_data.dart';
-import 'package:yht_ticket/widgets/input_field.dart';
+import 'package:yht_ticket/theme/new_app_theme.dart';
+import 'package:yht_ticket/theme/text_style.dart';
+import 'package:yht_ticket/widgets/button.dart';
+import 'package:yht_ticket/widgets/container.dart';
+import 'package:yht_ticket/widgets/spacing.dart';
+import 'package:yht_ticket/widgets/text.dart';
 
 import 'register_controller.dart';
 
@@ -16,143 +17,322 @@ class RegisterScreen extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: AppTheme.yhtTheme.bgLayer1,
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Image.asset(
-                  './assets/icons/ticket-outline.png',
-                  color: AppTheme.yhtTheme.primary,
-                  width: 36,
-                  height: 36,
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: MySize.size24!),
-                  child: Text(
-                    "HESAP OLUŞTUR".toUpperCase(),
-                    style: AppTheme.getTextStyle(
-                        AppTheme.theme.textTheme.headline6,
-                        color: AppTheme.yhtTheme.onBgLayer1,
-                        fontWeight: 700,
-                        letterSpacing: 0.5),
-                  ),
-                ),
-                Form(
-                  key: registerFormKey,
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        left: MySize.size24!,
-                        right: MySize.size24!,
-                        top: MySize.size24!),
-                    child: Column(
-                      children: <Widget>[
-                        InputField(
-                          controller: controller.nameController,
-                          icon: MdiIcons.accountOutline,
-                          keyboardType: TextInputType.text,
-                          placeholder: 'Ad Soyad',
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Ad soyad gerekli';
-                            }
-
-                            return null;
-                          },
+    var theme = AppTheme.theme;
+    var customTheme = AppTheme.customTheme;
+    return Obx(
+      () => Scaffold(
+        body: Container(
+          margin: FxSpacing.top(36),
+          padding: FxSpacing.x(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () => Get.back(),
+                child: const Icon(MdiIcons.chevronLeft),
+              ),
+              Expanded(
+                child: Form(
+                  key: controller.formKey,
+                  child: Center(
+                    child: ListView(
+                      //mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FxContainer.rounded(
+                          height: 120,
+                          color: theme.colorScheme.secondary,
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                          ),
                         ),
-                        CommonWidget.rowHeight(height: MySize.size16!),
-                        InputField(
-                          controller: controller.emailController,
-                          icon: MdiIcons.emailOutline,
-                          keyboardType: TextInputType.emailAddress,
-                          placeholder: 'E-posta adresi',
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'E-posta adresi gerekli';
-                            }
-                            if (!Regex.isEmail(value)) {
-                              return 'E-posta formatı hatalı.';
-                            }
-
-                            return null;
-                          },
+                        FxSpacing.height(16),
+                        const FxText.h6(
+                          "Hesap Oluştur",
+                          fontWeight: 600,
+                          textAlign: TextAlign.center,
                         ),
-                        CommonWidget.rowHeight(height: MySize.size16!),
-                        InputField(
-                          controller: controller.passwordController,
-                          icon: MdiIcons.lockOutline,
-                          keyboardType: TextInputType.emailAddress,
-                          placeholder: 'Parola',
-                          password: true,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Boş bırakılamaz.';
-                            }
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: TextFormField(
+                                  controller: controller.firstNameController,
+                                  autofocus: true,
+                                  style: FxTextStyle.b1(
+                                      letterSpacing: 0.1,
+                                      color: theme.colorScheme.onBackground,
+                                      fontWeight: 500),
+                                  decoration: InputDecoration(
+                                    hintText: "Ad",
+                                    hintStyle: FxTextStyle.sh2(
+                                        letterSpacing: 0.1,
+                                        color: theme.colorScheme.onBackground,
+                                        fontWeight: 500),
+                                    border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        borderSide: BorderSide.none),
+                                    enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        borderSide: BorderSide.none),
+                                    focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        borderSide: BorderSide.none),
+                                    filled: true,
+                                    fillColor: customTheme.card,
+                                    prefixIcon: const Icon(
+                                      MdiIcons.accountOutline,
+                                      size: 22,
+                                    ),
+                                    isDense: true,
+                                    contentPadding: const EdgeInsets.all(0),
+                                  ),
+                                  keyboardType: TextInputType.name,
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  onEditingComplete: () {
+                                    FocusScope.of(context).nextFocus();
+                                  },
+                                  textInputAction: TextInputAction.next,
+                                ),
+                              ),
+                            ),
+                            FxSpacing.width(8),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: TextFormField(
+                                  controller: controller.lastNameController,
+                                  style: FxTextStyle.b1(
+                                      letterSpacing: 0.1,
+                                      color: theme.colorScheme.onBackground,
+                                      fontWeight: 500),
+                                  decoration: InputDecoration(
+                                    hintText: "Soyad",
+                                    hintStyle: FxTextStyle.sh2(
+                                        letterSpacing: 0.1,
+                                        color: theme.colorScheme.onBackground,
+                                        fontWeight: 500),
+                                    border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        borderSide: BorderSide.none),
+                                    enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        borderSide: BorderSide.none),
+                                    focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        borderSide: BorderSide.none),
+                                    filled: true,
+                                    fillColor: customTheme.card,
+                                    prefixIcon: const Icon(
+                                      MdiIcons.accountOutline,
+                                      size: 22,
+                                    ),
+                                    isDense: true,
+                                    contentPadding: const EdgeInsets.all(0),
+                                  ),
+                                  keyboardType: TextInputType.name,
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  onEditingComplete: () {
+                                    FocusScope.of(context).nextFocus();
+                                  },
+                                  textInputAction: TextInputAction.next,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          child: TextFormField(
+                            controller: controller.emailController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'E-posta adresi gerekli';
+                              }
+                              if (!Regex.isEmail(value)) {
+                                return 'E-posta formatı hatalı.';
+                              }
 
-                            return null;
-                          },
+                              return null;
+                            },
+                            style: FxTextStyle.b1(
+                                letterSpacing: 0.1,
+                                color: theme.colorScheme.onBackground,
+                                fontWeight: 500),
+                            decoration: InputDecoration(
+                              hintText: "E-posta adresi",
+                              hintStyle: FxTextStyle.sh2(
+                                  letterSpacing: 0.1,
+                                  color: theme.colorScheme.onBackground,
+                                  fontWeight: 500),
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              focusedBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              filled: true,
+                              fillColor: customTheme.card,
+                              prefixIcon: const Icon(
+                                MdiIcons.email,
+                                size: 22,
+                              ),
+                              isDense: true,
+                              contentPadding: const EdgeInsets.all(0),
+                            ),
+                            keyboardType: TextInputType.name,
+                            textCapitalization: TextCapitalization.sentences,
+                            onEditingComplete: () {
+                              FocusScope.of(context).nextFocus();
+                            },
+                            textInputAction: TextInputAction.next,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          child: TextFormField(
+                            controller: controller.usernameController,
+                            style: FxTextStyle.b1(
+                                letterSpacing: 0.1,
+                                color: theme.colorScheme.onBackground,
+                                fontWeight: 500),
+                            decoration: InputDecoration(
+                              hintText: "Kullanıcı Adı",
+                              hintStyle: FxTextStyle.sh2(
+                                  letterSpacing: 0.1,
+                                  color: theme.colorScheme.onBackground,
+                                  fontWeight: 500),
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              focusedBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              filled: true,
+                              fillColor: customTheme.card,
+                              prefixIcon: const Icon(
+                                MdiIcons.at,
+                                size: 22,
+                              ),
+                              isDense: true,
+                              contentPadding: const EdgeInsets.all(0),
+                            ),
+                            keyboardType: TextInputType.name,
+                            textCapitalization: TextCapitalization.sentences,
+                            onEditingComplete: () {
+                              FocusScope.of(context).nextFocus();
+                            },
+                            textInputAction: TextInputAction.next,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 16),
+                          child: TextFormField(
+                            controller: controller.passwordController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Boş bırakılamaz.';
+                              }
+
+                              return null;
+                            },
+                            obscureText: !controller.isPasswordVisible.value,
+                            style: FxTextStyle.b1(
+                                letterSpacing: 0.1,
+                                color: theme.colorScheme.onBackground,
+                                fontWeight: 500),
+                            decoration: InputDecoration(
+                              hintStyle: FxTextStyle.sh2(
+                                  letterSpacing: 0.1,
+                                  color: theme.colorScheme.onBackground,
+                                  fontWeight: 500),
+                              hintText: "Parola",
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              focusedBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8.0),
+                                  ),
+                                  borderSide: BorderSide.none),
+                              filled: true,
+                              fillColor: customTheme.card,
+                              prefixIcon: const Icon(
+                                MdiIcons.lockOutline,
+                                size: 22,
+                              ),
+                              suffixIcon: InkWell(
+                                onTap: controller.onPasswordVisibilityPressed,
+                                child: Icon(
+                                  controller.isPasswordVisible.value
+                                      ? MdiIcons.eyeOffOutline
+                                      : MdiIcons.eyeOutline,
+                                  size: 22,
+                                ),
+                              ),
+                              isDense: true,
+                              contentPadding: EdgeInsets.zero,
+                            ),
+                            textCapitalization: TextCapitalization.sentences,
+                            onFieldSubmitted: (_) => controller.register(),
+                          ),
+                        ),
+                        FxSpacing.height(40),
+                        FxButton.block(
+                          elevation: 0,
+                          borderRadiusAll: 4,
+                          onPressed: controller.register,
+                          child: FxText.b2(
+                            "KAYIT OL",
+                            fontWeight: 600,
+                            color: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(MySize.size12!)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.yhtTheme.primary.withAlpha(24),
-                        blurRadius: 5,
-                        offset:
-                            const Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  margin: EdgeInsets.only(
-                      left: MySize.size24!,
-                      right: MySize.size24!,
-                      top: MySize.size24!),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => AppTheme.yhtTheme.primary),
-                        padding: MaterialStateProperty.all(Spacing.xy(16, 0))),
-                    onPressed: () {
-                      controller.register(context, registerFormKey);
-                    },
-                    child: Text(
-                      "KAYIT OL".toUpperCase(),
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText2,
-                          fontWeight: 600,
-                          color: AppTheme.yhtTheme.onPrimary,
-                          letterSpacing: 0.5),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: MySize.size16!),
-                  child: InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(Routes.LOGIN);
-                    },
-                    child: Text(
-                      "Zaten bir hesabım var",
-                      style: AppTheme.getTextStyle(
-                          AppTheme.theme.textTheme.bodyText2,
-                          color: AppTheme.yhtTheme.onBgLayer1,
-                          fontWeight: 500,
-                          decoration: TextDecoration.underline),
-                    ),
-                  ),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:yht_ticket/models/models.dart';
+import 'package:yht_ticket/models/responses/register_response.dart';
 
 import 'base_api_repository.dart';
 
@@ -26,7 +27,7 @@ class FakeApiRepository implements BaseApiRepository {
   }
 
   @override
-  Future<LoginResponse?> register(RegisterRequest data) async {
+  Future<RegisterResponse?> register(RegisterRequest data) async {
     EasyLoading.show(status: 'Bekleyiniz...');
     await Future.delayed(const Duration(seconds: 3));
     EasyLoading.dismiss();

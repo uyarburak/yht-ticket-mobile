@@ -50,7 +50,9 @@ class IntroScreen extends GetView<IntroController> {
                   children: [
                     Expanded(
                       child: FxButton.outlined(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.REGISTER);
+                        },
                         splashColor: theme.colorScheme.onPrimary.withAlpha(90),
                         elevation: 0,
                         borderRadiusAll: 4,

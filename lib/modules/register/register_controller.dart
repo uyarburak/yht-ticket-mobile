@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:yht_ticket/api/api.dart';
 import 'package:yht_ticket/models/models.dart';
-import 'package:yht_ticket/shared/utils/focus.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final BaseApiRepository apiRepository;
   RegisterController({required this.apiRepository});
 
-  final nameController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void register(BuildContext context, GlobalKey<FormState> formKey) async {
-    AppFocus.unfocus(context);
+  var isPasswordVisible = false.obs;
+
+  void onPasswordVisibilityPressed() {
+    isPasswordVisible.toggle();
+  }
+
+  void register() async {
     if (formKey.currentState!.validate()) {
       final res = await apiRepository.register(
         RegisterRequest(
-          name: nameController.text,
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
           email: emailController.text,
+          username: usernameController.text,
           password: passwordController.text,
         ),
       );
@@ -31,8 +41,10 @@ class RegisterController extends GetxController {
 
   @override
   void onClose() {
-    nameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     emailController.dispose();
+    usernameController.dispose();
     passwordController.dispose();
 
     super.onClose();

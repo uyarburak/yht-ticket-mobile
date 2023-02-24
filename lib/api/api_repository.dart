@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:yht_ticket/models/models.dart';
+import 'package:yht_ticket/models/responses/register_response.dart';
 
 import 'api_provider.dart';
 import 'base_api_repository.dart';
@@ -10,6 +11,14 @@ class ApiRepository extends FakeApiRepository implements BaseApiRepository {
   ApiRepository({required this.apiProvider});
 
   final ApiProvider apiProvider;
+
+  @override
+  Future<RegisterResponse?> register(RegisterRequest data) async {
+    final res = await apiProvider.register(data);
+    if (res.isOk) {
+      return RegisterResponse.fromMap(res.body);
+    }
+  }
 
   @override
   Future<LoginResponse?> login(LoginRequest data) async {

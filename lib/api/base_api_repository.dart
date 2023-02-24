@@ -1,9 +1,10 @@
 import 'package:yht_ticket/models/models.dart';
+import 'package:yht_ticket/models/responses/register_response.dart';
 
 abstract class BaseApiRepository {
   Future<LoginResponse?> login(LoginRequest data);
   Future<LoginResponse?> loginAsGuest(LoginAsGuestRequest data);
-  Future<LoginResponse?> register(RegisterRequest data);
+  Future<RegisterResponse?> register(RegisterRequest data);
   Future<bool?> forgotPassword(ForgotPasswordRequest data);
   Future<ProfileResponse?> getProfile();
 

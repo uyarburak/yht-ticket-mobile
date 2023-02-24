@@ -5,6 +5,10 @@ import 'package:yht_ticket/models/models.dart';
 import 'base_provider.dart';
 
 class ApiProvider extends BaseProvider {
+  Future<Response> register(RegisterRequest request) {
+    return post('/auth/api/v1/auth/register', request.toJson());
+  }
+
   Future<Response> login(LoginRequest request) {
     return post('/auth/api/v1/auth', request.toJson());
   }

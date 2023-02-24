@@ -86,7 +86,7 @@ class PopularDestinationsGridview extends StatelessWidget {
                 displayName: 'Konya',
               ),
               StationInfo(
-                name: 'Selçuklu YHT',
+                name: 'Selçuklu YHT(Konya)',
                 displayName: 'Selçuklu YHT',
               ),
               StationInfo(
